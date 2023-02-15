@@ -21,11 +21,13 @@ const actions = {
         return new Promise(resolve => {
             $axios.post('login', payload)
                 .then(response => {
-                    localStorage.setItem('token', response.data.data.token)
-                    localStorage.setItem('expires_at', response.data.data.expires_at)
-                    commit('SET_TOKEN', response.data.data.token, { root: true })
-                    commit('SET_TOKEN_EXPIRED', response.data.data.expires_at, { root: true })
-                    resolve(response)
+                    if (response.data.status) {
+                        localStorage.setItem('token', response.data.data.token)
+                        localStorage.setItem('expires_at', response.data.data.expires_at)
+                        commit('SET_TOKEN', response.data.data.token, { root: true })
+                        commit('SET_TOKEN_EXPIRED', response.data.data.expires_at, { root: true })
+                    }
+                    resolve(response.data)
                 })
                 .catch(error => {
                     resolve(error.response)

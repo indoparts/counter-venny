@@ -2,12 +2,19 @@ import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
 import VueApexCharts from 'vue-apexcharts'
 import VueFullscreen from 'vue-fullscreen'
+import * as VueGoogleMaps from "vue2-google-maps"
 
 Vue.use(VueApexCharts)
 Vue.use(VueFullscreen)
 // eslint-disable-next-line vue/multi-word-component-names
 Vue.component('apexchart', VueApexCharts)
 Vue.use(Vuetify)
+Vue.use(VueGoogleMaps, {
+    load: {
+        key: process.env.GMAP_API_TOKEN,
+        libraries: "places"
+    }
+});
 
 export default new Vuetify({
     theme: {

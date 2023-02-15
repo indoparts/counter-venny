@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 // modules::start
 import auth from './modules/auth.js'
+import absensi from './modules/absensi.js'
 // modules::end
 
 Vue.use(Vuex)
@@ -26,6 +27,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    auth
+    auth,
+    absensi
   }
 })

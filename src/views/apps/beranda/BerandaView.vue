@@ -12,7 +12,7 @@
               <v-card-title v-text="item.title"></v-card-title>
               <v-card-subtitle v-text="item.artist"></v-card-subtitle>
               <v-card-actions>
-                <v-btn class="ml-2 mt-2" outlined rounded small>
+                <v-btn class="ml-2 mt-2" outlined rounded small :to="item.link">
                   periksa
                 </v-btn>
               </v-card-actions>
@@ -64,36 +64,42 @@ export default {
           src: 'mdi-fingerprint',
           title: 'Absen',
           artist: 'Absen masuk/pulang',
+          link:'/users-absen'
         },
         {
           color: 'error',
           src: 'mdi-plane-car',
           title: 'Cuti',
           artist: 'Permohonan Cuti',
+          link:'/'
         },
         {
           color: 'accent',
           src: 'mdi-hospital-box',
           title: 'Sakit',
           artist: 'Permohonan izin sakit',
+          link:'/'
         },
         {
           color: 'error',
           src: 'mdi-ghost',
           title: 'Izin',
           artist: 'Permohonan izin pribadi',
+          link:'/'
         },
         {
           color: 'accent',
           src: 'mdi-wallet-giftcard',
           title: 'Gaji',
           artist: 'Periksa slip pendapatan',
+          link:'/'
         },
         {
           color: 'primary',
           src: 'mdi-cash-multiple',
           title: 'Kasbon',
           artist: 'Permohonan izin kasbon',
+          link:'/'
         },
       ],
       optionsDonuts: {

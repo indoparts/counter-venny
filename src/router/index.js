@@ -42,6 +42,28 @@ const routes = [
     },
   },
   {
+    path: '/users-absen',
+    name: 'users-absen',
+    component: () => import('@/views/apps/beranda/Tools/AbsenView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Users Absen',
+      breadscrum: [
+        {
+          text: 'Beranda',
+          disabled: false,
+          href: '/',
+        },
+        {
+          text: 'Users Absen',
+          disabled: true,
+          href: '/users-absen',
+        },
+      ]
+    },
+  },
+  {
     path: '/summary-istirahat',
     name: 'jadwal-istirahat',
     component: () => import('@/views/apps/JadwalIstirahatView.vue'),

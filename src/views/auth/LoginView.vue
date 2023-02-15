@@ -76,10 +76,19 @@ export default {
         this.loading = false
         if (this.remember_me === true)
           localStorage.setItem('email', this.form.email)
+        var a = (function () {
+          if (res.msg === 'error' && typeof res.data !== 'undefined') {
+            return res.data.errors
+          } else if (res.msg === 'error' && typeof res.data === 'undefined'){
+            return [{ field: '', rule: '', message: 'Email & password salah !!' }]
+          }else{
+            return [{ field: '', rule: '', message: 'Berhasil' }]
+          }
+        })();
         this.alert = {
-          type: res.data.msg,
-          title: res.data.msg,
-          msg: res.data.msg === 'error' ? res.data.data.errors : [{ field: '', rule: '', message: 'Berhasil' }]
+          type: res.msg,
+          title: res.msg,
+          msg: a
         }
       })
     }
