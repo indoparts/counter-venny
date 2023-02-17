@@ -20,9 +20,13 @@
         <v-btn depressed :loading="loading" color="primary" block :disabled="!valid" @click="submit">
             Submit data absen
         </v-btn>
+        <div class="d-flex justify-center mt-5">
+            <alert-components :type="alert.type" :title="alert.title" :msg="alert.msg"></alert-components>
+        </div>
     </v-form>
 </template>
 <script>
+import AlertComponents from '@/components/AlertComponents.vue'
 import moment from 'moment'
 import { mapActions, mapState } from "vuex";
 export default {
@@ -30,6 +34,9 @@ export default {
         lat: Number,
         lng: Number,
         enable: Boolean,
+    },
+    components: {
+        AlertComponents
     },
     watch: {
         lat: function (v) {
@@ -46,6 +53,11 @@ export default {
         valid: false,
         items: ['masuk', 'pulang'],
         loading:false,
+        alert: {
+            type: '',
+            title: '',
+            msg: []
+        }
     }),
     computed: {
         ...mapState('absensi', {
@@ -56,9 +68,22 @@ export default {
         ...mapActions('absensi', ['submitAbsen']),
         submit(){
             this.loading = true
-            this.submitAbsen(this.form).then((e)=>{
+            this.submitAbsen().then((e)=>{
                 this.loading = false
-                console.log(e);
+                var a = (function () {
+                    if (e.msg === 'error' && typeof e.data !== 'undefined') {
+                        return e.data.errors
+                    } else if (e.msg === 'error' && typeof e.data === 'undefined') {
+                        return [{ field: '', rule: '', message: 'Terjadi duplikat, anda sudah membuat data ini sebelumnya !!' }]
+                    } else {
+                        return [{ field: '', rule: '', message: 'Berhasil' }]
+                    }
+                })();
+                this.alert = {
+                    type: e.msg,
+                    title: e.msg,
+                    msg: a
+                }
             })
         },
         keterangan_absen(){

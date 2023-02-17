@@ -2,7 +2,7 @@
     <v-list dense nav subheader>
         <v-subheader>Aksi Data</v-subheader>
         <v-list-item-group v-model="selectedRightDrawer" color="primary">
-            <v-list-item v-for="([title, icon, link], i) in cruds" :key="i" @click="movePage(nameUrl, link)" router exact>
+            <v-list-item v-for="([title, icon, link], i) in menu" :key="i" @click="movePage(link)" router exact>
                 <v-list-item-action>
                     <v-icon v-text="icon"></v-icon>
                 </v-list-item-action>
@@ -18,30 +18,32 @@ export default{
     data() {
         return {
             selectedRightDrawer: 0,
-            nameUrl:'',
-            crud:false,
-            cruds: [
-                ['List Data', 'mdi-view-list', 'data'],
-                ['Create', 'mdi-plus-outline', 'add'],
-                ['Delete', 'mdi-delete', 'delete'],
-            ],
+            menu:[]
         }
     },
     watch: {
         $route(e) {
-            if (e.fullPath.search('master-data')) {
-                this.crud = true
-                this.nameUrl = e.name
+            switch (e.name) {
+                case 'users-absen':
+                    this.menu = this.$store.state.absensi.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    break;
+                case 'list-data-absensi-user':
+                    this.menu = this.$store.state.absensi.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    break;
+                case 'grafik-data-absensi-user':
+                    this.menu = this.$store.state.absensi.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    break;
+                default:
+                    break;
             }
-            this.crud = false
         }
     },
     methods:{
-        movePage(e, i){
-            var x = e.split(".")
-            x[1] = i
-            var url = x[0] + '.' + x[1]
-            if (this.$route.name !== url) this.$router.push({ name: url })
+        movePage(nameurl){
+            this.$router.push({ name: nameurl }) 
         }
     }
 };

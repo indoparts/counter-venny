@@ -60,7 +60,7 @@
  
 <script>
 import { mapState } from "vuex";
-import FormAbsensi from './components/FormAbsensi.vue'
+import FormAbsensi from '../components/FormAbsensi.vue'
 export default {
     name: "AddGoogleMap",
     components: {

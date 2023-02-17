@@ -61,7 +61,7 @@
             </div>
             <v-subheader>Master Data</v-subheader>
             <div v-for="(item) in menus_masterdata" :key="item.no">
-                <v-list-item link :to="item.link">
+                <v-list-item link :to="item.link" v-if="$can(item.permission)">
                     <v-list-item-icon>
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-item-icon>
@@ -92,7 +92,7 @@ export default {
                 icon: 'mdi-office-building',
                 child: true,
                 itemchild: [
-                    ['Absensi Kehadiran', 'mdi-fingerprint', '/absen'],
+                    ['Absensi Kehadiran', 'mdi-fingerprint', '/users-absen'],
                     ['Pengajuan Cuti', 'mdi-plane-car', '/cuti'],
                     ['Izin Sakit', 'mdi-hospital-box', '/sakit'],
                     ['Izin Pribadi', 'mdi-ghost', '/pribadi'],
@@ -137,7 +137,8 @@ export default {
                 icon: 'mdi-account-group',
                 child: false,
                 itemchild: [],
-                link: '/master-data-pengguna'
+                link: '/master-data-pengguna',
+                permission: 'read-user'
             },
             {
                 no:7,
@@ -145,7 +146,8 @@ export default {
                 icon: 'mdi-group',
                 child: false,
                 itemchild: [],
-                link: '/kasbon'
+                link: '/kasbon',
+                permission: 'read-role'
             },
             {
                 no:8,
@@ -153,7 +155,8 @@ export default {
                 icon: 'mdi-security',
                 child: false,
                 itemchild: [],
-                link: '/kasbon'
+                link: '/kasbon',
+                permission: 'read-permission'
             },
             {
                 no:9,
@@ -161,7 +164,8 @@ export default {
                 icon: 'mdi-storefront',
                 child: false,
                 itemchild: [],
-                link: '/kasbon'
+                link: '/kasbon',
+                permission: 'read-toko'
             },
             {
                 no:10,
@@ -169,7 +173,8 @@ export default {
                 icon: 'mdi-store',
                 child: false,
                 itemchild: [],
-                link: '/kasbon'
+                link: '/kasbon',
+                permission: 'read-gudang'
             },
             {
                 no:11,
@@ -177,7 +182,8 @@ export default {
                 icon: 'mdi-face-agent',
                 child: false,
                 itemchild: [],
-                link: '/kasbon'
+                link: '/kasbon',
+                permission: 'read-pelanggan'
             },
         ]
     }),

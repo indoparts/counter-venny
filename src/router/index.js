@@ -44,7 +44,7 @@ const routes = [
   {
     path: '/users-absen',
     name: 'users-absen',
-    component: () => import('@/views/apps/beranda/Tools/AbsenView.vue'),
+    component: () => import('@/views/apps/beranda/Tools/Absen/AbsenView.vue'),
     meta: {
       layout: 'content',
       requiresAuth: true,
@@ -59,6 +59,60 @@ const routes = [
           text: 'Users Absen',
           disabled: true,
           href: '/users-absen',
+        },
+      ]
+    },
+  },
+  {
+    path: '/list-data-absensi-user',
+    name: 'list-data-absensi-user',
+    component: () => import('@/views/apps/beranda/Tools/Absen/AbsenListUserView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'List Data Users Absen',
+      breadscrum: [
+        {
+          text: 'Beranda',
+          disabled: false,
+          href: '/',
+        },
+        {
+          text: 'Users Absen',
+          disabled: false,
+          href: '/users-absen',
+        },
+        {
+          text: 'List data absensi user',
+          disabled: true,
+          href: '/list-data-absensi-user',
+        },
+      ]
+    },
+  },
+  {
+    path: '/grafik-data-absensi-user',
+    name: 'grafik-data-absensi-user',
+    component: () => import('@/views/apps/beranda/Tools/Absen/AbsenGrafikUserView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Grafik Data Users Absen',
+      breadscrum: [
+        {
+          text: 'Beranda',
+          disabled: false,
+          href: '/',
+        },
+        {
+          text: 'Users Absen',
+          disabled: false,
+          href: '/users-absen',
+        },
+        {
+          text: 'Grafik data absensi user',
+          disabled: true,
+          href: '/grafik-data-absensi-user',
         },
       ]
     },
