@@ -42,6 +42,28 @@ const routes = [
     },
   },
   {
+    path: '/users-info/:data',
+    name: 'users-info',
+    component: () => import('@/views/apps/beranda/Tools/UserInfoView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Users Info',
+      breadscrum: [
+        {
+          text: 'Beranda',
+          disabled: false,
+          href: '/',
+        },
+        {
+          text: 'Users Info',
+          disabled: true,
+          href: '/users-info',
+        },
+      ]
+    },
+  },
+  {
     path: '/users-absen',
     name: 'users-absen',
     component: () => import('@/views/apps/beranda/Tools/Absen/AbsenView.vue'),
@@ -118,6 +140,33 @@ const routes = [
     },
   },
   {
+    path: '/laporan-data-absensi',
+    name: 'laporan-data-absensi',
+    component: () => import('@/views/apps/beranda/Tools/Absen/AbsenLaporanUserView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Laporan Data Absen',
+      breadscrum: [
+        {
+          text: 'Beranda',
+          disabled: false,
+          href: '/',
+        },
+        {
+          text: 'Users Absen',
+          disabled: false,
+          href: '/users-absen',
+        },
+        {
+          text: 'Laporan data absensi',
+          disabled: true,
+          href: '/laporan-data-absensi',
+        },
+      ]
+    },
+  },
+  {
     path: '/summary-istirahat',
     name: 'jadwal-istirahat',
     component: () => import('@/views/apps/JadwalIstirahatView.vue'),
@@ -159,7 +208,6 @@ const routes = [
   },
   {
     path: '/master-data-pengguna',
-    name: 'master-data-pengguna',
     component: () => import('@/views/apps/Masterdata/pengguna/IndexView.vue'),
     meta: {
       layout: 'content',
@@ -172,6 +220,7 @@ const routes = [
         name: 'master-data-pengguna.data',
         component: () => import('@/views/apps/Masterdata/pengguna/DataView.vue'),
         meta: { 
+          requiresAuth: true,
           title: 'Kelola Pengguna',
           breadscrum: [
             {
@@ -192,6 +241,7 @@ const routes = [
         name: 'master-data-pengguna.add',
         component: () => import('@/views/apps/Masterdata/pengguna/AddView.vue'),
         meta: { 
+          requiresAuth: true,
           title: 'Tambah data Pengguna',
           breadscrum: [
             {
@@ -217,7 +267,8 @@ const routes = [
         name: 'master-data-pengguna.show',
         component: () => import('@/views/apps/Masterdata/pengguna/ShowView.vue'),
         meta: { 
-          title: 'Detail Pengguna',
+          requiresAuth: true,
+          title: 'Detail/Update Pengguna',
           breadscrum: [
             {
               text: 'Beranda',
@@ -237,12 +288,24 @@ const routes = [
           ]
         }
       },
+    ]
+  },
+  {
+    path: '/master-data-role',
+    component: () => import('@/views/apps/Masterdata/role/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Role',
+    },
+    children: [
       {
-        path: 'edit/:id',
-        name: 'master-data-pengguna.edit',
-        component: () => import('@/views/apps/Masterdata/pengguna/EditView.vue'),
-        meta: { 
-          title: 'Edit Pengguna',
+        path: '',
+        name: 'master-data-role.data',
+        component: () => import('@/views/apps/Masterdata/role/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola Role',
           breadscrum: [
             {
               text: 'Beranda',
@@ -250,18 +313,343 @@ const routes = [
               href: '/',
             },
             {
-              text: 'Master Data Pengguna',
+              text: 'Master Data Role',
               disabled: true,
-              href: '/master-data-pengguna',
-            },
-            {
-              text: 'Edit Data Pengguna',
-              disabled: true,
-              href: '/master-data-pengguna/edit/:id',
+              href: '/master-data-role',
             },
           ]
         }
-      }
+      },
+      {
+        path: 'add',
+        name: 'master-data-role.add',
+        component: () => import('@/views/apps/Masterdata/role/AddView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Tambah data Role',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Role',
+              disabled: true,
+              href: '/master-data-role',
+            },
+            {
+              text: 'Tambah Data Role',
+              disabled: true,
+              href: '/master-data-role/add',
+            },
+          ]
+        }
+      },
+      {
+        path: 'show/:id',
+        name: 'master-data-role.show',
+        component: () => import('@/views/apps/Masterdata/role/ShowView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Detail/Update Role',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Role',
+              disabled: true,
+              href: '/master-data-role',
+            },
+            {
+              text: 'Lihat Data Role',
+              disabled: true,
+              href: '/master-data-role/show/:id',
+            },
+          ]
+        }
+      },
+      {
+        path: 'setrole/:id',
+        name: 'master-data-role.setrole',
+        component: () => import('@/views/apps/Masterdata/role/SetroleView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Detail/Update Set Akses',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Set Akses',
+              disabled: true,
+              href: '/master-data-role',
+            },
+            {
+              text: 'Lihat Data Set Akses',
+              disabled: true,
+              href: '/master-data-role/setrole/:id',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
+    path: '/master-data-akses',
+    component: () => import('@/views/apps/Masterdata/akses/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Akses',
+    },
+    children: [
+      {
+        path: '',
+        name: 'master-data-akses.data',
+        component: () => import('@/views/apps/Masterdata/akses/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola Akses',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Akses',
+              disabled: true,
+              href: '/master-data-akses',
+            },
+          ]
+        }
+      },
+      {
+        path: 'add',
+        name: 'master-data-akses.add',
+        component: () => import('@/views/apps/Masterdata/akses/AddView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Tambah data Akses',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Akses',
+              disabled: true,
+              href: '/master-data-akses',
+            },
+            {
+              text: 'Tambah Data Akses',
+              disabled: true,
+              href: '/master-data-akses/add',
+            },
+          ]
+        }
+      },
+      {
+        path: 'show/:id',
+        name: 'master-data-akses.show',
+        component: () => import('@/views/apps/Masterdata/akses/ShowView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Detail/Update Akses',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Akses',
+              disabled: true,
+              href: '/master-data-akses',
+            },
+            {
+              text: 'Lihat Data Akses',
+              disabled: true,
+              href: '/master-data-akses/show/:id',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
+    path: '/master-data-toko',
+    component: () => import('@/views/apps/Masterdata/toko/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Toko',
+    },
+    children: [
+      {
+        path: '',
+        name: 'master-data-toko.data',
+        component: () => import('@/views/apps/Masterdata/toko/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola Toko',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Toko',
+              disabled: true,
+              href: '/master-data-toko',
+            },
+          ]
+        }
+      },
+      {
+        path: 'add',
+        name: 'master-data-toko.add',
+        component: () => import('@/views/apps/Masterdata/toko/AddView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Tambah data Toko',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Toko',
+              disabled: true,
+              href: '/master-data-toko',
+            },
+            {
+              text: 'Tambah Data Toko',
+              disabled: true,
+              href: '/master-data-toko/add',
+            },
+          ]
+        }
+      },
+      {
+        path: 'show/:id',
+        name: 'master-data-toko.show',
+        component: () => import('@/views/apps/Masterdata/toko/ShowView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Detail/Update Toko',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Toko',
+              disabled: true,
+              href: '/master-data-toko',
+            },
+            {
+              text: 'Lihat Data Toko',
+              disabled: true,
+              href: '/master-data-toko/show/:id',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
+    path: '/master-data-pelanggan',
+    component: () => import('@/views/apps/Masterdata/pelanggan/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Pelanggan',
+    },
+    children: [
+      {
+        path: '',
+        name: 'master-data-pelanggan.data',
+        component: () => import('@/views/apps/Masterdata/pelanggan/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola Pelanggan',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Pelanggan',
+              disabled: true,
+              href: '/master-data-pelanggan',
+            },
+          ]
+        }
+      },
+      {
+        path: 'add',
+        name: 'master-data-pelanggan.add',
+        component: () => import('@/views/apps/Masterdata/pelanggan/AddView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Tambah data Pelanggan',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Pelanggan',
+              disabled: true,
+              href: '/master-data-pelanggan',
+            },
+            {
+              text: 'Tambah Data Pelanggan',
+              disabled: true,
+              href: '/master-data-pelanggan/add',
+            },
+          ]
+        }
+      },
+      {
+        path: 'show/:id',
+        name: 'master-data-pelanggan.show',
+        component: () => import('@/views/apps/Masterdata/pelanggan/ShowView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Detail/Update Pelanggan',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Pelanggan',
+              disabled: true,
+              href: '/master-data-pelanggan',
+            },
+            {
+              text: 'Lihat Data Pelanggan',
+              disabled: true,
+              href: '/master-data-pelanggan/show/:id',
+            },
+          ]
+        }
+      },
     ]
   },
 ]

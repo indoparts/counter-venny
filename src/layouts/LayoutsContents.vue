@@ -36,10 +36,10 @@
                         </v-btn>
                     </v-card-text>
                     <v-card-text class="pt-0">
-                        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
+                        Jl. Raya serang, KM. 13,5, Des. Sukadamai, Kec. Cikupa-Tangerang 15710, Hp. 081212439564
                     </v-card-text>
                     <v-card-text>
-                        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+                        {{ new Date().getFullYear() }} — <strong>Al&Pam Development</strong>
                     </v-card-text>
                 </v-card>
             </v-footer>
@@ -64,7 +64,6 @@ export default {
             rightDrawer: true,
             icons: [
                 'mdi-facebook',
-                'mdi-twitter',
                 'mdi-linkedin',
                 'mdi-instagram',
             ],

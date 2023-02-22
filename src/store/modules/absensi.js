@@ -11,9 +11,10 @@ const state = () => ({
         foto_selfi: [],
     },
     rightMenuDrawer: [
-        ['Absensi', 'mdi-fingerprint', 'users-absen'],
-        ['List Data', 'mdi-view-list', 'list-data-absensi-user'],
-        ['Grafik', 'mdi-chart-bar', 'grafik-data-absensi-user'],
+        ['Absensi', 'mdi-fingerprint', 'users-absen', 'create-absensi'],
+        ['List Data', 'mdi-view-list', 'list-data-absensi-user', 'read-absensi'],
+        ['Grafik', 'mdi-chart-bar', 'grafik-data-absensi-user', 'read-absensi'],
+        ['Laporan Absensi', 'mdi-chart-scatter-plot-hexbin', 'laporan-data-absensi', 'report-absensi'],
     ]
 })
 
@@ -31,7 +32,7 @@ const mutations = {
 }
 
 const actions = {
-    index({}, payload) {
+    index({ }, payload) {
         return new Promise(resolve => {
             const {
                 page,
@@ -40,6 +41,24 @@ const actions = {
                 sortDesc,
             } = payload.options
             $axios.get(`/absensi?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}`)
+                .then(response => {
+                    resolve(response.data)
+                })
+                .catch(error => {
+                    resolve(error.response)
+                })
+        })
+    },
+    laporan({ }, payload) {
+        return new Promise(resolve => {
+            const {
+                page,
+                itemsPerPage,
+                sortBy,
+                sortDesc,
+            } = payload.options
+            const { search, between } = payload.attr
+            $axios.get(`/absensi-report?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}&between=${between}`)
                 .then(response => {
                     resolve(response.data)
                 })

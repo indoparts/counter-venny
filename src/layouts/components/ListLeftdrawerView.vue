@@ -146,7 +146,7 @@ export default {
                 icon: 'mdi-group',
                 child: false,
                 itemchild: [],
-                link: '/kasbon',
+                link: '/master-data-role',
                 permission: 'read-role'
             },
             {
@@ -155,35 +155,26 @@ export default {
                 icon: 'mdi-security',
                 child: false,
                 itemchild: [],
-                link: '/kasbon',
+                link: '/master-data-akses',
                 permission: 'read-permission'
             },
             {
-                no:9,
+                no:10,
                 title: 'Data Toko',
                 icon: 'mdi-storefront',
                 child: false,
                 itemchild: [],
-                link: '/kasbon',
-                permission: 'read-toko'
+                link: '/master-data-toko',
+                permission: 'read-mastertoko'
             },
             {
-                no:10,
-                title: 'Data Gudang',
-                icon: 'mdi-store',
-                child: false,
-                itemchild: [],
-                link: '/kasbon',
-                permission: 'read-gudang'
-            },
-            {
-                no:11,
+                no:12,
                 title: 'Data Pelanggan',
                 icon: 'mdi-face-agent',
                 child: false,
                 itemchild: [],
-                link: '/kasbon',
-                permission: 'read-pelanggan'
+                link: '/master-data-pelanggan',
+                permission: 'read-masterpelanggan'
             },
         ]
     }),

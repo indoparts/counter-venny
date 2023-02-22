@@ -6,7 +6,7 @@
     </div>
     <v-row>
       <v-col v-for="(item, i) in items" :key="i" cols="12" md="4">
-        <v-card flat color="card" rounded>
+        <v-card flat color="card" rounded v-if="$can(item.authorization)">
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
               <v-card-title v-text="item.title"></v-card-title>
@@ -26,7 +26,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-card flat class="mt-5" color="card">
+    <!-- <v-card flat class="mt-5" color="card">
       <v-card-text>
         <apexchart type="bar" :options="options" :series="series"></apexchart>
       </v-card-text>
@@ -51,7 +51,7 @@
           </v-card-text>
         </v-card>
       </v-col>
-    </v-row>
+    </v-row> -->
   </v-container>
 </template>
 <script>
@@ -64,80 +64,86 @@ export default {
           src: 'mdi-fingerprint',
           title: 'Absen',
           artist: 'Absen masuk/pulang',
-          link:'/users-absen'
+          link:'/users-absen',
+          authorization:'read-absensi'
         },
         {
           color: 'error',
           src: 'mdi-plane-car',
           title: 'Cuti',
           artist: 'Permohonan Cuti',
-          link:'/'
+          link:'/',
+          authorization:'read-cuti'
         },
         {
           color: 'accent',
           src: 'mdi-hospital-box',
           title: 'Sakit',
           artist: 'Permohonan izin sakit',
-          link:'/'
+          link:'/',
+          authorization:'read-izinsakit'
         },
         {
           color: 'error',
           src: 'mdi-ghost',
           title: 'Izin',
           artist: 'Permohonan izin pribadi',
-          link:'/'
+          link:'/',
+          authorization:'read-izinpribadi'
         },
         {
           color: 'accent',
           src: 'mdi-wallet-giftcard',
           title: 'Gaji',
           artist: 'Periksa slip pendapatan',
-          link:'/'
+          link:'/',
+          authorization:'read-gaji'
         },
         {
           color: 'primary',
           src: 'mdi-cash-multiple',
           title: 'Kasbon',
           artist: 'Permohonan izin kasbon',
-          link:'/'
+          link:'/',
+          authorization:'read-kasbon'
         },
       ],
-      optionsDonuts: {
-        series: [44, 55, 13, 33],
-        labels: ['Apple', 'Mango', 'Orange', 'Watermelon']
-      },
-      options: {
-        chart: {
-          foreColor: '#ccc',
-          toolbar: {
-            show: false
-          },
-        },
-        stroke: {
-          width: 3
-        },
-        dataLabels: {
-          enabled: false
-        },
-        tooltip: {
-          theme: (this.$vuetify.theme.dark) ? 'dark' : 'light'
-        },
-        grid: {
-          borderColor: "#535A6C",
-          xaxis: {
-            lines: {
-              show: true
-            }
-          }
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-        }
-      },
-      series: [{
-        name: 'series-1',
-        data: [30, 40, 45, 50, 49, 60, 70, 91]
-      }]
+      // optionsDonuts: {
+      //   series: [44, 55, 13, 33],
+      //   labels: ['Apple', 'Mango', 'Orange', 'Watermelon']
+      // },
+      // options: {
+      //   chart: {
+      //     foreColor: '#ccc',
+      //     toolbar: {
+      //       show: false
+      //     },
+      //   },
+      //   stroke: {
+      //     width: 3
+      //   },
+      //   dataLabels: {
+      //     enabled: false
+      //   },
+      //   tooltip: {
+      //     theme: (this.$vuetify.theme.dark) ? 'dark' : 'light'
+      //   },
+      //   grid: {
+      //     borderColor: "#535A6C",
+      //     xaxis: {
+      //       lines: {
+      //         show: true
+      //       }
+      //     }
+      //   },
+      //   xaxis: {
+      //     categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+      //   }
+      // },
+      // series: [{
+      //   name: 'series-1',
+      //   data: [30, 40, 45, 50, 49, 60, 70, 91]
+      // }]
     }
   },
 }

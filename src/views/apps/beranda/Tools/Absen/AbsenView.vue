@@ -121,12 +121,11 @@ export default {
         },
 
         hitung(mk1, mk2) {
-            var R = parseInt(this.lokasiAbsen.radius_forabsen); // Radius of the Earth in miles
-            var rlat1 = mk1.lat * (Math.PI / 180); // Convert degrees to radians
-            var rlat2 = mk2.lat * (Math.PI / 180); // Convert degrees to radians
-            var difflat = rlat2 - rlat1; // Radian difference (latitudes)
-            var difflon = (mk2.lng - mk1.lng) * (Math.PI / 180); // Radian difference (longitudes)
-
+            var R = parseInt(this.lokasiAbsen.radius_forabsen);
+            var rlat1 = mk1.lat * (Math.PI / 180);
+            var rlat2 = mk2.lat * (Math.PI / 180);
+            var difflat = rlat2 - rlat1;
+            var difflon = (mk2.lng - mk1.lng) * (Math.PI / 180);
             var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
             var hasil = d.toFixed(2)
             this.enableAbsen = hasil <= this.lokasiAbsen.radius ? true : false
@@ -134,9 +133,3 @@ export default {
     }
 };
 </script>
-
-<style>
-.v-data-table--dense.theme--dark{
-    background-color: rgb(0, 48, 60) !important;
-}
-</style>

@@ -1,6 +1,6 @@
 <template>
     <v-card flat color="card">
-        <v-card-title>Master Data Pengguna</v-card-title>
+        <v-card-title>Master Data Pelanggan</v-card-title>
         <v-card-text>
             <alert-components :type="alert.type" :title="alert.title" :msg="alert.msg"></alert-components>
             <v-text-field
@@ -10,63 +10,21 @@
                 v-model="search"
                 @keyup="filter()"
               ></v-text-field>
-            <v-data-table dense flat show-expand :headers="headers" :items="desserts" :options.sync="options"
-                :server-items-length="totalDesserts" :loading="loading" :single-expand="singleExpand" item-key="id"
-                :expanded.sync="expanded">
+            <v-data-table dense flat :headers="headers" :items="desserts" :options.sync="options"
+                :server-items-length="totalDesserts" :loading="loading">
+                <template v-slot:[`item.created_at`]="{ item }">
+                    {{ parseDate(item) }}
+                </template>
+                <template v-slot:[`item.updated_at`]="{ item }">
+                    {{ parseDate(item) }}
+                </template>
                 <template v-slot:[`item.act`]="{ item }">
-                    <v-icon small class="mr-2" @click="editItem(item.id)" v-if="$can('update-user')">
+                    <v-icon small class="mr-2" @click="editItem(item.id)" v-if="$can('update-masterpelanggan')">
                         mdi-pencil
                     </v-icon>
-                    <v-icon small @click="deleteItem(item.id)" v-if="$can('delete-user')">
+                    <v-icon small @click="deleteItem(item.id)" v-if="$can('delete-masterpelanggan')">
                         mdi-delete
                     </v-icon>
-                </template>
-                <template v-slot:expanded-item="{ headers, item }">
-                    <td :colspan="headers.length / 2">
-                        <tr>
-                            <th class="text-left">Aktivasi</th>
-                            <td> : {{ item.activation ? 'aktif' : 'tidak aktif' }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Lokasi Kerja</th>
-                            <td> : {{ item.work_location }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Saldo Cuti</th>
-                            <td> : {{ item.saldo_cuti }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-left">No HP</th>
-                            <td> : {{ item.hp }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Selfi Masuk</th>
-                            <td> : <v-img max-height="100" max-width="100" :src="baseUrl + item.avatar"></v-img>
-                            </td>
-                        </tr>
-                    </td>
-                    <td :colspan="headers.length / 2">
-                        <tr>
-                            <th class="text-left">Status kerja</th>
-                            <td> : {{ item.status }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Tgl. Join</th>
-                            <td> : {{ parseDate(item.tgl_join) }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Limit Kasbon</th>
-                            <td> : {{ item.limit_kasbon }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Role Akses</th>
-                            <td> : {{ item.rolename }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Departemen</th>
-                            <td> : {{ item.deptname }}</td>
-                        </tr>
-                    </td>
                 </template>
             </v-data-table>
         </v-card-text>
@@ -93,17 +51,15 @@ export default {
                 title: '',
                 msg: []
             },
-            baseUrl: `http://${process.env.BASE_URL_API}/api/images/avatar-users/`,
-            expanded: [],
-            singleExpand: false,
             totalDesserts: 0,
             desserts: [],
             loading: true,
             options: {},
             headers: [
-                { text: 'NIK', value: 'nik' },
-                { text: 'NAMA', value: 'name' },
-                { text: 'EMAIL', value: 'email' },
+                { text: 'Nama', value: 'nama' },
+                { text: 'Email', value: 'email' },
+                { text: 'Telp', value: 'telp' },
+                { text: 'Alamat', value: 'alamat' },
                 { text: 'ACT', value: 'act' },
             ],
         }
@@ -117,7 +73,7 @@ export default {
         },
     },
     methods: {
-        ...mapActions("masterdata_user", ['index', 'edit', 'delete']),
+        ...mapActions("masterdata_pelanggan", ['index', 'edit', 'delete']),
         getDataFromApi() {
             this.loading = true
             const tableAttr = { options: this.options, search: this.search }
@@ -134,7 +90,7 @@ export default {
             return moment(e).format('yyyy-MM-DD, h:mm:ss');
         },
         editItem(id) {
-            this.$router.push({ path: `master-data-pengguna/show/${id}` })
+            this.$router.push({ path: `/master-data-pelanggan/show/${id}` })
         },
         deleteItem(id) {
             this.deleteId = id

@@ -26,14 +26,10 @@
                 Tidak punya akun? <a href="#" class="pl-2" color="primary">Daftar Akun</a>
               </v-card-actions>
               <v-btn class="rounded-0" color="primary"
-                :disabled="form.email === '' && form.password === '' ? true : false" :loading="loading" x-large block
-                dark @click="submit()">Login</v-btn>
+                :disabled="form.email === '' && form.password === '' ? true : false" :loading="loading" x-large block dark
+                @click="submit()">Login</v-btn>
             </v-form>
           </v-card-text>
-          <v-card-actions class="ml-6 mr-6 text-center">
-            <p>By continuing, you agree to Fedorae Education's <a href="#" class="pl-2" color="primary">Policy</a>
-              and <a href="#" class="pl-2" color="primary">Terms of Use</a></p>
-          </v-card-actions>
           <v-card-actions class="d-flex justify-center">
             <alert-components :type="alert.type" :title="alert.title" :msg="alert.msg"></alert-components>
           </v-card-actions>
@@ -43,7 +39,7 @@
   </v-container>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import SwitchMode from '@/components/SwitchMode.vue'
 import AlertComponents from '@/components/AlertComponents.vue'
 export default {
@@ -68,6 +64,16 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters(['isAuth']),
+  },
+  mounted() {
+    if (this.isAuth) {
+      const cekRoute = this.$router.currentRoute.meta.requiresAuth
+      if (!cekRoute)
+        this.$router.push({ name: 'dashboard' })
+    }
+  },
   methods: {
     ...mapActions('auth', ['submitLogin']),
     submit() {
@@ -79,9 +85,9 @@ export default {
         var a = (function () {
           if (res.msg === 'error' && typeof res.data !== 'undefined') {
             return res.data.errors
-          } else if (res.msg === 'error' && typeof res.data === 'undefined'){
+          } else if (res.msg === 'error' && typeof res.data === 'undefined') {
             return [{ field: '', rule: '', message: 'Email & password salah !!' }]
-          }else{
+          } else {
             return [{ field: '', rule: '', message: 'Berhasil' }]
           }
         })();

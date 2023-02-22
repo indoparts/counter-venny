@@ -108,9 +108,3 @@ export default {
     },
 }
 </script>
-
-<style>
-.v-data-table--dense.theme--dark {
-    background-color: rgb(0, 48, 60) !important;
-}
-</style>
