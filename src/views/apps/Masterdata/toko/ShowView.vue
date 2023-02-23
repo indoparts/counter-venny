@@ -5,27 +5,27 @@
             <v-card-text>
                 <v-row no-gutters>
                     <v-col cols="12" md="4">
-                        <v-text-field dense outlined v-model="form.nama" label="nama" class="mt-input"
+                        <v-text-field dense outlined v-model="form.nama" label="nama" class="mb-input"
                             :rules="[v => !!v || 'Item is required']"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4">
-                        <v-text-field type="number" dense outlined v-model="form.telepon" label="telepon" class="mt-input"
+                        <v-text-field type="number" dense outlined v-model="form.telepon" label="telepon" class="mb-input"
                             :rules="[v => !!v || 'Item is required']"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4">
                         <v-text-field type="number" dense outlined v-model="form.radius_forabsen" label="radius absen"
-                            class="mt-input" :rules="[v => !!v || 'Item is required']"></v-text-field>
+                            class="mb-input" :rules="[v => !!v || 'Item is required']"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="6">
-                        <v-text-field type="number" dense outlined v-model="form.latitude" label="latitude" class="mt-input"
+                        <v-text-field type="number" dense outlined v-model="form.latitude" label="latitude" class="mb-input"
                             :rules="[v => !!v || 'Item is required']"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="6">
                         <v-text-field type="number" dense outlined v-model="form.longitude" label="longitude"
-                            class="mt-input" :rules="[v => !!v || 'Item is required']"></v-text-field>
+                            class="mb-input" :rules="[v => !!v || 'Item is required']"></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                        <v-textarea dense outlined v-model="form.alamat" label="alamat" class="mt-input"
+                        <v-textarea dense outlined v-model="form.alamat" label="alamat" class="mb-input"
                             :rules="[v => !!v || 'Item is required']"></v-textarea>
                     </v-col>
                 </v-row>
@@ -38,7 +38,7 @@
                 </v-btn>
             </v-card-actions>
             <v-card-actions>
-                <div class="d-flex justify-center mt-5">
+                <div class="d-flex justify-center mb-5">
                     <alert-components :type="alert.type" :title="alert.title" :msg="alert.msg"></alert-components>
                 </div>
             </v-card-actions>

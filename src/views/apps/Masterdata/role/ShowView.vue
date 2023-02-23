@@ -3,7 +3,7 @@
         <v-card color="card" flat>
             <v-card-title>Form Role</v-card-title>
             <v-card-text>
-                <v-text-field dense outlined v-model="form.rolename" label="name" class="mt-input"
+                <v-text-field dense outlined v-model="form.rolename" label="name" class="mb-input"
                     :rules="[v => !!v || 'Item is required']"></v-text-field>
             </v-card-text>
             <v-card-actions>

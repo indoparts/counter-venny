@@ -6,65 +6,60 @@
                 <v-row no-gutters>
                     <v-col cols="12" md="6">
                         <v-select dense outlined v-model="form.role_id" :items="role" item-text="rolename" item-value="id"
-                            label="pilih role user" :rules="[v => !!v || 'Item is required']" class="mt-input"></v-select>
+                            label="pilih role user" class="mb-input"></v-select>
                     </v-col>
                     <v-col cols="12" md="6">
                         <v-select dense outlined v-model="form.dept_id" :items="dept" item-text="deptname" item-value="id"
-                            label="pilih departemen user" :rules="[v => !!v || 'Item is required']"
-                            class="mt-input"></v-select>
+                            label="pilih departemen user" class="mb-input"></v-select>
                     </v-col>
                     <v-col cols="12" md="4">
-                        <v-text-field dense outlined v-model="form.name" label="name" class="mt-input"
-                            :rules="[v => !!v || 'Item is required']"></v-text-field>
+                        <v-text-field dense outlined v-model="form.name" label="name" class="mb-input"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4">
-                        <v-text-field dense outlined v-model="form.email" label="email" class="mt-input"
-                            :rules="[v => !!v || 'Item is required']"></v-text-field>
+                        <v-text-field dense outlined v-model="form.email" label="email" class="mb-input"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4">
-                        <v-text-field type="number" dense outlined v-model="form.nik" class="mt-input" label="nik"
-                            :rules="[v => !!v || 'Item is required']"></v-text-field>
+                        <v-text-field type="number" dense outlined v-model="form.nik" class="mb-input"
+                            label="nik"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4">
-                        <v-text-field type="number" dense outlined v-model="form.hp" class="mt-input" label="No. HP"
-                            :rules="[v => !!v || 'Item is required']"></v-text-field>
+                        <v-text-field type="number" dense outlined v-model="form.hp" class="mb-input"
+                            label="No. HP"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4">
-                        <v-text-field type="number" dense outlined v-model="form.password" class="mt-input" label="Password"
-                            :rules="[v => !!v || 'Item is required']"></v-text-field>
+                        <v-text-field type="number" dense outlined v-model="form.password" class="mb-input"
+                            label="Password"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4">
-                        <v-text-field dense outlined v-model="form.password_confirmation" class="mt-input"
-                            label="konfirmasi password" :rules="[v => !!v || 'Item is required']"></v-text-field>
+                        <v-text-field dense outlined v-model="form.password_confirmation" class="mb-input"
+                            label="konfirmasi password"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4">
                         <v-select dense outlined v-model="form.work_location" :items="lokasi_kerja"
-                            label="pilih lokasi kerja" :rules="[v => !!v || 'Item is required']"
-                            class="mt-input"></v-select>
+                            label="pilih lokasi kerja" class="mb-input"></v-select>
                     </v-col>
                     <v-col cols="12" md="4">
-                        <v-text-field type="number" dense outlined v-model="form.saldo_cuti" class="mt-input"
-                            label="saldo cuti" :rules="[v => !!v || 'Item is required']"></v-text-field>
+                        <v-text-field type="number" dense outlined v-model="form.saldo_cuti" class="mb-input"
+                            label="saldo cuti"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="4">
                         <v-select dense outlined v-model="form.activation" :items="activation" label="activation"
-                            :rules="[v => !!v || 'Item is required']" class="mt-input"></v-select>
+                            class="mb-input"></v-select>
                     </v-col>
                     <v-col cols="12" md="3">
                         <v-select dense outlined v-model="form.status" :items="status" label="Status Pengguna"
-                            :rules="[v => !!v || 'Item is required']" class="mt-input"></v-select>
+                            class="mb-input"></v-select>
                     </v-col>
                     <v-col cols="12" md="3">
-                        <DatePicker label="Tgl. Join" @someEvent="callback"></DatePicker>
+                        <DatePicker label="Tgl. Join" @someEvent="callback" :disabled="false"></DatePicker>
                     </v-col>
                     <v-col cols="12" md="3">
-                        <v-text-field dense outlined v-model="form.limit_kasbon" class="mt-input" label="Limit Kasbon"
-                            :rules="[v => !!v || 'Item is required']"></v-text-field>
+                        <v-text-field dense outlined v-model="form.limit_kasbon" class="mb-input"
+                            label="Limit Kasbon"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="3">
-                        <v-file-input prepend-inner-icon="mdi-camera" dense outlined v-model="form.avatar" class="mt-input"
-                            accept="image/*" label="avatar" required
-                            :rules="[v => !!v || 'Item is required']"></v-file-input>
+                        <v-file-input prepend-inner-icon="mdi-camera" dense outlined v-model="form.avatar" class="mb-input"
+                            accept="image/*" label="avatar"></v-file-input>
                     </v-col>
                 </v-row>
             </v-card-text>

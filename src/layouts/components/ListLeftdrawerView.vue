@@ -19,7 +19,7 @@
                     </v-list-item>
                 </template>
                 <v-list>
-                    <v-list-item link>
+                    <v-list-item link to="/profile">
                         <v-list-item-action>
                             <v-icon>mdi-account</v-icon>
                         </v-list-item-action>

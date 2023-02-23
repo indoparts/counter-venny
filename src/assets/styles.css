@@ -1,6 +1,26 @@
 .v-data-table--dense.theme--dark {
     background-color: rgb(0, 48, 60) !important;
 }
-.mt-input {
-    margin-bottom: -23px !important;
+.v-data-table--dense.theme--light {
+    background-color: #fdf6f0 !important;
+}
+.mb-input {
+    margin-bottom: -26px !important;
+}
+.v-text-field--outlined,
+.v-text-field--solo {
+    border-radius: 0px !important;
+}
+.theme--light.v-card>.v-card__text,
+.theme--light.v-card>.v-card__subtitle {
+    color: #7f2549 !important;
+}
+.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+    color: #7f2549 !important;
+}
+.theme--light.v-card {
+    color: #7f2549 !important;
+}
+.theme--light.v-application {
+    color: #7f2549 !important;
 }

@@ -2,7 +2,7 @@
     <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date"
         transition="scale-transition" offset-y min-width="auto">
         <template v-slot:activator="{ on, attrs }">
-            <v-text-field v-model="date" :label="label" dense outlined prepend-inner-icon="mdi-calendar" readonly v-bind="attrs"
+            <v-text-field :disabled="disabled" v-model="date" :label="label" dense outlined prepend-inner-icon="mdi-calendar" readonly v-bind="attrs"
                 v-on="on"></v-text-field>
         </template>
         <v-date-picker v-model="date" no-title scrollable>
@@ -20,6 +20,7 @@
 export default{
     props: {
         label: String,
+        disabled: Boolean,
     },
     data: () => ({
         date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),

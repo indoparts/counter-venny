@@ -22,17 +22,16 @@ export default {
             categories: [],
             series: [{
                 name: 'Absensi Telat',
-                type: 'column',
                 data: []
             }, {
                 name: 'Absensi Tidak Telat',
-                type: 'line',
                 data: []
             }],
         }
     },
     mounted() {
         this.grafikAbsen().then(res => {
+            console.log(res);
             this.series[0].data = res.data.telat
             this.series[1].data = res.data.tidak_telat
             this.categories = res.data.label
@@ -41,49 +40,83 @@ export default {
     methods: {
         ...mapActions('absensi', ['grafikAbsen']),
         chartOptions() {
-            return {
+            var options = {
                 chart: {
-                    foreColor: (this.$vuetify.theme.dark) ? '#ffffff' : '#00000',
                     height: 350,
-                    type: 'line',
-                },
-                stroke: {
-                    width: [0, 4]
-                },
-                title: {
-                    text: 'Traffic Absensi'
+                    type: "bar",
+                    stacked: false
                 },
                 dataLabels: {
-                    enabled: true,
-                    enabledOnSeries: [1]
+                    enabled: false
                 },
-                labels: this.categories,
-                tooltip: {
-                    theme: (this.$vuetify.theme.dark) ? 'dark' : 'light'
+                colors: ["#FF1654", "#247BA0"],
+                stroke: {
+                    width: [4, 4]
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: "20%"
+                    }
                 },
                 xaxis: {
-                    type: 'datetime'
+                    categories: this.categories
                 },
-                yaxis: [{
-                    title: {
-                        text: 'Absensi Telat',
-                    },
-
-                }, {
-                    opposite: true,
-                    title: {
-                        text: 'Absensi Tidak Telat'
-                    }
-                }],
-                grid: {
-                    borderColor: (this.$vuetify.theme.dark) ? '#ffffff' : '#00000',
-                    xaxis: {
-                        lines: {
+                yaxis: [
+                    {
+                        axisTicks: {
                             show: true
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: "#FF1654"
+                        },
+                        labels: {
+                            style: {
+                                colors: "#FF1654"
+                            }
+                        },
+                        title: {
+                            text: "Absensi telat",
+                            style: {
+                                color: "#FF1654"
+                            }
+                        }
+                    },
+                    {
+                        opposite: true,
+                        axisTicks: {
+                            show: true
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: "#247BA0"
+                        },
+                        labels: {
+                            style: {
+                                colors: "#247BA0"
+                            }
+                        },
+                        title: {
+                            text: "Absensi tidak telat",
+                            style: {
+                                color: "#247BA0"
+                            }
                         }
                     }
+                ],
+                tooltip: {
+                    shared: false,
+                    intersect: true,
+                    x: {
+                        show: false
+                    }
                 },
-            }
+                legend: {
+                    horizontalAlign: "left",
+                    offsetX: 40
+                }
+            };
+            return options
         },
     }
 }

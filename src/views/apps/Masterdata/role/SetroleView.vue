@@ -4,7 +4,7 @@
             <v-card-title>Form Set Role</v-card-title>
             <v-card-text>
                 <v-select dense outlined v-model="formsetrole.role_id" :items="role" item-text="rolename" item-value="id"
-                                label="pilih role user" :rules="[v => !!v || 'Item is required']" class="mt-input"></v-select>
+                                label="pilih role user" :rules="[v => !!v || 'Item is required']" class="mb-input"></v-select>
                 <v-data-table dense flat :headers="headers" :items="desserts" :options.sync="options"
                     :server-items-length="totalDesserts" :loading="loadingtable" class="elevation-0">
                     <template v-slot:[`item.act`]="{ item }">

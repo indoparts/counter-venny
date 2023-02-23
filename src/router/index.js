@@ -42,6 +42,23 @@ const routes = [
     },
   },
   {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('@/views/auth/ProfileView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Profile',
+      breadscrum: [
+        {
+          text: 'Profile',
+          disabled: true,
+          href: '/',
+        },
+      ]
+    },
+  },
+  {
     path: '/users-info/:data',
     name: 'users-info',
     component: () => import('@/views/apps/beranda/Tools/UserInfoView.vue'),
