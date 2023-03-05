@@ -8,7 +8,12 @@ import masterdata_user from './modules/masterdata_user.js'
 import masterdata_role from './modules/masterdata_role.js'
 import masterdata_akses from './modules/masterdata_akses.js'
 import masterdata_toko from './modules/masterdata_toko.js'
+import masterdata_office from './modules/masterdata_office.js'
+import masterdata_gudang from './modules/masterdata_gudang.js'
+import masterdata_dept from './modules/masterdata_dept.js'
 import masterdata_pelanggan from './modules/masterdata_pelanggan.js'
+import pengajuan_cuti from './modules/pengajuan_cuti.js'
+import pengajuan_izin from './modules/pengajuan_izin.js'
 // modules::end
 
 Vue.use(Vuex)
@@ -38,6 +43,11 @@ export default new Vuex.Store({
     masterdata_role,
     masterdata_akses,
     masterdata_toko,
+    masterdata_office,
+    masterdata_gudang,
+    masterdata_dept,
     masterdata_pelanggan,
+    pengajuan_cuti,
+    pengajuan_izin,
   }
 })

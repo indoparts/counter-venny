@@ -6,10 +6,10 @@
                 <v-list-item v-for="([title, icon, link, permission], i) in menu" :key="i" @click="movePage(link)" router
                     exact>
                     <v-list-item-action v-if="$can(permission)">
-                        <v-icon v-text="icon"></v-icon>
+                        <v-icon>{{ icon }}</v-icon>
                     </v-list-item-action>
                     <v-list-item-content v-if="$can(permission)">
-                        <v-list-item-title v-text="title" />
+                        <v-list-item-title>{{ title }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-list-item-group>
@@ -75,6 +75,7 @@ export default {
     },
     methods: {
         rendered(e){
+            console.log(e);
             switch (e) {
                 case 'dashboard':
                     this.isDashboard = true
@@ -100,6 +101,36 @@ export default {
                 case 'laporan-data-absensi':
                     this.menu = this.$store.state.absensi.rightMenuDrawer
                     this.selectedRightDrawer = 3
+                    this.isDashboard = false
+                    break;
+                case 'cuti.data':
+                    this.menu = this.$store.state.pengajuan_cuti.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'cuti.form':
+                    this.menu = this.$store.state.pengajuan_cuti.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'cuti.laporan':
+                    this.menu = this.$store.state.pengajuan_cuti.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    this.isDashboard = false
+                    break;
+                case 'izin.data':
+                    this.menu = this.$store.state.pengajuan_izin.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'izin.form':
+                    this.menu = this.$store.state.pengajuan_izin.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'izin.laporan':
+                    this.menu = this.$store.state.pengajuan_izin.rightMenuDrawer
+                    this.selectedRightDrawer = 0
                     this.isDashboard = false
                     break;
                 case 'master-data-pengguna.data':
@@ -129,6 +160,21 @@ export default {
                     break;
                 case 'master-data-role.show':
                     this.menu = this.$store.state.masterdata_role.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'master-data-dept.data':
+                    this.menu = this.$store.state.masterdata_dept.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'master-data-dept.add':
+                    this.menu = this.$store.state.masterdata_dept.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'master-data-dept.show':
+                    this.menu = this.$store.state.masterdata_dept.rightMenuDrawer
                     this.selectedRightDrawer = 1
                     this.isDashboard = false
                     break;
@@ -164,6 +210,21 @@ export default {
                     break;
                 case 'master-data-toko.show':
                     this.menu = this.$store.state.masterdata_toko.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'master-data-office.data':
+                    this.menu = this.$store.state.masterdata_office.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'master-data-office.add':
+                    this.menu = this.$store.state.masterdata_office.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'master-data-office.show':
+                    this.menu = this.$store.state.masterdata_office.rightMenuDrawer
                     this.selectedRightDrawer = 1
                     this.isDashboard = false
                     break;

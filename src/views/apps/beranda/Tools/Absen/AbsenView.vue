@@ -4,17 +4,21 @@
             <h3 class="font-weight-bold mt-3" v-text="$route.meta.title"></h3>
             <v-breadcrumbs :items="$route.meta.breadscrum"></v-breadcrumbs>
         </div>
-        <v-card color="card" flat>
-            <v-card-text>
-                <GmapMap :center="center" :zoom="18" map-style-id="roadmap" :options="mapOptions"
-                    style="width:100%;  height: 600px;" ref="mapRef" @click="handleMapClick">
-                    <GmapMarker :position="marker.position" :clickable="true" :draggable="true" @drag="handleMarkerDrag"
-                        @click="panToMarker" />
-                </GmapMap>
-            </v-card-text>
+        <GmapMap :center="center" :zoom="15" map-style-id="roadmap" :options="mapOptions"
+            style="width:100%;  height: 600px;" ref="mapRef" @click="handleMapClick">
+            <GmapMarker :position="marker.position" :clickable="true" :draggable="true" @drag="handleMarkerDrag"
+                @click="panToMarker" />
+            <GmapMarker :position="marker2.position" :clickable="true" :draggable="true" @drag="handleMarkerDrag"
+                @click="panToMarker" />
+        </GmapMap>
+        <v-card color="card" flat class="mt-3">
+            <v-toolbar collapse flat dense color="card">
+                <v-btn icon @click="loadMap">
+                    <v-icon>mdi-reload</v-icon>
+                </v-btn>
+            </v-toolbar>
             <v-card-actions class="d-flex justify-center">
-                <form-absensi :lat="marker.position.lat" :lng="marker.position.lng"
-                    :enable="enableAbsen"></form-absensi>
+                <form-absensi :lat="marker.position.lat" :lng="marker.position.lng" :enable="enableAbsen"></form-absensi>
             </v-card-actions>
             <v-card-actions>
                 <v-container>
@@ -59,8 +63,9 @@
 </template>
  
 <script>
-import { mapState } from "vuex";
+import { mapActions } from "vuex";
 import FormAbsensi from '../components/FormAbsensi.vue'
+import haversine from 'haversine-distance'
 export default {
     name: "AddGoogleMap",
     components: {
@@ -69,6 +74,7 @@ export default {
     data() {
         return {
             marker: { position: { lat: 10, lng: 10 }, animation: Animation.BOUNCE },
+            marker2: { position: { lat: 10, lng: 10 }, animation: Animation.BOUNCE },
             center: { lat: 10, lng: 10 }, mapOptions: {
                 disableDefaultUI: true,
             },
@@ -76,34 +82,36 @@ export default {
             enableAbsen: false
         };
     },
-
-    computed: {
-        ...mapState('auth', {
-            authenticated: state => state.authenticated,
-        }),
+    mounted() {
+        this.getUserLogin().then((res) => {
+            const v = res.data.data.user
+            this.lokasiAbsen = v.work_location_detail
+            this.geolocate(v.work_location_detail.latitude, v.work_location_detail.longitude);
+        })
     },
-    watch: {
-        authenticated(v) {
-            this.lokasiAbsen = v.toko
-            this.geolocate(v.toko.latitude, v.toko.longitude);
-        }
-    },
-
     methods: {
+        ...mapActions('auth', ['getUserLogin']),
         geolocate(lt, lg) {
             navigator.geolocation.getCurrentPosition((position) => {
                 this.marker.position = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 };
-                this.panToMarker();
-                this.hitung({
+                this.marker2.position = {
                     lat: parseFloat(lt),
                     lng: parseFloat(lg),
+                };
+                this.panToMarker();
+                const calculate = this.haversine_distance({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
                 }, {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
+                    latitude: parseFloat(lt),
+                    longitude: parseFloat(lg),
                 })
+                const x = calculate >= parseFloat(this.lokasiAbsen.radius_forabsen) ? true : false
+                console.log(Math.round(calculate));
+                this.enableAbsen = x
             });
         },
 
@@ -117,18 +125,17 @@ export default {
 
         handleMapClick(e) {
             this.marker.position = { lat: e.latLng.lat(), lng: e.latLng.lng() };
-            console.log(e);
         },
 
-        hitung(mk1, mk2) {
-            var R = parseInt(this.lokasiAbsen.radius_forabsen);
-            var rlat1 = mk1.lat * (Math.PI / 180);
-            var rlat2 = mk2.lat * (Math.PI / 180);
-            var difflat = rlat2 - rlat1;
-            var difflon = (mk2.lng - mk1.lng) * (Math.PI / 180);
-            var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
-            var hasil = d.toFixed(2)
-            this.enableAbsen = hasil <= this.lokasiAbsen.radius ? true : false
+        rad(x) {
+            return x * Math.PI / 180;
+        },
+        haversine_distance(a, b) {
+            return haversine(a, b)
+        },
+
+        loadMap() {
+            location.reload()
         }
     }
 };

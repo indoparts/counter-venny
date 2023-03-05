@@ -51,10 +51,10 @@
                     </template>
 
                     <v-list-item v-for="([title, icon, link], x) in item.itemchild" :key="x" link :to="link">
-                        <v-list-item-title v-text="title"></v-list-item-title>
+                        <v-list-item-title>{{ title }}</v-list-item-title>
 
                         <v-list-item-icon>
-                            <v-icon v-text="icon"></v-icon>
+                            <v-icon>{{ icon }}</v-icon>
                         </v-list-item-icon>
                     </v-list-item>
                 </v-list-group>
@@ -88,14 +88,13 @@ export default {
             },
             {
                 no:1,
-                title: 'Absensi',
+                title: 'Tools',
                 icon: 'mdi-office-building',
                 child: true,
                 itemchild: [
                     ['Absensi Kehadiran', 'mdi-fingerprint', '/users-absen'],
-                    ['Pengajuan Cuti', 'mdi-plane-car', '/cuti'],
-                    ['Izin Sakit', 'mdi-hospital-box', '/sakit'],
-                    ['Izin Pribadi', 'mdi-ghost', '/pribadi'],
+                    ['Pengajuan Cuti', 'mdi-plane-car', '/'],
+                    ['Pengajuan Izin', 'mdi-frequently-asked-questions', '/'],
                 ],
                 link: '/'
             },
@@ -142,6 +141,15 @@ export default {
             },
             {
                 no:7,
+                title: 'Data Departemen',
+                icon: 'mdi-lightbulb-group-outline',
+                child: false,
+                itemchild: [],
+                link: '/master-data-dept',
+                permission: 'read-dept'
+            },
+            {
+                no:8,
                 title: 'Data Role',
                 icon: 'mdi-group',
                 child: false,
@@ -150,7 +158,7 @@ export default {
                 permission: 'read-role'
             },
             {
-                no:8,
+                no:9,
                 title: 'Data Akses',
                 icon: 'mdi-security',
                 child: false,
@@ -168,7 +176,25 @@ export default {
                 permission: 'read-mastertoko'
             },
             {
+                no:11,
+                title: 'Data Office',
+                icon: 'mdi-office-building',
+                child: false,
+                itemchild: [],
+                link: '/master-data-office',
+                permission: 'read-masteroffice'
+            },
+            {
                 no:12,
+                title: 'Data Gudang',
+                icon: 'mdi-warehouse',
+                child: false,
+                itemchild: [],
+                link: '/master-data-gudang',
+                permission: 'read-mastergudang'
+            },
+            {
+                no:13,
                 title: 'Data Pelanggan',
                 icon: 'mdi-face-agent',
                 child: false,

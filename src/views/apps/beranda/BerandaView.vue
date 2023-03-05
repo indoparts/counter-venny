@@ -9,8 +9,8 @@
         <v-card flat color="card" rounded v-if="$can(item.authorization)">
           <div class="d-flex flex-no-wrap justify-space-between">
             <div>
-              <v-card-title v-text="item.title"></v-card-title>
-              <v-card-subtitle v-text="item.artist"></v-card-subtitle>
+              <v-card-title>{{ item.title }}</v-card-title>
+              <v-card-subtitle>{{ item.artist }}</v-card-subtitle>
               <v-card-actions>
                 <v-btn class="ml-2 mt-2" outlined rounded small :to="item.link">
                   periksa
@@ -77,23 +77,15 @@ export default {
         },
         {
           color: 'accent',
-          src: 'mdi-hospital-box',
-          title: 'Sakit',
-          artist: 'Permohonan izin sakit',
-          link:'/',
-          authorization:'read-izinsakit'
-        },
-        {
-          color: 'error',
-          src: 'mdi-ghost',
+          src: 'mdi-email-variant',
           title: 'Izin',
-          artist: 'Permohonan izin pribadi',
+          artist: 'Permohonan izin',
           link:'/',
-          authorization:'read-izinpribadi'
+          authorization:'read-izin'
         },
         {
           color: 'accent',
-          src: 'mdi-wallet-giftcard',
+          src: 'mdi-wallet-travel',
           title: 'Gaji',
           artist: 'Periksa slip pendapatan',
           link:'/',

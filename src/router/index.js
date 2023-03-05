@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
 const routes = [
   { path: '/', redirect: { name: 'login' } },
-  { path: "*", redirect: { name: 'error-404' } },
+  // { path: "*", redirect: { name: 'error-404' } },
   {
     path: '/error-404',
     name: 'error-404',
@@ -183,6 +183,177 @@ const routes = [
       ]
     },
   },
+
+  {
+    path: '/izin',
+    component: () => import('@/views/apps/beranda/Tools/izin/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Pengguna',
+    },
+    children: [
+      {
+        path: '',
+        name: 'izin.data',
+        component: () => import('@/views/apps/beranda/Tools/izin/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola Pengguna',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Izin',
+              disabled: true,
+              href: '/izin',
+            },
+          ]
+        }
+      },
+      {
+        path: 'izin-form',
+        name: 'izin.add',
+        component: () => import('@/views/apps/beranda/Tools/izin/FormView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Tambah data Pengguna',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Izin',
+              disabled: true,
+              href: '/izin',
+            },
+            {
+              text: 'Form Izin',
+              disabled: true,
+              href: '/izin/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'izin-laporan',
+        name: 'izin.laporan',
+        component: () => import('@/views/apps/beranda/Tools/izin/ReportView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Laporan Izin',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Izin',
+              disabled: true,
+              href: '/izin',
+            },
+            {
+              text: 'Laporan Izin',
+              disabled: true,
+              href: '/izin/laporan',
+            },
+          ]
+        }
+      },
+    ]
+  },
+
+  {
+    path: '/cuti',
+    component: () => import('@/views/apps/beranda/Tools/cuti/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Cuti',
+    },
+    children: [
+      {
+        path: '',
+        name: 'cuti.data',
+        component: () => import('@/views/apps/beranda/Tools/cuti/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola List Data Cuti',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Cuti',
+              disabled: true,
+              href: '/cuti',
+            },
+          ]
+        }
+      },
+      {
+        path: 'form-cuti',
+        name: 'cuti.add',
+        component: () => import('@/views/apps/beranda/Tools/cuti/FormView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Form pengajuan Cuti',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Cuti',
+              disabled: true,
+              href: '/cuti',
+            },
+            {
+              text: 'Form cuti',
+              disabled: true,
+              href: '/cuti/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'laporan-cuti',
+        name: 'cuti.laporan',
+        component: () => import('@/views/apps/beranda/Tools/cuti/ReportView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Laporan Cuti',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Cuti',
+              disabled: true,
+              href: '/cuti',
+            },
+            {
+              text: 'Laporan Cuti',
+              disabled: true,
+              href: '/cuti/laporan',
+            },
+          ]
+        }
+      },
+    ]
+  },
+
   {
     path: '/summary-istirahat',
     name: 'jadwal-istirahat',
@@ -579,6 +750,258 @@ const routes = [
               text: 'Lihat Data Toko',
               disabled: true,
               href: '/master-data-toko/show/:id',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
+    path: '/master-data-office',
+    component: () => import('@/views/apps/Masterdata/office/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Office',
+    },
+    children: [
+      {
+        path: '',
+        name: 'master-data-office.data',
+        component: () => import('@/views/apps/Masterdata/office/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola Office',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Office',
+              disabled: true,
+              href: '/master-data-office',
+            },
+          ]
+        }
+      },
+      {
+        path: 'add',
+        name: 'master-data-office.add',
+        component: () => import('@/views/apps/Masterdata/office/AddView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Tambah data Office',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Office',
+              disabled: true,
+              href: '/master-data-office',
+            },
+            {
+              text: 'Tambah Data Office',
+              disabled: true,
+              href: '/master-data-office/add',
+            },
+          ]
+        }
+      },
+      {
+        path: 'show/:id',
+        name: 'master-data-office.show',
+        component: () => import('@/views/apps/Masterdata/office/ShowView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Detail/Update Office',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Office',
+              disabled: true,
+              href: '/master-data-office',
+            },
+            {
+              text: 'Lihat Data Office',
+              disabled: true,
+              href: '/master-data-office/show/:id',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
+    path: '/master-data-gudang',
+    component: () => import('@/views/apps/Masterdata/gudang/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Gudang',
+    },
+    children: [
+      {
+        path: '',
+        name: 'master-data-gudang.data',
+        component: () => import('@/views/apps/Masterdata/gudang/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola Gudang',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Gudang',
+              disabled: true,
+              href: '/master-data-gudang',
+            },
+          ]
+        }
+      },
+      {
+        path: 'add',
+        name: 'master-data-gudang.add',
+        component: () => import('@/views/apps/Masterdata/gudang/AddView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Tambah data Gudang',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Gudang',
+              disabled: true,
+              href: '/master-data-gudang',
+            },
+            {
+              text: 'Tambah Data Gudang',
+              disabled: true,
+              href: '/master-data-gudang/add',
+            },
+          ]
+        }
+      },
+      {
+        path: 'show/:id',
+        name: 'master-data-gudang.show',
+        component: () => import('@/views/apps/Masterdata/gudang/ShowView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Detail/Update Gudang',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Gudang',
+              disabled: true,
+              href: '/master-data-gudang',
+            },
+            {
+              text: 'Lihat Data Gudang',
+              disabled: true,
+              href: '/master-data-gudang/show/:id',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
+    path: '/master-data-dept',
+    component: () => import('@/views/apps/Masterdata/dept/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Departement',
+    },
+    children: [
+      {
+        path: '',
+        name: 'master-data-dept.data',
+        component: () => import('@/views/apps/Masterdata/dept/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola Departement',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Departement',
+              disabled: true,
+              href: '/master-data-dept',
+            },
+          ]
+        }
+      },
+      {
+        path: 'add',
+        name: 'master-data-dept.add',
+        component: () => import('@/views/apps/Masterdata/dept/AddView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Tambah data Departement',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Departement',
+              disabled: true,
+              href: '/master-data-dept',
+            },
+            {
+              text: 'Tambah Data Departement',
+              disabled: true,
+              href: '/master-data-dept/add',
+            },
+          ]
+        }
+      },
+      {
+        path: 'show/:id',
+        name: 'master-data-dept.show',
+        component: () => import('@/views/apps/Masterdata/dept/ShowView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Detail/Update Departement',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Departement',
+              disabled: true,
+              href: '/master-data-dept',
+            },
+            {
+              text: 'Lihat Data Departement',
+              disabled: true,
+              href: '/master-data-dept/show/:id',
             },
           ]
         }

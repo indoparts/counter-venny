@@ -11,10 +11,16 @@ const state = () => ({
         nik: '',
         password: '',
         password_confirmation: '',
-        work_location: '',
-        saldo_cuti: '',
         activation: '',
         avatar: [],
+        work_location: '',
+        work_location_master: '',
+        saldo_cuti: '',
+        hp: '',
+        status: '',
+        tgl_join: '',
+        limit_kasbon: '',
+        total_gaji_perbulan: '',
     },
     rightMenuDrawer: [
         ['List Data', 'mdi-view-list', 'master-data-pengguna.data', 'read-user'],
@@ -36,11 +42,13 @@ const mutations = {
             activation: '',
             avatar: [],
             work_location: '',
+            work_location_master: '',
             saldo_cuti: '',
             hp: '',
             status: '',
             tgl_join: '',
             limit_kasbon: '',
+            total_gaji_perbulan: '',
         }
     },
 }
@@ -89,11 +97,13 @@ const actions = {
             formData.append('activation', form.activation)
             formData.append('avatar', form.avatar)
             formData.append('work_location', form.work_location)
+            formData.append('work_location_master', form.work_location_master)
             formData.append('saldo_cuti', form.saldo_cuti)
             formData.append('hp', form.hp)
             formData.append('status', form.status)
             formData.append('tgl_join', form.tgl_join)
             formData.append('limit_kasbon', form.limit_kasbon)
+            formData.append('total_gaji_perbulan', form.total_gaji_perbulan)
             const headers = { 'Content-Type': 'multipart/form-data' };
             $axios.post('users', formData, { headers })
                 .then(response => {
@@ -122,6 +132,7 @@ const actions = {
                         activation: x[0].activation === 'true'?true:false,
                         avatar: [],
                         work_location: x[0].work_location,
+                        work_location_master: x[1],
                         saldo_cuti: x[0].saldo_cuti,
                         hp: x[0].hp,
                         status: x[0].status,
@@ -135,7 +146,7 @@ const actions = {
                 })
         })
     },
-    update({ state, commit }, payload) {
+    update({ state }, payload) {
         return new Promise(resolve => {
             const { form } = state
             const formData = new FormData()
@@ -149,15 +160,16 @@ const actions = {
             formData.append('activation', form.activation)
             formData.append('avatar', form.avatar)
             formData.append('work_location', form.work_location)
+            formData.append('work_location_master', form.work_location_master)
             formData.append('saldo_cuti', form.saldo_cuti)
             formData.append('hp', form.hp)
             formData.append('status', form.status)
             formData.append('tgl_join', moment(form.tgl_join).format("YYYY-MM-DD"))
             formData.append('limit_kasbon', form.limit_kasbon)
+            formData.append('total_gaji_perbulan', form.total_gaji_perbulan)
             const headers = { 'Content-Type': 'multipart/form-data' };
             $axios.put(`users/${payload}`, formData, { headers })
                 .then(response => {
-                    commit('CLEAR_FORM')
                     resolve(response.data)
                 })
                 .catch(error => {

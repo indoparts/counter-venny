@@ -33,7 +33,7 @@
             <v-divider></v-divider>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn v-if="$can('create-permission')" text color="primary" @click="submit">
+                <v-btn v-if="$can('create-mastertoko')" text color="primary" @click="submit">
                     Submit
                 </v-btn>
             </v-card-actions>

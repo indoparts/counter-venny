@@ -134,7 +134,7 @@ export default {
             return moment(e).format('yyyy-MM-DD, h:mm:ss');
         },
         editItem(id) {
-            this.$router.push({ path: `master-data-pengguna/show/${id}` })
+            this.$router.push({ name: 'master-data-pengguna.show', params: { id: id } })
         },
         deleteItem(id) {
             this.deleteId = id

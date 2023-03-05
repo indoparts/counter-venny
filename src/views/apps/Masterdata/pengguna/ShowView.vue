@@ -42,6 +42,21 @@
                             label="pilih lokasi kerja" :rules="[v => !!v || 'Item is required']"
                             class="mb-input"></v-select>
                     </v-col>
+                    <v-col cols="12" md="4" v-if="form.work_location === 'toko'">
+                        <v-select dense outlined v-model="form.work_location_master" :items="items_toko"
+                            label="pilih lokasi toko" :rules="[v => !!v || 'Item is required']" class="mb-input"
+                            item-text="nama" item-value="id"></v-select>
+                    </v-col>
+                    <v-col cols="12" md="4" v-if="form.work_location === 'gudang'">
+                        <v-select dense outlined v-model="form.work_location_master" :items="items_gudang"
+                            label="pilih lokasi gudang" :rules="[v => !!v || 'Item is required']" class="mb-input"
+                            item-text="nama" item-value="id"></v-select>
+                    </v-col>
+                    <v-col cols="12" md="4" v-if="form.work_location === 'office'">
+                        <v-select dense outlined v-model="form.work_location_master" :items="items_office"
+                            label="pilih lokasi office" :rules="[v => !!v || 'Item is required']" class="mb-input"
+                            item-text="nama" item-value="id"></v-select>
+                    </v-col>
                     <v-col cols="12" md="4">
                         <v-text-field type="number" dense outlined v-model="form.saldo_cuti" class="mb-input"
                             label="saldo cuti" :rules="[v => !!v || 'Item is required']"></v-text-field>
@@ -50,21 +65,24 @@
                         <v-select dense outlined v-model="form.activation" :items="activation" label="activation"
                             :rules="[v => !!v || 'Item is required']" class="mb-input"></v-select>
                     </v-col>
-                    <v-col cols="12" md="3">
+                    <v-col cols="12" md="4">
                         <v-select dense outlined v-model="form.status" :items="status" label="Status Pengguna"
                             :rules="[v => !!v || 'Item is required']" class="mb-input"></v-select>
                     </v-col>
-                    <v-col cols="12" md="3">
+                    <v-col cols="12" md="4">
                         <DatePicker label="Tgl. Join" @someEvent="callback"></DatePicker>
                     </v-col>
-                    <v-col cols="12" md="3">
+                    <v-col cols="12" md="4">
                         <v-text-field dense outlined v-model="form.limit_kasbon" class="mb-input" label="Limit Kasbon"
                             :rules="[v => !!v || 'Item is required']"></v-text-field>
                     </v-col>
-                    <v-col cols="12" md="3">
-                        <v-file-input prepend-inner-icon="mdi-camera" dense outlined v-model="form.avatar" class="mb-input"
-                            accept="image/*" label="avatar" required
-                            :rules="[v => !!v || 'Item is required']"></v-file-input>
+                    <v-col cols="12" md="4">
+                        <v-text-field dense outlined v-model="form.total_gaji_perbulan" class="mb-input"
+                            label="Total Gaji Perbulan"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                        <v-file-input prepend-inner-icon="mdi-camera" dense outlined v-model="form.avatar" accept="image/*"
+                            label="avatar" required :rules="[v => !!v || 'Item is required']"></v-file-input>
                     </v-col>
                     <v-img :src="baseUrl + avatar" lazy-src="https://picsum.photos/id/11/100/60" max-width="100"></v-img>
                 </v-row>
@@ -94,6 +112,9 @@ export default {
         avatar: '',
         role: [],
         dept: [],
+        items_toko: [],
+        items_gudang: [],
+        items_office: [],
         lokasi_kerja: ['office', 'gudang', 'toko'],
         status: ['tetap', 'training', 'kontrak', 'magang'],
         activation: [true, false],
@@ -114,8 +135,11 @@ export default {
         this.attr_form_user().then((res) => {
             this.dept = res.data.depts
             this.role = res.data.roles
+            this.items_toko = res.data.toko
+            this.items_gudang = res.data.gudang
+            this.items_office = res.data.office
         })
-        this.edit(this.$route.params.id).then((res)=>{
+        this.edit(this.$route.params.id).then((res) => {
             this.avatar = res.data[0].avatar
         })
     },

@@ -1,14 +1,17 @@
+/* eslint-disable vue/multi-word-component-names */
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
 import VueApexCharts from 'vue-apexcharts'
 import VueFullscreen from 'vue-fullscreen'
 import * as VueGoogleMaps from "vue2-google-maps"
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 Vue.use(VueApexCharts)
 Vue.use(VueFullscreen)
-// eslint-disable-next-line vue/multi-word-component-names
 Vue.component('apexchart', VueApexCharts)
 Vue.use(Vuetify)
+Vue.use(VueSweetalert2);
 Vue.use(VueGoogleMaps, {
     load: {
         key: process.env.GMAP_API_TOKEN,

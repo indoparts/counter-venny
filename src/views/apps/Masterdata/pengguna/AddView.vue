@@ -38,6 +38,21 @@
                         <v-select dense outlined v-model="form.work_location" :items="lokasi_kerja"
                             label="pilih lokasi kerja" class="mb-input"></v-select>
                     </v-col>
+                    <v-col cols="12" md="4" v-if="form.work_location === 'toko'">
+                        <v-select dense outlined v-model="form.work_location_master" :items="items_toko"
+                            label="pilih lokasi toko" :rules="[v => !!v || 'Item is required']" class="mb-input"
+                            item-text="nama" item-value="id"></v-select>
+                    </v-col>
+                    <v-col cols="12" md="4" v-if="form.work_location === 'gudang'">
+                        <v-select dense outlined v-model="form.work_location_master" :items="items_gudang"
+                            label="pilih lokasi gudang" :rules="[v => !!v || 'Item is required']" class="mb-input"
+                            item-text="nama" item-value="id"></v-select>
+                    </v-col>
+                    <v-col cols="12" md="4" v-if="form.work_location === 'office'">
+                        <v-select dense outlined v-model="form.work_location_master" :items="items_office"
+                            label="pilih lokasi office" :rules="[v => !!v || 'Item is required']" class="mb-input"
+                            item-text="nama" item-value="id"></v-select>
+                    </v-col>
                     <v-col cols="12" md="4">
                         <v-text-field type="number" dense outlined v-model="form.saldo_cuti" class="mb-input"
                             label="saldo cuti"></v-text-field>
@@ -56,6 +71,10 @@
                     <v-col cols="12" md="3">
                         <v-text-field dense outlined v-model="form.limit_kasbon" class="mb-input"
                             label="Limit Kasbon"></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="3">
+                        <v-text-field dense outlined v-model="form.total_gaji_perbulan" class="mb-input"
+                            label="Total Gaji Perbulan"></v-text-field>
                     </v-col>
                     <v-col cols="12" md="3">
                         <v-file-input prepend-inner-icon="mdi-camera" dense outlined v-model="form.avatar" class="mb-input"
@@ -86,6 +105,9 @@ export default {
     data: () => ({
         role: [],
         dept: [],
+        items_toko: [],
+        items_gudang: [],
+        items_office: [],
         lokasi_kerja: ['office', 'gudang', 'toko'],
         status: ['tetap', 'training', 'kontrak', 'magang'],
         activation: [true, false],
@@ -106,6 +128,9 @@ export default {
         this.attr_form_user().then((res) => {
             this.dept = res.data.depts
             this.role = res.data.roles
+            this.items_toko = res.data.toko
+            this.items_gudang = res.data.gudang
+            this.items_office = res.data.office
         })
     },
     methods: {
