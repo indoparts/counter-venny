@@ -93,8 +93,8 @@ export default {
                 child: true,
                 itemchild: [
                     ['Absensi Kehadiran', 'mdi-fingerprint', '/users-absen'],
-                    ['Pengajuan Cuti', 'mdi-plane-car', '/'],
-                    ['Pengajuan Izin', 'mdi-frequently-asked-questions', '/'],
+                    ['Pengajuan Cuti', 'mdi-plane-car', '/cuti'],
+                    ['Pengajuan Izin', 'mdi-frequently-asked-questions', '/izin'],
                 ],
                 link: '/'
             },
@@ -104,8 +104,8 @@ export default {
                 icon: 'mdi-clipboard-text-clock',
                 child: true,
                 itemchild: [
-                    ['Jadwal-istirahat', 'mdi-coffee', '/summary-istirahat'],
-                    ['Jadwal piket', 'mdi-broom', '/summary-piket'],
+                    ['Jadwal-istirahat', 'mdi-coffee', '/jadwal-istirahat'],
+                    ['Jadwal piket', 'mdi-broom', '/jadwal-piket'],
                 ],
                 link: '/'
             },

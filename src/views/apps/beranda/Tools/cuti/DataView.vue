@@ -5,44 +5,47 @@
             <v-data-table dense flat show-expand :headers="headers" :items="desserts" :options.sync="options"
                 :server-items-length="totalDesserts" :loading="loading" :single-expand="singleExpand" item-key="id"
                 :expanded.sync="expanded">
-                <template v-slot:[`item.jam_masuk`]="{ item }">
-                    {{ parseDate(item) }}
+                <template v-slot:[`item.date`]="{ item }">
+                    {{ parseDate(item.date) }}
                 </template>
-                <template v-slot:[`item.created_at`]="{ item }">
-                    {{ parseDate(item) }}
+                <template v-slot:[`item.todate`]="{ item }">
+                    {{ parseDate(item.todate) }}
+                </template>
+                <template v-slot:[`item.status_approval`]="{ item }">
+                    <v-chip class="ma-2" :color="item.status_approval === 'y' ? 'success' : 'pink'" outlined>
+                        <v-icon left>
+                            {{ item.status_approval === 'y' ? 'mdi-check-circle-outline' : 'mdi-close-circle-outline' }}
+                        </v-icon>
+                        {{ item.status_approval === 'y' ? 'Disetujui' : 'Belum disetujui' }}
+                    </v-chip>
                 </template>
                 <template v-slot:expanded-item="{ headers, item }">
-                    <td :colspan="headers.length / 2">
+                    <td :colspan="headers.length/2">
                         <tr>
-                            <th class="text-left">Jam Masuk</th>
-                            <td> : {{ parseDate(item.jam_masuk) }}</td>
+                            <th class="text-left">Permintaan cuti</th>
+                            <td> : {{ item.leave_req }}</td>
                         </tr>
                         <tr>
-                            <th class="text-left">Latitude Masuk</th>
-                            <td> : {{ item.latitude_masuk }}</td>
+                            <th class="text-left">Catatan</th>
+                            <td> : {{ item.notes }}</td>
                         </tr>
                         <tr>
-                            <th class="text-left">Longitude Masuk</th>
-                            <td> : {{ item.longitude_masuk }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-left">Selfi Masuk</th>
-                            <td> : <v-img max-height="100" max-width="100" :src="baseUrl + item.foto_selfi_masuk"></v-img>
-                            </td>
+                            <th class="text-left">Yang mengajukan</th>
+                            <td> : {{ item.user.name }}</td>
                         </tr>
                     </td>
-                    <td :colspan="headers.length / 2">
+                    <td :colspan="headers.length/2">
                         <tr>
-                            <th class="text-left">Jam Pulang</th>
-                            <td> : {{ parseDate(item.jam_pulang) }}</td>
+                            <th class="text-left">Permintaan cuti</th>
+                            <td> : {{ item.leave_req }}</td>
                         </tr>
                         <tr>
-                            <th class="text-left">Latitude Pulang</th>
-                            <td> : {{ item.latitude_pulang }}</td>
+                            <th class="text-left">Catatan</th>
+                            <td> : {{ item.notes }}</td>
                         </tr>
                         <tr>
-                            <th class="text-left">Longitude Pulang</th>
-                            <td> : {{ item.longitude_pulang }}</td>
+                            <th class="text-left">Yang menyetujui</th>
+                            <td> : {{ item.userapproval.name }}</td>
                         </tr>
                     </td>
                 </template>
@@ -63,11 +66,13 @@ export default {
             desserts: [],
             loading: true,
             options: {},
+            search:'',
             headers: [
-                { text: 'Jam Masuk', value: 'jam_masuk' },
-                { text: 'Status Masuk', value: 'status_masuk' },
-                { text: 'Waktu Terlambat Masuk', value: 'waktu_telat_masuk' },
-                { text: 'Data Dibuat', value: 'created_at' },
+                { text: 'Tanggal Dibuat', value: 'date' },
+                { text: 'Tanggal Diajukan', value: 'todate' },
+                { text: 'Durasi', value: 'leave_duration' },
+                { text: 'Tipe Permintaan', value: 'req_type' },
+                { text: 'Approval', value: 'status_approval' },
             ],
         }
     },
@@ -80,18 +85,23 @@ export default {
         },
     },
     methods: {
+        ...mapActions('auth', ['getUserLogin']),
         ...mapActions('pengajuan_cuti', ['index']),
         getDataFromApi() {
             this.loading = true
-            const tableAttr = { options: this.options }
-            this.index(tableAttr).then(res => {
-                this.desserts = res.data.data
-                this.totalDesserts = res.data.meta.total
-                this.loading = false
+            this.getUserLogin().then((res) => {
+                const v = res.data.data.user
+                this.search = v.id
+                const tableAttr = { options: this.options, authId:this.search }
+                this.index(tableAttr).then(res => {
+                    this.desserts = res.data.data
+                    this.totalDesserts = res.data.meta.total
+                    this.loading = false
+                })
             })
         },
         parseDate(e) {
-            return moment(e).format('yyyy-MM-DD, h:mm:ss');
+            return moment(e).format('yyyy-MM-DD');
         }
     },
 }

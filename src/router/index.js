@@ -355,23 +355,199 @@ const routes = [
   },
 
   {
-    path: '/summary-istirahat',
-    name: 'jadwal-istirahat',
-    component: () => import('@/views/apps/JadwalIstirahatView.vue'),
+    path: '/jadwal-istirahat',
+    component: () => import('@/views/apps/beranda/jadwal/istirahat/IndexView.vue'),
     meta: {
       layout: 'content',
       requiresAuth: true,
-      title: 'Dashboard',
+      title: 'Master Data Istirahat',
     },
+    children: [
+      {
+        path: '',
+        name: 'jadwal-istirahat.data',
+        component: () => import('@/views/apps/beranda/jadwal/istirahat/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola List Data Istirahat',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Istirahat',
+              disabled: true,
+              href: '/istirahat',
+            },
+          ]
+        }
+      },
+      {
+        path: 'form-istirahat',
+        name: 'jadwal-istirahat.add',
+        component: () => import('@/views/apps/beranda/jadwal/istirahat/FormView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Form Istirahat',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Istirahat',
+              disabled: true,
+              href: '/istirahat',
+            },
+            {
+              text: 'Form Istirahat',
+              disabled: true,
+              href: '/istirahat/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'laporan-istirahat',
+        name: 'jadwal-istirahat.laporan',
+        component: () => import('@/views/apps/beranda/jadwal/istirahat/ReportView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Laporan Istirahat',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Istirahat',
+              disabled: true,
+              href: '/istirahat',
+            },
+            {
+              text: 'Laporan Istirahat',
+              disabled: true,
+              href: '/istirahat/laporan',
+            },
+          ]
+        }
+      },
+    ]
+  },
+
+  {
+    path: '/jadwal-piket',
+    component: () => import('@/views/apps/beranda/jadwal/piket/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Piket',
+    },
+    children: [
+      {
+        path: '',
+        name: 'jadwal-piket.data',
+        component: () => import('@/views/apps/beranda/jadwal/piket/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola List Data Piket',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Piket',
+              disabled: true,
+              href: '/piket',
+            },
+          ]
+        }
+      },
+      {
+        path: 'form-piket',
+        name: 'jadwal-piket.add',
+        component: () => import('@/views/apps/beranda/jadwal/piket/FormView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Form Piket',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Piket',
+              disabled: true,
+              href: '/piket',
+            },
+            {
+              text: 'Form Piket',
+              disabled: true,
+              href: '/piket/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'laporan-piket',
+        name: 'jadwal-piket.laporan',
+        component: () => import('@/views/apps/beranda/jadwal/piket/ReportView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Laporan Piket',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Piket',
+              disabled: true,
+              href: '/piket',
+            },
+            {
+              text: 'Laporan Piket',
+              disabled: true,
+              href: '/piket/laporan',
+            },
+          ]
+        }
+      },
+    ]
   },
   {
-    path: '/summary-piket',
-    name: 'jadwal-piket',
-    component: () => import('@/views/apps/JadwalPiketView.vue'),
+    path: '/masterdata-piket',
+    name: 'masterdata-piket',
+    component: () => import('@/views/apps/beranda/jadwal/piket/MasterData.vue'),
     meta: {
       layout: 'content',
       requiresAuth: true,
-      title: 'Dashboard',
+      title: 'Masterdata Piket',
+      breadscrum: [
+        {
+          text: 'Beranda',
+          disabled: false,
+          href: '/',
+        },
+        {
+          text: 'Piket',
+          disabled: true,
+          href: '/piket',
+        },
+        {
+          text: 'Masterdata Piket',
+          disabled: true,
+          href: '/masterdata-piket',
+        },
+      ]
     },
   },
   {

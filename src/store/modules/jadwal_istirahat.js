@@ -2,37 +2,27 @@
 import $axios from '../api'
 const state = () => ({
     form: {
+        dept_id: '',
+        role_id: '',
         user_id: '',
-        permit_req: '',
-        req_type: '',
-        date: '',
-        todate: '',
-        leave_duration: '',
-        notes: '',
-        user_id_approval: '',
-        status_approval: 'n',
-        file: [],
+        time: null,
+        date: null,
     },
     rightMenuDrawer: [
-        ['Form Pengajuan Izin', 'mdi-form-select', 'izin.add', 'create-izin'],
-        ['List Data', 'mdi-view-list', 'izin.data', 'read-izin'],
-        ['Laporan Izin', 'mdi-chart-scatter-plot-hexbin', 'izin.laporan', 'report-izin'],
+        ['Form Pengaturan Jam Istirahat', 'mdi-form-select', 'jadwal-istirahat.add', 'create-jadwalistirahat'],
+        ['List Data', 'mdi-view-list', 'jadwal-istirahat.data', 'read-jadwalistirahat'],
+        ['Laporan Jam Istirahat', 'mdi-chart-scatter-plot-hexbin', 'jadwal-istirahat.laporan', 'report-jadwalistirahat'],
     ]
 })
 
 const mutations = {
     CLEAR_FORM(state) {
         state.form = {
+            dept_id: '',
+            role_id: '',
             user_id: '',
-            permit_req: '',
-            req_type: '',
-            date: '',
-            todate: '',
-            leave_duration: '',
-            notes: '',
-            user_id_approval: '',
-            status_approval: 'n',
-            file: [],
+            time: null,
+            date: null,
         }
     },
 }
@@ -46,7 +36,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/form-izin?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
+            $axios.get(`/jadwal-istirahat?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -63,7 +53,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/report-izin?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
+            $axios.get(`/report-jadwal-istirahat?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -74,7 +64,7 @@ const actions = {
     },
     reportExport({ }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/report-izin-export?daterange=${payload}`)
+            $axios.get(`/report-jadwal-istirahat-export?daterange=${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -83,10 +73,9 @@ const actions = {
                 })
         })
     },
-    approval({ }, payload) {
-        const { id, status_approval } = payload
+    attr_get_dept({ }) {
         return new Promise(resolve => {
-            $axios.put(`/form-izin/approval/${id}`, { status_approval: status_approval })
+            $axios.get(`jadwal-istirahat-attr-form?key=divisi&value=`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -95,9 +84,9 @@ const actions = {
                 })
         })
     },
-    user() {
+    attr_get_jabatan({ }) {
         return new Promise(resolve => {
-            $axios.get('/user-approval')
+            $axios.get(`jadwal-istirahat-attr-form?key=jabatan&value=`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -106,16 +95,9 @@ const actions = {
                 })
         })
     },
-    laporan({ }, payload) {
+    attr_get_user({ }, payload) {
         return new Promise(resolve => {
-            const {
-                page,
-                itemsPerPage,
-                sortBy,
-                sortDesc,
-            } = payload.options
-            const { search, between } = payload.attr
-            $axios.get(`/form-izin-report?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}&between=${between}`)
+            $axios.get(`jadwal-istirahat-attr-form?key=user&value=${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -124,22 +106,9 @@ const actions = {
                 })
         })
     },
-    submitIzin({ state, commit }) {
+    submitCreate({ state, commit }) {
         return new Promise(resolve => {
-            const { form } = state
-            const formData = new FormData()
-            formData.append('user_id', form.user_id)
-            formData.append('permit_req', form.permit_req)
-            formData.append('req_type', form.req_type)
-            formData.append('date', form.date)
-            formData.append('todate', form.todate)
-            formData.append('leave_duration', form.leave_duration)
-            formData.append('notes', form.notes)
-            formData.append('user_id_approval', form.user_id_approval)
-            formData.append('status_approval', form.status_approval)
-            formData.append('file', form.file)
-            const headers = { 'Content-Type': 'multipart/form-data' };
-            $axios.post('form-izin', formData, { headers })
+            $axios.post('jadwal-istirahat', state.form)
                 .then(response => {
                     if (response.data.status === true) {
                         commit('CLEAR_FORM')

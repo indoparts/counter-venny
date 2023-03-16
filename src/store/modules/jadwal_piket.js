@@ -1,39 +1,33 @@
 /* eslint-disable no-empty-pattern */
 import $axios from '../api'
-
 const state = () => ({
     form: {
-        user_id: '',
-        remaining: '',
-        leave_req: '',
-        req_type: '',
-        date: '',
-        todate: '',
-        leave_duration: '',
-        notes: '',
-        user_id_approval: '',
-        status_approval: 'n',
+        master_piket_id:'',
+        dept_id:'',
+        role_id:'',
+        user_id:'',
+        time:'',
+        date:'',
+        status:'n',
     },
     rightMenuDrawer: [
-        ['Form Pengajuan Cuti', 'mdi-form-select', 'cuti.add', 'create-cuti'],
-        ['List Data', 'mdi-view-list', 'cuti.data', 'read-cuti'],
-        ['Laporan Cuti', 'mdi-chart-scatter-plot-hexbin', 'cuti.laporan', 'report-cuti'],
+        ['Form Pengaturan Piket', 'mdi-form-select', 'jadwal-piket.add', 'create-jadwalpiket'],
+        ['List Data', 'mdi-view-list', 'jadwal-piket.data', 'read-jadwalpiket'],
+        ['Laporan Piket', 'mdi-chart-scatter-plot-hexbin', 'jadwal-piket.laporan', 'report-jadwalpiket'],
+        ['Master Data Piket', 'mdi-database', 'masterdata-piket', 'report-jadwalpiket'],
     ]
 })
 
 const mutations = {
     CLEAR_FORM(state) {
         state.form = {
+            master_piket_id: '',
+            dept_id: '',
+            role_id: '',
             user_id: '',
-            remaining: '',
-            leave_req: '',
-            req_type: '',
+            time: '',
             date: '',
-            todate: '',
-            leave_duration: '',
-            notes: '',
-            user_id_approval: '',
-            status_approval: 'n',
+            status: 'n',
         }
     },
 }
@@ -47,7 +41,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/form-cuti?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
+            $axios.get(`/jadwal-piket?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -64,7 +58,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/report-cuti?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
+            $axios.get(`/report-jadwal-piket?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -75,7 +69,7 @@ const actions = {
     },
     reportExport({ }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/report-cuti-export?daterange=${payload}`)
+            $axios.get(`/report-jadwal-piket-export?daterange=${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -84,9 +78,9 @@ const actions = {
                 })
         })
     },
-    user() {
+    attr({ }) {
         return new Promise(resolve => {
-            $axios.get('/user-approval')
+            $axios.get(`jadwal-piket-attr-form?key=attr&value=`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -95,10 +89,9 @@ const actions = {
                 })
         })
     },
-    approval({ }, payload) {
-        const { id, status_approval } = payload
+    attr_get_user({ }, payload) {
         return new Promise(resolve => {
-            $axios.put(`/form-cuti/approval/${id}`, { status_approval: status_approval })
+            $axios.get(`jadwal-piket-attr-form?key=user&value=${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -107,27 +100,9 @@ const actions = {
                 })
         })
     },
-    laporan({ }, payload) {
+    submitCreate({ state, commit }) {
         return new Promise(resolve => {
-            const {
-                page,
-                itemsPerPage,
-                sortBy,
-                sortDesc,
-            } = payload.options
-            const { search, between } = payload.attr
-            $axios.get(`/form-cuti-report?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}&between=${between}`)
-                .then(response => {
-                    resolve(response.data)
-                })
-                .catch(error => {
-                    resolve(error.response)
-                })
-        })
-    },
-    submitCuti({ state, commit }) {
-        return new Promise(resolve => {
-            $axios.post('form-cuti', state.form)
+            $axios.post('jadwal-piket', state.form)
                 .then(response => {
                     if (response.data.status === true) {
                         commit('CLEAR_FORM')

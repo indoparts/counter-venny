@@ -108,6 +108,11 @@ export default {
                     this.selectedRightDrawer = 1
                     this.isDashboard = false
                     break;
+                case 'cuti.add':
+                    this.menu = this.$store.state.pengajuan_cuti.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
                 case 'cuti.form':
                     this.menu = this.$store.state.pengajuan_cuti.rightMenuDrawer
                     this.selectedRightDrawer = 0
@@ -120,17 +125,52 @@ export default {
                     break;
                 case 'izin.data':
                     this.menu = this.$store.state.pengajuan_izin.rightMenuDrawer
-                    this.selectedRightDrawer = 0
+                    this.selectedRightDrawer = 1
                     this.isDashboard = false
                     break;
-                case 'izin.form':
+                case 'izin.add':
                     this.menu = this.$store.state.pengajuan_izin.rightMenuDrawer
                     this.selectedRightDrawer = 0
                     this.isDashboard = false
                     break;
                 case 'izin.laporan':
                     this.menu = this.$store.state.pengajuan_izin.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    this.isDashboard = false
+                    break;
+                case 'jadwal-istirahat.data':
+                    this.menu = this.$store.state.jadwal_istirahat.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'jadwal-istirahat.add':
+                    this.menu = this.$store.state.jadwal_istirahat.rightMenuDrawer
                     this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'jadwal-istirahat.laporan':
+                    this.menu = this.$store.state.jadwal_istirahat.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    this.isDashboard = false
+                    break;
+                case 'jadwal-piket.data':
+                    this.menu = this.$store.state.jadwal_piket.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'jadwal-piket.add':
+                    this.menu = this.$store.state.jadwal_piket.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'jadwal-piket.laporan':
+                    this.menu = this.$store.state.jadwal_piket.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    this.isDashboard = false
+                    break;
+                case 'masterdata-piket':
+                    this.menu = this.$store.state.jadwal_piket.rightMenuDrawer
+                    this.selectedRightDrawer = 3
                     this.isDashboard = false
                     break;
                 case 'master-data-pengguna.data':

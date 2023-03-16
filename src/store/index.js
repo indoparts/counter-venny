@@ -14,6 +14,9 @@ import masterdata_dept from './modules/masterdata_dept.js'
 import masterdata_pelanggan from './modules/masterdata_pelanggan.js'
 import pengajuan_cuti from './modules/pengajuan_cuti.js'
 import pengajuan_izin from './modules/pengajuan_izin.js'
+import jadwal_istirahat from './modules/jadwal_istirahat.js'
+import jadwal_piket from './modules/jadwal_piket.js'
+import masterdata_piket from './modules/masterdata_piket.js'
 // modules::end
 
 Vue.use(Vuex)
@@ -49,5 +52,8 @@ export default new Vuex.Store({
     masterdata_pelanggan,
     pengajuan_cuti,
     pengajuan_izin,
+    jadwal_istirahat,
+    jadwal_piket,
+    masterdata_piket,
   }
 })
