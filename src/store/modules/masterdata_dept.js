@@ -35,7 +35,7 @@ const actions = {
                 sortDesc
             } = payload.options
             const search = payload.search
-            $axios.get(`/dept?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
+            $axios.get(`api/dept?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -46,7 +46,7 @@ const actions = {
     },
     store({ state, commit }) {
         return new Promise(resolve => {
-            $axios.post('/dept', state.form)
+            $axios.post('api/dept', state.form)
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -58,7 +58,7 @@ const actions = {
     },
     edit({ commit }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/dept/${payload}`)
+            $axios.get(`api/dept/${payload}`)
                 .then(response => {
                     const form = {
                         deptname: response.data.data.deptname,
@@ -73,7 +73,7 @@ const actions = {
     },
     update({ state, commit }, payload) {
         return new Promise(resolve => {
-            $axios.put(`/dept/${payload}`, state.form)
+            $axios.put(`api/dept/${payload}`, state.form)
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -85,7 +85,7 @@ const actions = {
     },
     delete({ }, payload) {
         return new Promise(resolve => {
-            $axios.delete(`/dept/${payload}`)
+            $axios.delete(`api/dept/${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })

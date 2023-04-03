@@ -46,7 +46,7 @@ const actions = {
                 sortDesc
             } = payload.options
             const search = payload.search
-            $axios.get(`/role?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
+            $axios.get(`api/role?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -57,7 +57,7 @@ const actions = {
     },
     store({ state, commit }) {
         return new Promise(resolve => {
-            $axios.post('/role', state.form)
+            $axios.post('api/role', state.form)
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -69,7 +69,7 @@ const actions = {
     },
     edit({ state }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/role/${payload}`)
+            $axios.get(`api/role/${payload}`)
                 .then(response => {
                     state.form.rolename = response.data.data.rolename
                     resolve(response.data)
@@ -81,7 +81,7 @@ const actions = {
     },
     update({ state, commit }, payload) {
         return new Promise(resolve => {
-            $axios.put(`/role/${payload}`, state.form)
+            $axios.put(`api/role/${payload}`, state.form)
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -93,7 +93,7 @@ const actions = {
     },
     delete({ }, payload) {
         return new Promise(resolve => {
-            $axios.delete(`/role/${payload}`)
+            $axios.delete(`api/role/${payload}`)
             .then(response => {
                 resolve(response.data)
             })
@@ -114,7 +114,7 @@ const actions = {
             return a;
         }
         return new Promise(resolve => {
-            $axios.get(`/role-permission/${payload}`)
+            $axios.get(`api/role-permission/${payload}`)
                 .then(response => {
                     const idRole = []
                     const idPermission = []
@@ -136,7 +136,7 @@ const actions = {
         },
         submitSetRole({ state, commit }, payload) {
             return new Promise(resolve => {
-                $axios.put(`/role-permission/${payload}`, state.formsetrole)
+                $axios.put(`api/role-permission/${payload}`, state.formsetrole)
                     .then(response => {
                         commit('CLEAR_FORMSETROLE')
                         resolve(response.data)

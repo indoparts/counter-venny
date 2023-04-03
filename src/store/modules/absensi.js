@@ -40,7 +40,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/absensi?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}`)
+            $axios.get(`api/absensi?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -58,7 +58,7 @@ const actions = {
                 sortDesc,
             } = payload.options
             const { search, between } = payload.attr
-            $axios.get(`/absensi-report?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}&between=${between}`)
+            $axios.get(`api/absensi-report?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}&between=${between}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -69,7 +69,7 @@ const actions = {
     },
     grafikAbsen() {
         return new Promise(resolve => {
-            $axios.get(`/absensi-chart`)
+            $axios.get(`api/absensi-chart`)
                 .then(response => {
                     resolve(response.data)
                 })

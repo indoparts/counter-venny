@@ -15,7 +15,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/master-piket?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
+            $axios.get(`api/master-piket?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -32,7 +32,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/report-master-piket?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}}`)
+            $axios.get(`api/report-master-piket?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -43,7 +43,7 @@ const actions = {
     },
     submitCreate({ }, payload) {
         return new Promise(resolve => {
-            $axios.post('master-piket', payload)
+            $axios.post('api/master-piket', payload)
             .then(response => {
                 resolve(response.data)
             })
@@ -54,7 +54,7 @@ const actions = {
     },
     edit({ }, payload) {
         return new Promise(resolve => {
-            $axios.get(`master-piket/${payload}`)
+            $axios.get(`api/master-piket/${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -65,7 +65,7 @@ const actions = {
     },
     update({ }, payload) {
         return new Promise(resolve => {
-            $axios.put(`master-piket/${payload.id}`, payload.form)
+            $axios.put(`api/master-piket/${payload.id}`, payload.form)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -76,7 +76,7 @@ const actions = {
     },
     destroy({ }, payload) {
         return new Promise(resolve => {
-            $axios.delete(`master-piket/${payload}`)
+            $axios.delete(`api/master-piket/${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })

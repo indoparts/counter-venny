@@ -46,7 +46,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/form-izin?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
+            $axios.get(`api/form-izin?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -63,7 +63,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/report-izin?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
+            $axios.get(`api/report-izin?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -74,7 +74,7 @@ const actions = {
     },
     reportExport({ }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/report-izin-export?daterange=${payload}`)
+            $axios.get(`api/report-izin-export?daterange=${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -83,10 +83,10 @@ const actions = {
                 })
         })
     },
-    approval({ }, payload) {
+    approval_izin({ }, payload) {
         const { id, status_approval } = payload
         return new Promise(resolve => {
-            $axios.put(`/form-izin/approval/${id}`, { status_approval: status_approval })
+            $axios.put(`api/form-izin/approval/${id}`, { status_approval: status_approval })
                 .then(response => {
                     resolve(response.data)
                 })
@@ -97,7 +97,7 @@ const actions = {
     },
     user() {
         return new Promise(resolve => {
-            $axios.get('/user-approval')
+            $axios.get('api/user-approval')
                 .then(response => {
                     resolve(response.data)
                 })
@@ -115,7 +115,7 @@ const actions = {
                 sortDesc,
             } = payload.options
             const { search, between } = payload.attr
-            $axios.get(`/form-izin-report?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}&between=${between}`)
+            $axios.get(`api/form-izin-report?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}&between=${between}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -139,7 +139,7 @@ const actions = {
             formData.append('status_approval', form.status_approval)
             formData.append('file', form.file)
             const headers = { 'Content-Type': 'multipart/form-data' };
-            $axios.post('form-izin', formData, { headers })
+            $axios.post('api/form-izin', formData, { headers })
                 .then(response => {
                     if (response.data.status === true) {
                         commit('CLEAR_FORM')

@@ -168,6 +168,16 @@ export default {
                     this.selectedRightDrawer = 2
                     this.isDashboard = false
                     break;
+                case 'summary-gaji.data':
+                    this.menu = this.$store.state.summary_gaji.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    this.isDashboard = false
+                    break;
+                case 'summary-gaji.formula':
+                    this.menu = this.$store.state.summary_gaji.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
                 case 'masterdata-piket':
                     this.menu = this.$store.state.jadwal_piket.rightMenuDrawer
                     this.selectedRightDrawer = 3

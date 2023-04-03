@@ -2,13 +2,13 @@
 import $axios from '../api'
 const state = () => ({
     form: {
-        master_piket_id:'',
-        dept_id:'',
-        role_id:'',
-        user_id:'',
-        time:'',
-        date:'',
-        status:'n',
+        master_piket_id: '',
+        dept_id: '',
+        role_id: '',
+        user_id: '',
+        time: '',
+        date: '',
+        status: 'n',
     },
     rightMenuDrawer: [
         ['Form Pengaturan Piket', 'mdi-form-select', 'jadwal-piket.add', 'create-jadwalpiket'],
@@ -41,7 +41,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/jadwal-piket?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
+            $axios.get(`api/jadwal-piket?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -58,7 +58,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/report-jadwal-piket?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
+            $axios.get(`api/report-jadwal-piket?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -69,7 +69,7 @@ const actions = {
     },
     reportExport({ }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/report-jadwal-piket-export?daterange=${payload}`)
+            $axios.get(`api/report-jadwal-piket-export?daterange=${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -80,7 +80,7 @@ const actions = {
     },
     attr({ }) {
         return new Promise(resolve => {
-            $axios.get(`jadwal-piket-attr-form?key=attr&value=`)
+            $axios.get(`api/jadwal-piket-attr-form?key=attr&value=`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -91,7 +91,7 @@ const actions = {
     },
     attr_get_user({ }, payload) {
         return new Promise(resolve => {
-            $axios.get(`jadwal-piket-attr-form?key=user&value=${payload}`)
+            $axios.get(`api/jadwal-piket-attr-form?key=user&value=${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -102,11 +102,26 @@ const actions = {
     },
     submitCreate({ state, commit }) {
         return new Promise(resolve => {
-            $axios.post('jadwal-piket', state.form)
+            $axios.post('api/jadwal-piket', state.form)
                 .then(response => {
                     if (response.data.status === true) {
                         commit('CLEAR_FORM')
                     }
+                    resolve(response.data)
+                })
+                .catch(error => {
+                    resolve(error.response)
+                })
+        })
+    },
+    submitUpdate({ }, payload) {
+        return new Promise(resolve => {
+            const formData = new FormData()
+            formData.append('filebefore', payload.filebefore)
+            formData.append('fileafter', payload.fileafter)
+            const headers = { 'Content-Type': 'multipart/form-data' };
+            $axios.put(`fetch-notification/piket-istirahat/${payload.id}`, formData, { headers })
+                .then(response => {
                     resolve(response.data)
                 })
                 .catch(error => {

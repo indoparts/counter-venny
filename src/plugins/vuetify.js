@@ -6,6 +6,8 @@ import VueFullscreen from 'vue-fullscreen'
 import * as VueGoogleMaps from "vue2-google-maps"
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import socketio from 'socket.io-client'
+import VueSocketIO from 'vue-socket.io'
 
 Vue.use(VueApexCharts)
 Vue.use(VueFullscreen)
@@ -18,6 +20,12 @@ Vue.use(VueGoogleMaps, {
         libraries: "places"
     }
 });
+const url = `http://${process.env.BASE_URL_API}`
+const SocketInstance = socketio.connect(url)
+Vue.use(new VueSocketIO({
+    debug: true,
+    connection: SocketInstance,
+}))
 
 export default new Vuetify({
     theme: {

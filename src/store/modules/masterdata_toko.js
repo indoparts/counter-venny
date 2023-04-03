@@ -50,7 +50,7 @@ const actions = {
                 sortDesc
             } = payload.options
             const search = payload.search
-            $axios.get(`/master-toko?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
+            $axios.get(`api/master-toko?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -61,7 +61,7 @@ const actions = {
     },
     store({ state, commit }) {
         return new Promise(resolve => {
-            $axios.post('/master-toko', state.form)
+            $axios.post('api/master-toko', state.form)
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -73,7 +73,7 @@ const actions = {
     },
     edit({ commit }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/master-toko/${payload}`)
+            $axios.get(`api/master-toko/${payload}`)
                 .then(response => {
                     const form = {
                         nama: response.data.data.nama,
@@ -94,7 +94,7 @@ const actions = {
     },
     update({ state, commit }, payload) {
         return new Promise(resolve => {
-            $axios.put(`/master-toko/${payload}`, state.form)
+            $axios.put(`api/master-toko/${payload}`, state.form)
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -106,7 +106,7 @@ const actions = {
     },
     delete({ }, payload) {
         return new Promise(resolve => {
-            $axios.delete(`/master-toko/${payload}`)
+            $axios.delete(`api/master-toko/${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })

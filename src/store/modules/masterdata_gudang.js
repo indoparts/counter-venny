@@ -50,7 +50,7 @@ const actions = {
                 sortDesc
             } = payload.options
             const search = payload.search
-            $axios.get(`/master-gudang?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
+            $axios.get(`api/master-gudang?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -61,7 +61,7 @@ const actions = {
     },
     store({ state, commit }) {
         return new Promise(resolve => {
-            $axios.post('/master-gudang', state.form)
+            $axios.post('api/master-gudang', state.form)
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -73,7 +73,7 @@ const actions = {
     },
     edit({ commit }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/master-gudang/${payload}`)
+            $axios.get(`api/master-gudang/${payload}`)
                 .then(response => {
                     const form = {
                         nama: response.data.data.nama,
@@ -94,7 +94,7 @@ const actions = {
     },
     update({ state, commit }, payload) {
         return new Promise(resolve => {
-            $axios.put(`/master-gudang/${payload}`, state.form)
+            $axios.put(`api/master-gudang/${payload}`, state.form)
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -106,7 +106,7 @@ const actions = {
     },
     delete({ }, payload) {
         return new Promise(resolve => {
-            $axios.delete(`/master-gudang/${payload}`)
+            $axios.delete(`api/master-gudang/${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })

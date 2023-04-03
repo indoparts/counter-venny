@@ -50,7 +50,7 @@ const actions = {
                 sortDesc
             } = payload.options
             const search = payload.search
-            $axios.get(`/master-office?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
+            $axios.get(`api/master-office?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -61,7 +61,7 @@ const actions = {
     },
     store({ state, commit }) {
         return new Promise(resolve => {
-            $axios.post('/master-office', state.form)
+            $axios.post('api/master-office', state.form)
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -73,7 +73,7 @@ const actions = {
     },
     edit({ commit }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/master-office/${payload}`)
+            $axios.get(`api/master-office/${payload}`)
                 .then(response => {
                     const form = {
                         nama: response.data.data.nama,
@@ -93,7 +93,7 @@ const actions = {
     },
     update({ state, commit }, payload) {
         return new Promise(resolve => {
-            $axios.put(`/master-office/${payload}`, state.form)
+            $axios.put(`api/master-office/${payload}`, state.form)
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -105,7 +105,7 @@ const actions = {
     },
     delete({ }, payload) {
         return new Promise(resolve => {
-            $axios.delete(`/master-office/${payload}`)
+            $axios.delete(`api/master-office/${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })

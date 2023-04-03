@@ -17,6 +17,7 @@ import pengajuan_izin from './modules/pengajuan_izin.js'
 import jadwal_istirahat from './modules/jadwal_istirahat.js'
 import jadwal_piket from './modules/jadwal_piket.js'
 import masterdata_piket from './modules/masterdata_piket.js'
+import summary_gaji from './modules/summary_gaji.js'
 // modules::end
 
 Vue.use(Vuex)
@@ -55,5 +56,6 @@ export default new Vuex.Store({
     jadwal_istirahat,
     jadwal_piket,
     masterdata_piket,
+    summary_gaji,
   }
 })

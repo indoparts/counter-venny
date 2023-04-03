@@ -3,29 +3,9 @@
         <v-card-title>List Data</v-card-title>
         <v-card-text>
             <v-data-table dense flat :headers="headers" :items="desserts" :options.sync="options"
-                :server-items-length="totalDesserts" :loading="loading" item-key="id" :expanded.sync="expanded" show-expand>
+                :server-items-length="totalDesserts" :loading="loading" item-key="id">
                 <template v-slot:[`item.date`]="{ item }">
                     {{ parseDate(item.date) }}
-                </template>
-                <template v-slot:expanded-item="{ headers, item }">
-                    <td :colspan="headers.length / 2">
-                        <tr>
-                            <th class="text-left">Foto Area Sebelum Piket :</th>
-                        </tr>
-                        <tr>
-                            <td><v-img max-height="100" max-width="100" :src="baseUrl + item.img_before"></v-img>
-                            </td>
-                        </tr>
-                    </td>
-                    <td :colspan="headers.length / 2">
-                        <tr>
-                            <th class="text-left">Foto Area Setelah Piket :</th>
-                        </tr>
-                        <tr>
-                            <td><v-img max-height="100" max-width="100" :src="baseUrl + item.img_after"></v-img>
-                            </td>
-                        </tr>
-                    </td>
                 </template>
             </v-data-table>
         </v-card-text>
@@ -38,9 +18,7 @@ import { mapActions } from "vuex";
 export default {
     data() {
         return {
-            baseUrl: `http://${process.env.BASE_URL_API}/api/images/image-piket/`,
             totalDesserts: 0,
-            expanded: [],
             desserts: [],
             loading: true,
             options: {},
@@ -50,9 +28,7 @@ export default {
                 { text: 'Jabatan', value: 'role.rolename' },
                 { text: 'Users', value: 'user.name' },
                 { text: 'Waktu', value: 'time' },
-                { text: 'Tugas Piket', value: 'masterPiket.tugas' },
                 { text: 'Tanggal', value: 'date' },
-                { text: '', value: 'data-table-expand' },
             ],
         }
     },
@@ -66,7 +42,7 @@ export default {
     },
     methods: {
         ...mapActions('auth', ['getUserLogin']),
-        ...mapActions('jadwal_piket', ['index']),
+        ...mapActions('jadwal_istirahat', ['index']),
         getDataFromApi() {
             this.loading = true
             this.getUserLogin().then((res) => {

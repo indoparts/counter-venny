@@ -63,7 +63,7 @@ const actions = {
                 sortDesc
             } = payload.options
             const search = payload.search
-            $axios.get(`/users?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
+            $axios.get(`api/users?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -74,7 +74,7 @@ const actions = {
     },
     attr_form_user() {
         return new Promise(resolve => {
-            $axios.get('/attr_form')
+            $axios.get('api/attr_form')
                 .then(response => {
                     resolve(response.data)
                 })
@@ -105,7 +105,7 @@ const actions = {
             formData.append('limit_kasbon', form.limit_kasbon)
             formData.append('total_gaji_perbulan', form.total_gaji_perbulan)
             const headers = { 'Content-Type': 'multipart/form-data' };
-            $axios.post('users', formData, { headers })
+            $axios.post('api/users', formData, { headers })
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)
@@ -117,7 +117,7 @@ const actions = {
     },
     edit({state}, payload) {
         return new Promise(resolve => {
-            $axios.get(`/users/${payload}`)
+            $axios.get(`api/users/${payload}`)
                 .then(response => {
                     const x = response.data.data
                     console.log(x[0].dept_id);
@@ -168,7 +168,7 @@ const actions = {
             formData.append('limit_kasbon', form.limit_kasbon)
             formData.append('total_gaji_perbulan', form.total_gaji_perbulan)
             const headers = { 'Content-Type': 'multipart/form-data' };
-            $axios.put(`users/${payload}`, formData, { headers })
+            $axios.put(`api/users/${payload}`, formData, { headers })
                 .then(response => {
                     resolve(response.data)
                 })
@@ -179,7 +179,7 @@ const actions = {
     },
     delete({ }, payload) {
         return new Promise(resolve => {
-            $axios.delete(`/users/${payload}`)
+            $axios.delete(`api/users/${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })

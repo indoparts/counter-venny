@@ -71,7 +71,7 @@ const actions = {
         localStorage.setItem('token', null)
         commit('SET_TOKEN', null, { root: true })
         return new Promise(resolve => {
-            $axios.post('login', payload)
+            $axios.post('api/login', payload)
                 .then(response => {
                     if (response.data.status) {
                         localStorage.setItem('token', response.data.data.token)
@@ -88,7 +88,7 @@ const actions = {
     },
     logout({ commit }) {
         return new Promise(resolve => {
-            $axios.post('logout')
+            $axios.post('api/logout')
                 .then(response => {
                     localStorage.setItem('token', null)
                     commit('SET_TOKEN', null, { root: true })
@@ -101,7 +101,7 @@ const actions = {
     },
     getUserLogin({ commit }) {
         return new Promise(resolve => {
-            $axios.get('profile')
+            $axios.get('api/profile')
                 .then(response => {
                     commit('ASSIGN_USER_AUTH', response.data.data.user)
                     commit('ASSIGN_PERMISSION', response.data.data.permission)
@@ -114,7 +114,7 @@ const actions = {
     },
     attr_form_user() {
         return new Promise(resolve => {
-            $axios.get('/attr_form')
+            $axios.get('api/attr_form')
                 .then(response => {
                     resolve(response.data)
                 })
@@ -125,7 +125,7 @@ const actions = {
     },
     getProfile({ commit }) {
         return new Promise(resolve => {
-            $axios.get('profile')
+            $axios.get('api/profile')
                 .then(response => {
                     const user = response.data.data.user;
                     const payload = {
@@ -147,6 +147,28 @@ const actions = {
                     }
                     commit('SET_FORM_PROFILE', payload)
                     resolve(response)
+                })
+                .catch(error => {
+                    resolve(error.response)
+                })
+        })
+    },
+    getNotifTask({ }) {
+        return new Promise(resolve => {
+            $axios.get('fetch-notification/piket-istirahat')
+                .then(response => {
+                    resolve(response.data)
+                })
+                .catch(error => {
+                    resolve(error.response)
+                })
+        })
+    },
+    getNotifInfo({ }) {
+        return new Promise(resolve => {
+            $axios.get('fetch-notification/info')
+                .then(response => {
+                    resolve(response.data)
                 })
                 .catch(error => {
                     resolve(error.response)

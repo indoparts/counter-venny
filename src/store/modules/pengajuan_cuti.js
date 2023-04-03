@@ -47,7 +47,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/form-cuti?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
+            $axios.get(`api/form-cuti?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -64,7 +64,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/report-cuti?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
+            $axios.get(`api/report-cuti?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -75,7 +75,7 @@ const actions = {
     },
     reportExport({ }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/report-cuti-export?daterange=${payload}`)
+            $axios.get(`api/report-cuti-export?daterange=${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -86,7 +86,7 @@ const actions = {
     },
     user() {
         return new Promise(resolve => {
-            $axios.get('/user-approval')
+            $axios.get('api/user-approval')
                 .then(response => {
                     resolve(response.data)
                 })
@@ -95,10 +95,10 @@ const actions = {
                 })
         })
     },
-    approval({ }, payload) {
+    approval_cuti({ }, payload) {
         const { id, status_approval } = payload
         return new Promise(resolve => {
-            $axios.put(`/form-cuti/approval/${id}`, { status_approval: status_approval })
+            $axios.put(`api/form-cuti/approval/${id}`, { status_approval: status_approval })
                 .then(response => {
                     resolve(response.data)
                 })
@@ -116,7 +116,7 @@ const actions = {
                 sortDesc,
             } = payload.options
             const { search, between } = payload.attr
-            $axios.get(`/form-cuti-report?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}&between=${between}`)
+            $axios.get(`api/form-cuti-report?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${search}&between=${between}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -127,7 +127,7 @@ const actions = {
     },
     submitCuti({ state, commit }) {
         return new Promise(resolve => {
-            $axios.post('form-cuti', state.form)
+            $axios.post('api/form-cuti', state.form)
                 .then(response => {
                     if (response.data.status === true) {
                         commit('CLEAR_FORM')

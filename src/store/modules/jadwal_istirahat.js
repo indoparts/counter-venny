@@ -36,7 +36,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/jadwal-istirahat?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
+            $axios.get(`api/jadwal-istirahat?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -53,7 +53,7 @@ const actions = {
                 sortBy,
                 sortDesc,
             } = payload.options
-            $axios.get(`/report-jadwal-istirahat?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
+            $axios.get(`api/report-jadwal-istirahat?page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&search=${payload.authId}&daterange=${payload.daterange}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -64,7 +64,7 @@ const actions = {
     },
     reportExport({ }, payload) {
         return new Promise(resolve => {
-            $axios.get(`/report-jadwal-istirahat-export?daterange=${payload}`)
+            $axios.get(`api/report-jadwal-istirahat-export?daterange=${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -75,7 +75,7 @@ const actions = {
     },
     attr_get_dept({ }) {
         return new Promise(resolve => {
-            $axios.get(`jadwal-istirahat-attr-form?key=divisi&value=`)
+            $axios.get(`api/jadwal-istirahat-attr-form?key=divisi&value=`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -86,7 +86,7 @@ const actions = {
     },
     attr_get_jabatan({ }) {
         return new Promise(resolve => {
-            $axios.get(`jadwal-istirahat-attr-form?key=jabatan&value=`)
+            $axios.get(`api/jadwal-istirahat-attr-form?key=jabatan&value=`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -97,7 +97,7 @@ const actions = {
     },
     attr_get_user({ }, payload) {
         return new Promise(resolve => {
-            $axios.get(`jadwal-istirahat-attr-form?key=user&value=${payload}`)
+            $axios.get(`api/jadwal-istirahat-attr-form?key=user&value=${payload}`)
                 .then(response => {
                     resolve(response.data)
                 })
@@ -108,7 +108,7 @@ const actions = {
     },
     submitCreate({ state, commit }) {
         return new Promise(resolve => {
-            $axios.post('jadwal-istirahat', state.form)
+            $axios.post('api/jadwal-istirahat', state.form)
                 .then(response => {
                     if (response.data.status === true) {
                         commit('CLEAR_FORM')

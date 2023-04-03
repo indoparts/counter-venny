@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from './index.js'
 
 const $axios = axios.create({
-    baseURL: `http://${process.env.BASE_URL_API}/api/`,
+    baseURL: `http://${process.env.BASE_URL_API}/`,
     headers: {
         'Content-Type': 'application/json',
     },

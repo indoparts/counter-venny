@@ -552,23 +552,145 @@ const routes = [
   },
   {
     path: '/summary-gaji',
-    name: 'gaji',
-    component: () => import('@/views/apps/GajiView.vue'),
+    component: () => import('@/views/apps/keuangan/Gaji/IndexView.vue'),
     meta: {
       layout: 'content',
       requiresAuth: true,
-      title: 'Dashboard',
+      title: 'Summary Gaji',
     },
+    children: [
+      {
+        path: '',
+        name: 'summary-gaji.data',
+        component: () => import('@/views/apps/keuangan/Gaji/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola List Data Gaji',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Gji',
+              disabled: true,
+              href: '/gaji',
+            },
+          ]
+        }
+      },
+      {
+        path: 'formula-gaji',
+        name: 'summary-gaji.formula',
+        component: () => import('@/views/apps/keuangan/Gaji/FormulaView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Setup Formula Gaji',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Summary Gaji',
+              disabled: true,
+              href: '/summary-gaji',
+            },
+            {
+              text: 'formula Gaji',
+              disabled: true,
+              href: '/summary-gaji/formula-gaji',
+            },
+          ]
+        }
+      },
+      {
+        path: 'selip-gaji',
+        name: 'summary-gaji.selip',
+        component: () => import('@/views/apps/keuangan/Gaji/SelipView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Selip Gaji',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Summary Gaji',
+              disabled: true,
+              href: '/summary-gaji',
+            },
+            {
+              text: 'Selip Gaji',
+              disabled: true,
+              href: '/summary-gaji/selip-gaji',
+            },
+          ]
+        }
+      },
+      {
+        path: 'laporan-gaji',
+        name: 'summary-gaji.laporan',
+        component: () => import('@/views/apps/keuangan/Gaji/ReportView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Laporan Gaji',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Summary Gaji',
+              disabled: true,
+              href: '/summary-gaji',
+            },
+            {
+              text: 'Laporan Gaji',
+              disabled: true,
+              href: '/summary-gaji/Laporan-gaji',
+            },
+          ]
+        }
+      },
+    ]
   },
   {
     path: '/summary-kasbon',
-    name: 'kasbon',
-    component: () => import('@/views/apps/KasbonView.vue'),
+    component: () => import('@/views/apps/keuangan/Kasbon/IndexView.vue'),
     meta: {
       layout: 'content',
       requiresAuth: true,
       title: 'Dashboard',
     },
+    children: [
+      {
+        path: '',
+        name: 'summary-kasbon.data',
+        component: () => import('@/views/apps/keuangan/Kasbon/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola List Data Kasbon',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Kasbon',
+              disabled: true,
+              href: '/kasbon',
+            },
+          ]
+        }
+      },
+    ]
   },
   {
     path: '/master-data-pengguna',
