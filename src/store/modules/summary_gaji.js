@@ -12,7 +12,7 @@ const state = () => ({
     },
     rightMenuDrawer: [
         ['Setup Formula Gaji', 'mdi-form-select', 'summary-gaji.formula', 'create-jadwalpiket'],
-        ['Generate Gaji', 'mdi-cash-sync', 'summary-gaji.data', 'read-jadwalpiket'],
+        ['Generate Gaji', 'mdi-cash-sync', 'summary-gaji.generate', 'read-jadwalpiket'],
         ['List Data', 'mdi-view-list', 'summary-gaji.data', 'read-jadwalpiket'],
         ['Laporan Gaji', 'mdi-chart-scatter-plot-hexbin', 'summary-gaji.laporan', 'report-jadwalpiket'],
         ['Selip Gaji', 'mdi-smart-card', 'summary-gaji.selip', 'report-jadwalpiket'],
@@ -59,6 +59,50 @@ const actions = {
     deleteVariable({ }, payload) {
         return new Promise(resolve => {
             $axios.delete(`api/variable-gaji/${payload}`)
+                .then(response => {
+                    resolve(response.data)
+                })
+                .catch(error => {
+                    resolve(error.response)
+                })
+        })
+    },
+    indexFormula({ }) {
+        return new Promise(resolve => {
+            $axios.get(`api/formula-gaji`)
+                .then(response => {
+                    resolve(response.data)
+                })
+                .catch(error => {
+                    resolve(error.response)
+                })
+        })
+    },
+    storeFormula({ }, payload) {
+        return new Promise(resolve => {
+            $axios.post(`api/formula-gaji`, payload)
+                .then(response => {
+                    resolve(response.data)
+                })
+                .catch(error => {
+                    resolve(error.response)
+                })
+        })
+    },
+    deleteFormula({ }, payload) {
+        return new Promise(resolve => {
+            $axios.delete(`api/formula-gaji/${payload}`)
+                .then(response => {
+                    resolve(response.data)
+                })
+                .catch(error => {
+                    resolve(error.response)
+                })
+        })
+    },
+    generateData({ }, payload) {
+        return new Promise(resolve => {
+            $axios.post(`api/formula-gaji/generate`, payload)
                 .then(response => {
                     resolve(response.data)
                 })

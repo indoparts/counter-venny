@@ -85,8 +85,34 @@ export default {
     mounted() {
         this.getUserLogin().then((res) => {
             const v = res.data.data.user
-            this.lokasiAbsen = v.work_location_detail
-            this.geolocate(v.work_location_detail.latitude, v.work_location_detail.longitude);
+            let currentTime = new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
+            const calculate = parseInt(this.diffTime(currentTime, v.jadwal.jam_mulai))
+            if (calculate <= -60) {
+                this.$swal({
+                    title: 'Anda sudah terlambat melebihi 1 jam!',
+                    icon: 'error',
+                    text: 'Untuk dapat tetap melakukan absen silahkan anda membuat form izin terlambat, dan meminta administrator untuk membuatkan absensi secara manual, dan tolong untuk tidak mengulanginya demi kenyamanan anda!',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$router.push({ name: 'izin.add' })
+                    }
+                })
+            }else{
+                if (v.work_location_detail === undefined) {
+                    this.$swal({
+                        title: 'Terjadi kesalahan saat mendeteksi kantor anda!',
+                        icon: 'error',
+                        text: 'Periksa data lokasi kantor anda pada sistem karena kami tidak dapat menemukan data lokasi kantor anda, silakan hubungi administrator.',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.$router.push({ name: 'dashboard' })
+                        }
+                    })
+                } else {
+                    this.lokasiAbsen = v.work_location_detail
+                    this.geolocate(v.work_location_detail.latitude, v.work_location_detail.longitude);
+                }
+            }
         })
     },
     methods: {
@@ -113,6 +139,18 @@ export default {
                 console.log(Math.round(calculate));
                 this.enableAbsen = x
             });
+        },
+
+        diffTime(current, fixed) {
+            current = current.split(":");
+            fixed = fixed.split(":");
+            var currentDate = new Date(0, 0, 0, current[0], current[1], 0);
+            var fixedDate = new Date(0, 0, 0, fixed[0], fixed[1], 0);
+            var diff = (fixedDate.getTime() > currentDate.getTime()) ? fixedDate.getTime() - currentDate.getTime() : currentDate.getTime() - fixedDate.getTime();
+            var hours = Math.floor(diff / 1000 / 60 / 60);
+            diff -= hours * 1000 * 60 * 60;
+            var minutes = Math.floor(diff / 1000 / 60);
+            return (fixedDate.getTime() > currentDate.getTime()) ? (hours * 60) + minutes : -((hours * 60) + minutes);
         },
 
         handleMarkerDrag(e) {

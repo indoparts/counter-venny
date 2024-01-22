@@ -15,39 +15,14 @@
             </v-list-item-group>
         </v-list>
         <v-list subheader three-line v-if="isDashboard">
-            <v-subheader>User Info</v-subheader>
+            <v-subheader>User Guide</v-subheader>
 
-            <v-list-item>
+            <v-list-item v-for="(i, index) in dataGuide" :key="index">
                 <v-list-item-content>
-                    <v-list-item-title>Absensi</v-list-item-title>
-                    <v-list-item-subtitle>
-                        Informasi tentang penggunaan fitur absensi dapat anda lihat disini.
-                    </v-list-item-subtitle>
+                    <v-list-item-title>{{ i.title }}</v-list-item-title>
+                    <v-list-item-subtitle>{{ i.subtitle }}</v-list-item-subtitle>
                     <v-list-item-action style="margin-left: 0px !important;">
-                        <v-btn small depressed color="primary" outlined to="/users-info/absensi">
-                            Lihat
-                        </v-btn>
-                    </v-list-item-action>
-                </v-list-item-content>
-            </v-list-item>
-
-            <v-list-item>
-                <v-list-item-content>
-                    <v-list-item-title>Fitur Lainya</v-list-item-title>
-                    <v-list-item-subtitle>
-                        Untuk fitur lainya masih dalam tahap pengerjaan.
-                    </v-list-item-subtitle>
-                </v-list-item-content>
-            </v-list-item>
-
-            <v-list-item>
-                <v-list-item-content>
-                    <v-list-item-title>Laporan error</v-list-item-title>
-                    <v-list-item-subtitle>
-                        Jika anda mengalami masalah tentang bug, error, dan keluhan lainya. Anda dapat menghubungi kami.
-                    </v-list-item-subtitle>
-                    <v-list-item-action style="margin-left: 0px !important;">
-                        <v-btn small depressed color="primary" outlined to="/users-info/error-reporting">
+                        <v-btn small depressed color="primary" outlined :to="i.link">
                             Lihat
                         </v-btn>
                     </v-list-item-action>
@@ -62,7 +37,74 @@ export default {
         return {
             selectedRightDrawer: 0,
             menu: [],
-            isDashboard: false
+            isDashboard: false,
+            dataGuide:[
+                {
+                    title:'Absensi',
+                    subtitle:'Informasi tentang penggunaan fitur absensi dapat anda lihat disini.',
+                    link:'/users-info/absensi'
+                },
+                {
+                    title: 'Laporan error',
+                    subtitle: 'Jika anda mengalami masalah tentang bug, error, dan keluhan lainya. Anda dapat menghubungi kami.',
+                    link: '/users-info/error-reporting'
+                },
+                {
+                    title: 'Tools Cuti',
+                    subtitle: 'Informasi tentang penggunaan fitur cuti dapat anda lihat disini.',
+                    link: '/users-info/cuti'
+                },
+                {
+                    title: 'Tools Izin',
+                    subtitle: 'Informasi tentang penggunaan fitur izin dapat anda lihat disini.',
+                    link: '/users-info/izin'
+                },
+                {
+                    title: 'Tools Lembur',
+                    subtitle: 'Informasi tentang penggunaan fitur lembur dapat anda lihat disini.',
+                    link: '/users-info/lembur'
+                },
+                {
+                    title: 'Tools Perjalanan Dinas',
+                    subtitle: 'Informasi tentang penggunaan fitur perjalanan dinas dapat anda lihat disini.',
+                    link: '/users-info/perdin'
+                },
+                {
+                    title: 'Tools Reimburs/Klaim',
+                    subtitle: 'Informasi tentang penggunaan fitur reimburs/klaim dapat anda lihat disini.',
+                    link: '/users-info/reimburs'
+                },
+                {
+                    title: 'Jadwal Istirahat',
+                    subtitle: 'Informasi tentang penggunaan fitur jadwal istirahat dapat anda lihat disini.',
+                    link: '/users-info/jadwal-istirahat'
+                },
+                {
+                    title: 'Jadwal Piket',
+                    subtitle: 'Informasi tentang penggunaan fitur jadwal piket dapat anda lihat disini.',
+                    link: '/users-info/jadwal-piket'
+                },
+                {
+                    title: 'Jadwal Kerja',
+                    subtitle: 'Informasi tentang penggunaan fitur jadwal kerja dapat anda lihat disini.',
+                    link: '/users-info/jadwal-kerja'
+                },
+                {
+                    title: 'Keuangan Gaji',
+                    subtitle: 'Informasi tentang penggunaan fitur keuangan gaji dapat anda lihat disini.',
+                    link: '/users-info/keuangan-gaji'
+                },
+                {
+                    title: 'Keuangan Kasbon',
+                    subtitle: 'Informasi tentang penggunaan fitur keuangan kasbon dapat anda lihat disini.',
+                    link: '/users-info/keuangan-kasbon'
+                },
+                {
+                    title: 'Permohonan Resign',
+                    subtitle: 'Informasi tentang penggunaan fitur permohonan resign dapat anda lihat disini.',
+                    link: '/users-info/resign'
+                },
+            ]
         }
     },
     mounted(){
@@ -138,6 +180,66 @@ export default {
                     this.selectedRightDrawer = 2
                     this.isDashboard = false
                     break;
+                case 'lembur.data':
+                    this.menu = this.$store.state.pengajuan_lembur.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'lembur.add':
+                    this.menu = this.$store.state.pengajuan_lembur.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'lembur.edit':
+                    this.menu = this.$store.state.pengajuan_lembur.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'lembur.laporan':
+                    this.menu = this.$store.state.pengajuan_lembur.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    this.isDashboard = false
+                    break;
+                case 'perdin.data':
+                    this.menu = this.$store.state.pengajuan_perdin.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'perdin.add':
+                    this.menu = this.$store.state.pengajuan_perdin.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'perdin.edit':
+                    this.menu = this.$store.state.pengajuan_perdin.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'perdin.laporan':
+                    this.menu = this.$store.state.pengajuan_perdin.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    this.isDashboard = false
+                    break;
+                case 'reimburs.data':
+                    this.menu = this.$store.state.pengajuan_reimburs.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'reimburs.add':
+                    this.menu = this.$store.state.pengajuan_reimburs.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'reimburs.edit':
+                    this.menu = this.$store.state.pengajuan_reimburs.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'reimburs.laporan':
+                    this.menu = this.$store.state.pengajuan_reimburs.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    this.isDashboard = false
+                    break;
                 case 'jadwal-istirahat.data':
                     this.menu = this.$store.state.jadwal_istirahat.rightMenuDrawer
                     this.selectedRightDrawer = 1
@@ -168,14 +270,79 @@ export default {
                     this.selectedRightDrawer = 2
                     this.isDashboard = false
                     break;
+                case 'jadwal-kerja.data':
+                    this.menu = this.$store.state.jadwal_kerja.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'jadwal-kerja.add':
+                    this.menu = this.$store.state.jadwal_kerja.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'jadwal-kerja.timeconfig':
+                    this.menu = this.$store.state.jadwal_kerja.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    this.isDashboard = false
+                    break;
                 case 'summary-gaji.data':
                     this.menu = this.$store.state.summary_gaji.rightMenuDrawer
                     this.selectedRightDrawer = 2
                     this.isDashboard = false
                     break;
+                case 'summary-gaji.edit':
+                    this.menu = this.$store.state.summary_gaji.rightMenuDrawer
+                    this.selectedRightDrawer = null
+                    this.isDashboard = false
+                    break;
+                case 'summary-gaji.laporan':
+                    this.menu = this.$store.state.summary_gaji.rightMenuDrawer
+                    this.selectedRightDrawer = 3
+                    this.isDashboard = false
+                    break;
+                case 'summary-gaji.selip':
+                    this.menu = this.$store.state.summary_gaji.rightMenuDrawer
+                    this.selectedRightDrawer = 4
+                    this.isDashboard = false
+                    break;
                 case 'summary-gaji.formula':
                     this.menu = this.$store.state.summary_gaji.rightMenuDrawer
                     this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'summary-gaji.generate':
+                    this.menu = this.$store.state.summary_gaji.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'summary-kasbon.data':
+                    this.menu = this.$store.state.summary_kasbon.rightMenuDrawer
+                    this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'summary-kasbon.form':
+                    this.menu = this.$store.state.summary_kasbon.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'summary-kasbon.report':
+                    this.menu = this.$store.state.summary_kasbon.rightMenuDrawer
+                    this.selectedRightDrawer = 2
+                    this.isDashboard = false
+                    break;
+                case 'resign.form':
+                    this.menu = this.$store.state.resign.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'resign.edit':
+                    this.menu = this.$store.state.resign.rightMenuDrawer
+                    this.selectedRightDrawer = 0
+                    this.isDashboard = false
+                    break;
+                case 'resign.data':
+                    this.menu = this.$store.state.resign.rightMenuDrawer
+                    this.selectedRightDrawer = 1
                     this.isDashboard = false
                     break;
                 case 'masterdata-piket':
@@ -196,6 +363,11 @@ export default {
                 case 'master-data-pengguna.show':
                     this.menu = this.$store.state.masterdata_user.rightMenuDrawer
                     this.selectedRightDrawer = 1
+                    this.isDashboard = false
+                    break;
+                case 'master-data-pengguna.group':
+                    this.menu = this.$store.state.masterdata_user.rightMenuDrawer
+                    this.selectedRightDrawer = 2
                     this.isDashboard = false
                     break;
                 case 'master-data-role.data':

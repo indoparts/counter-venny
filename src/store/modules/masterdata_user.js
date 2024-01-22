@@ -25,7 +25,7 @@ const state = () => ({
     rightMenuDrawer: [
         ['List Data', 'mdi-view-list', 'master-data-pengguna.data', 'read-user'],
         ['Buat Data Baru', 'mdi-plus-box', 'master-data-pengguna.add', 'create-user'],
-        // ['Grafik', 'mdi-chart-bar', 'grafik-data-users-user'],
+        ['User Group', 'mdi-group', 'master-data-pengguna.group', 'create-user'],
     ]
 })
 
@@ -180,6 +180,23 @@ const actions = {
     delete({ }, payload) {
         return new Promise(resolve => {
             $axios.delete(`api/users/${payload}`)
+                .then(response => {
+                    resolve(response.data)
+                })
+                .catch(error => {
+                    resolve(error.response)
+                })
+        })
+    },
+
+    indexUserGroup({ }, payload) {
+        return new Promise(resolve => {
+            const {
+                page,
+                itemsPerPage,
+                sortDesc
+            } = payload.options
+            $axios.get(`api/user-group?page=${page}&limit=${itemsPerPage}&sortDesc=${sortDesc}`)
                 .then(response => {
                     resolve(response.data)
                 })

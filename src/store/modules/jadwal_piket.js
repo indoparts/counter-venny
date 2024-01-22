@@ -80,7 +80,7 @@ const actions = {
     },
     attr({ }) {
         return new Promise(resolve => {
-            $axios.get(`api/jadwal-piket-attr-form?key=attr&value=`)
+            $axios.get(`api/jadwal-piket-attr-form?key=group&value=`)
                 .then(response => {
                     resolve(response.data)
                 })

@@ -9,20 +9,20 @@
                 </v-col>
                 <v-col cols="12" md="6">
                     <v-card-text>
-                        <v-select dense outlined v-model="form.dept_id" label="Divisi" required
-                            :rules="[v => !!v || 'Item is required']" :items="divisi" item-text="deptname" item-value="id"></v-select>
-                        <v-select dense outlined v-model="form.role_id" label="Jabatan" required
-                            :rules="[v => !!v || 'Item is required']" :items="jabatan" item-text="rolename" item-value="id" @change="keychange(form.dept_id, form.role_id)"></v-select>
-                        <v-select dense outlined v-model="form.user_id" label="Pilih User" required
-                            :rules="[v => !!v || 'Item is required']" :items="useritem" item-text="name" item-value="id"></v-select>
+                        <v-select dense outlined v-model="group" label="Pilih Group" required
+                            :rules="[v => !!v || 'Item is required']" :items="userGroupItem" item-text="nama"
+                            item-value="id" @change="keychange(group)"></v-select>
+                        <v-select dense outlined v-model="userPick" label="Pilih User" required
+                            :rules="[v => !!v || 'Item is required']" :items="useritem" item-text="user.name"
+                            item-value="user" @change="userpick"></v-select>
                         <v-text-field dense outlined v-model="form.time" label="Waktu istirahat" required
                             :rules="[v => !!v || 'Item is required']"></v-text-field>
                         <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date"
                             transition="scale-transition" offset-y min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-text-field dense outlined v-model="date" label="Tentukan tanggal" required
-                                    :rules="[v => !!v || 'Item is required']" prepend-inner-icon="mdi-calendar"
-                                    hide-details v-bind="attrs" v-on="on"></v-text-field>
+                                    :rules="[v => !!v || 'Item is required']" prepend-inner-icon="mdi-calendar" hide-details
+                                    v-bind="attrs" v-on="on"></v-text-field>
                             </template>
                             <v-date-picker v-model="date" range>
                                 <v-spacer></v-spacer>
@@ -52,38 +52,41 @@ export default {
         loading: false,
         menu: false,
         date: null,
-        divisi: [],
-        jabatan: [],
+        group: '',
+        userGroupItem: [],
         useritem: [],
+        userPick: [],
     }),
     computed: {
         ...mapState('jadwal_istirahat', {
             form: state => state.form,
         }),
     },
-    watch:{
-        date(e){
+    watch: {
+        date(e) {
             this.form.date = e[0]
         }
     },
-    created(){
-        this.attr_get_dept().then((res)=>{
-            this.divisi = res.data
-        })
-        this.attr_get_jabatan().then((res)=>{
-            this.jabatan = res.data
+    created() {
+        this.attr_get_groupUser().then((res) => {
+            this.userGroupItem = res.data
         })
     },
     methods: {
-        ...mapActions('jadwal_istirahat', ['submitCreate', 'user', 'attr_get_dept', 'attr_get_jabatan', 'attr_get_user']),
-        keychange(dept_id, role_id){
-            this.attr_get_user([dept_id, role_id]).then((res) => {
+        ...mapActions('jadwal_istirahat', ['submitCreate', 'user', 'attr_get_groupUser', 'attr_get_user']),
+        keychange(group_id) {
+            this.attr_get_user(group_id).then((res) => {
                 this.useritem = res.data
             })
         },
+        userpick() {
+            this.form.dept_id = this.userPick.dept_id
+            this.form.role_id = this.userPick.role_id
+            this.form.user_id = this.userPick.id
+        },
         submit() {
             this.loading = true
-            this.submitCreate().then((res)=>{
+            this.submitCreate().then((res) => {
                 this.$swal({
                     title: res.msg === 'error' ? 'Terjadi kesalahan!' : 'Berhasil tersimpan.',
                     icon: res.msg,

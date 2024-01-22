@@ -73,20 +73,9 @@ const actions = {
                 })
         })
     },
-    attr_get_dept({ }) {
+    attr_get_groupUser({ }) {
         return new Promise(resolve => {
-            $axios.get(`api/jadwal-istirahat-attr-form?key=divisi&value=`)
-                .then(response => {
-                    resolve(response.data)
-                })
-                .catch(error => {
-                    resolve(error.response)
-                })
-        })
-    },
-    attr_get_jabatan({ }) {
-        return new Promise(resolve => {
-            $axios.get(`api/jadwal-istirahat-attr-form?key=jabatan&value=`)
+            $axios.get(`api/jadwal-istirahat-attr-form?key=group&value=`)
                 .then(response => {
                     resolve(response.data)
                 })

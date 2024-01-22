@@ -12,14 +12,12 @@
                         <v-select dense outlined v-model="form.master_piket_id" label="Pilih Tugas Piket" required
                             :rules="[v => !!v || 'Item is required']" :items="piketitem" item-text="tugas"
                             item-value="id"></v-select>
-                        <v-select dense outlined v-model="form.dept_id" label="Pilih Departemen" required
-                            :rules="[v => !!v || 'Item is required']" :items="departemenitem" item-text="deptname" item-value="id"></v-select>
-                        <v-select dense outlined v-model="form.role_id" label="Pilih Jabatan" required
-                            :rules="[v => !!v || 'Item is required']" :items="jabatanitem" item-text="rolename"
-                            item-value="id" @change="keychange(form.dept_id, form.role_id)"></v-select>
-                        <v-select dense outlined v-model="form.user_id" label="Pilih User" required
-                            :rules="[v => !!v || 'Item is required']" :items="useritem" item-text="name"
-                            item-value="id"></v-select>
+                        <v-select dense outlined v-model="group" label="Pilih Group" required
+                            :rules="[v => !!v || 'Item is required']" :items="userGroupItem" item-text="nama"
+                            item-value="id" @change="keychange(group)"></v-select>
+                        <v-select dense outlined v-model="userPick" label="Pilih User" required
+                            :rules="[v => !!v || 'Item is required']" :items="useritem" item-text="user.name"
+                            item-value="user" @change="userpick"></v-select>
                         <v-text-field dense outlined v-model="form.time" label="Waktu piket" required
                             :rules="[v => !!v || 'Item is required']"></v-text-field>
                         <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date"
@@ -58,9 +56,10 @@ export default {
         menu: false,
         date: null,
         piketitem: [],
-        departemenitem: [],
-        jabatanitem: [],
+        group: '',
+        userGroupItem: [],
         useritem: [],
+        userPick: [],
     }),
     computed: {
         ...mapState('jadwal_piket', {
@@ -74,17 +73,21 @@ export default {
     },
     created() {
         this.attr().then((res) => {
+            this.userGroupItem = res.data.group
             this.piketitem = res.data.piket
-            this.departemenitem = res.data.divisi
-            this.jabatanitem = res.data.role
         })
     },
     methods: {
         ...mapActions('jadwal_piket', ['submitCreate', 'user', 'attr', 'attr_get_user']),
-        keychange(dept_id, role_id) {
-            this.attr_get_user([dept_id, role_id]).then((res) => {
+        keychange(group_id) {
+            this.attr_get_user(group_id).then((res) => {
                 this.useritem = res.data
             })
+        },
+        userpick() {
+            this.form.dept_id = this.userPick.dept_id
+            this.form.role_id = this.userPick.role_id
+            this.form.user_id = this.userPick.id
         },
         submit() {
             this.loading = true

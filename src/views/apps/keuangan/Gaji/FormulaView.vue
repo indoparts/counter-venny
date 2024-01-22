@@ -32,6 +32,19 @@
                             Submit
                         </v-btn>
                     </v-card-actions>
+                    <v-divider></v-divider>
+                    <v-card-text v-if="dataFormula.length > 0">
+                        <v-alert border="top" colored-border type="info" elevation="1">
+                            <p>
+                                <strong v-for="(i, index) in dataFormula" :key="index">
+                                    {{ i.variable_name }} {{ i.operator }}
+                                </strong>
+                                <v-btn class="ma-2" x-small outlined color="primary" @click="truncateFormula(dataFormula[0].id)">
+                                    delete formula
+                                </v-btn>
+                            </p>
+                        </v-alert>
+                    </v-card-text>
                 </v-card>
             </v-form>
         </v-col>
@@ -82,16 +95,24 @@ export default {
             }
         ],
         tools: ['+', ':', '-', '=', 'x', 'fix',],
-        dataVariable: []
+        dataVariable: [],
+        dataFormula: [],
     }),
     mounted() {
         this.getVariable()
+        this.getFormula()
     },
     methods: {
         ...mapActions('summary_gaji', ['indexVariable', 'storeVariable', 'deleteVariable']),
-        getVariable(){
+        ...mapActions('summary_gaji', ['indexFormula', 'storeFormula', 'deleteFormula']),
+        getVariable() {
             this.indexVariable().then((res) => {
                 this.dataVariable = res.data
+            })
+        },
+        getFormula() {
+            this.indexFormula().then((res) => {
+                this.dataFormula = res.data
             })
         },
         addSetupVariable() {
@@ -102,8 +123,8 @@ export default {
                 operator: '',
             })
         },
-        deleteVariableItem(id){
-            this.deleteVariable(id).then((res)=>{
+        deleteVariableItem(id) {
+            this.deleteVariable(id).then((res) => {
                 this.$swal(
                     res.msg,
                     res.status === true ? 'Data berhasil ditambahkan' : 'Data gagal ditambahkan',
@@ -116,17 +137,42 @@ export default {
             this.formLoop.splice(this.formLoop.indexOf(e), 1)
         },
         submitVariable() {
-            this.storeVariable(this.formVariable).then((res)=>{
+            this.storeVariable(this.formVariable).then((res) => {
                 this.$swal(
                     res.msg,
-                    res.status === true ? 'Data berhasil ditambahkan': 'Data gagal ditambahkan',
+                    res.status === true ? 'Data berhasil ditambahkan' : 'Data gagal ditambahkan',
                     res.msg
                 )
                 this.getVariable()
             })
         },
         submit() {
-            console.log(this.formLoop);
+            const arr = []
+            this.formLoop.forEach(el => {
+                arr.push({
+                    variable_name: el.variable,
+                    operator: el.operator
+                })
+            });
+            if (arr.length > 0)
+                this.storeFormula({ post: arr }).then((res) => {
+                    this.$swal(
+                        res.msg,
+                        res.status === true ? 'Data berhasil ditambahkan' : 'Data gagal ditambahkan',
+                        res.msg
+                    )
+                    this.getFormula()
+                })
+        },
+        truncateFormula(id){
+            this.deleteFormula(id).then((res)=>{
+                this.$swal(
+                    res.msg,
+                    res.status === true ? 'Data berhasil ditambahkan' : 'Data gagal ditambahkan',
+                    res.msg
+                )
+                this.getFormula()
+            })
         }
     }
 }

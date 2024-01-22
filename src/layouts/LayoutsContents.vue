@@ -70,7 +70,17 @@ export default {
                 'mdi-linkedin',
                 'mdi-instagram',
             ],
+            ShocketIsConnected: false,
         }
+    },
+    sockets: {
+        connect() {
+            this.ShocketIsConnected = true;
+        },
+
+        disconnect() {
+            this.ShocketIsConnected = false;
+        },
     },
     methods: {
         toggleFullscreen() {

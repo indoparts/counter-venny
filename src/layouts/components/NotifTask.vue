@@ -11,7 +11,7 @@
             <v-subheader inset>Informasi Piket & Istirahat</v-subheader>
             <v-list-item-group v-model="selectedItem" color="primary">
                 <div v-if="items.length > 0">
-                    <v-list-item v-for="i in items" :key="i.index" @click="movepage(i.initial)">
+                    <v-list-item v-for="(i, index) in items" :key="index" @click="movepage(i.initial)">
                         <v-list-item-avatar>
                             <v-icon :class="i.initial === 'user_pikets' ? 'primary' : 'secondary'">
                                 {{ i.initial === 'user_pikets' ? 'mdi-broom' : 'mdi-bed-clock' }}
@@ -34,7 +34,7 @@
                         </v-list-item-action>
                         <v-list-item-action v-else>
                             <v-btn icon>
-                                <v-icon color="info" @click="act(i.initial, i.id)">mdi-information</v-icon>
+                                <v-icon color="info">mdi-information</v-icon>
                             </v-btn>
                         </v-list-item-action>
                     </v-list-item>
@@ -50,38 +50,53 @@
     </v-menu>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import moment from 'moment';
 export default {
     data() {
         return {
             count: null,
             items: [],
-            selectedItem: null
+            selectedItem: null,
         }
+    },
+    computed: {
+        ...mapState('auth', {
+            authenticated: state => state.authenticated,
+        }),
     },
     mounted() {
         this.check()
+        this.sockets.subscribe('jadwal-istirahat:new', data => {
+            const user_id = data.payload.user_id
+            const dept_id = data.payload.dept_id
+            const role_id = data.payload.role_id
+            if (this.authenticated.id === user_id && this.authenticated.dept_id === dept_id && this.authenticated.role_id === role_id) {
+                this.check()
+            }
+        })
+        this.sockets.subscribe('jadwal-piket:new', data => {
+            const user_id = data.payload.user_id
+            const dept_id = data.payload.dept_id
+            const role_id = data.payload.role_id
+            if (this.authenticated.id === user_id && this.authenticated.dept_id === dept_id && this.authenticated.role_id === role_id) {
+                this.check()
+            }
+        })
+        this.sockets.subscribe('jadwal-piket:piket-image-upload', data => {
+            if (this.authenticated.id === data.u.user_id) {
+                this.check()
+            }
+        })
     },
     methods: {
         ...mapActions('auth', ['getNotifTask']),
         ...mapActions('jadwal_piket', ['submitUpdate']),
         check() {
             this.getNotifTask().then(res => {
-                if (res.status === 200) {
+                if (res.status === true) {
                     this.count = res.data.count
-                    for (let i = 0; i < res.data.data.length; i++) {
-                        this.items.push({
-                            created_at: res.data.data[i].created_at,
-                            date: res.data.data[i].date,
-                            state: res.data.data[i].state,
-                            index: i,
-                            id: res.data.data[i].id,
-                            initial: res.data.data[i].initial,
-                            time: res.data.data[i].time,
-                            user_id: res.data.data[i].user_id,
-                        })
-                    }
+                    this.items = res.data.data
                 }
             })
         },
@@ -100,7 +115,6 @@ export default {
         },
         async uploadbefore(initial, id) {
             if (initial === 'user_pikets') {
-                console.log(id);
                 const { value: file } = await this.$swal({
                     title: 'Gambar Sebelum Dikerjakan',
                     input: 'file',
@@ -136,7 +150,6 @@ export default {
         },
         async uploadafter(initial, id) {
             if (initial === 'user_pikets') {
-                console.log(id);
                 const { value: file } = await this.$swal({
                     title: 'Gambar Sesudah Dikerjakan',
                     input: 'file',
@@ -163,36 +176,6 @@ export default {
                                 }).then((res) => {
                                     this.$swal('Menambahkan foto', '', `${res.msg}`)
                                 })
-                            }
-                        })
-                    }
-                    reader.readAsDataURL(file)
-                }
-            }
-        },
-        async act(initial, id) {
-            if (initial === 'user_pikets') {
-                console.log(id);
-                const { value: file } = await this.$swal({
-                    title: 'Gambar Sebelum Dikerjakan',
-                    input: 'file',
-                    inputAttributes: {
-                        'accept': 'image/*',
-                        'aria-label': 'Upload your profile picture'
-                    }
-                })
-
-                if (file) {
-                    const reader = new FileReader()
-                    reader.onload = (e) => {
-                        this.$swal({
-                            title: 'Berikut gambar yang anda tambahkan.',
-                            imageUrl: e.target.result,
-                            imageAlt: 'The uploaded picture',
-                            showCancelButton: true,
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                this.$swal('Saved!', '', 'success')
                             }
                         })
                     }

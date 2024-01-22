@@ -190,7 +190,7 @@ const routes = [
     meta: {
       layout: 'content',
       requiresAuth: true,
-      title: 'Master Data Pengguna',
+      title: 'List Data Izin',
     },
     children: [
       {
@@ -199,7 +199,7 @@ const routes = [
         component: () => import('@/views/apps/beranda/Tools/izin/DataView.vue'),
         meta: {
           requiresAuth: true,
-          title: 'Kelola Pengguna',
+          title: 'Kelola Izin',
           breadscrum: [
             {
               text: 'Beranda',
@@ -220,7 +220,7 @@ const routes = [
         component: () => import('@/views/apps/beranda/Tools/izin/FormView.vue'),
         meta: {
           requiresAuth: true,
-          title: 'Tambah data Pengguna',
+          title: 'Tambah data Izin',
           breadscrum: [
             {
               text: 'Beranda',
@@ -262,6 +262,336 @@ const routes = [
               text: 'Laporan Izin',
               disabled: true,
               href: '/izin/laporan',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
+    path: '/lembur',
+    component: () => import('@/views/apps/beranda/Tools/lembur/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Permintaan Lembur',
+    },
+    children: [
+      {
+        path: '',
+        name: 'lembur.data',
+        component: () => import('@/views/apps/beranda/Tools/lembur/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola Lembur',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'lembur',
+              disabled: true,
+              href: '/lembur',
+            },
+          ]
+        }
+      },
+      {
+        path: 'lembur-form',
+        name: 'lembur.add',
+        component: () => import('@/views/apps/beranda/Tools/lembur/FormView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Buat Pengajuan Lembur',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'lembur',
+              disabled: true,
+              href: '/lembur',
+            },
+            {
+              text: 'Form lembur',
+              disabled: true,
+              href: '/lembur/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'edit/:id',
+        name: 'lembur.edit',
+        component: () => import('@/views/apps/beranda/Tools/lembur/EditView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Edit Pengajuan Lembur',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'lembur',
+              disabled: true,
+              href: '/lembur',
+            },
+            {
+              text: 'Form lembur',
+              disabled: true,
+              href: '/lembur/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'lembur-laporan',
+        name: 'lembur.laporan',
+        component: () => import('@/views/apps/beranda/Tools/lembur/ReportView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Laporan lembur',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'lembur',
+              disabled: true,
+              href: '/lembur',
+            },
+            {
+              text: 'Laporan lembur',
+              disabled: true,
+              href: '/lembur/laporan',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
+    path: '/perdin',
+    component: () => import('@/views/apps/beranda/Tools/perdin/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Permintaan perdin',
+    },
+    children: [
+      {
+        path: '',
+        name: 'perdin.data',
+        component: () => import('@/views/apps/beranda/Tools/perdin/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola Perjalanan Dinas',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'perdin',
+              disabled: true,
+              href: '/perdin',
+            },
+          ]
+        }
+      },
+      {
+        path: 'perdin-form',
+        name: 'perdin.add',
+        component: () => import('@/views/apps/beranda/Tools/perdin/FormView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Tambah data perdin',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'perdin',
+              disabled: true,
+              href: '/perdin',
+            },
+            {
+              text: 'Form perdin',
+              disabled: true,
+              href: '/perdin/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'edit/:id',
+        name: 'perdin.edit',
+        component: () => import('@/views/apps/beranda/Tools/perdin/EditView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Edit Pengajuan Perjalanan Dinas',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'perdin',
+              disabled: true,
+              href: '/perdin',
+            },
+            {
+              text: 'Form perdin',
+              disabled: true,
+              href: '/perdin/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'perdin-laporan',
+        name: 'perdin.laporan',
+        component: () => import('@/views/apps/beranda/Tools/perdin/ReportView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Laporan perdin',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'perdin',
+              disabled: true,
+              href: '/perdin',
+            },
+            {
+              text: 'Laporan perdin',
+              disabled: true,
+              href: '/perdin/laporan',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
+    path: '/reimburs',
+    component: () => import('@/views/apps/beranda/Tools/reimburs/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Permintaan reimburs',
+    },
+    children: [
+      {
+        path: '',
+        name: 'reimburs.data',
+        component: () => import('@/views/apps/beranda/Tools/reimburs/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola reimburs',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'reimburs',
+              disabled: true,
+              href: '/reimburs',
+            },
+          ]
+        }
+      },
+      {
+        path: 'reimburs-form',
+        name: 'reimburs.add',
+        component: () => import('@/views/apps/beranda/Tools/reimburs/FormView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Tambah data reimburs',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'reimburs',
+              disabled: true,
+              href: '/reimburs',
+            },
+            {
+              text: 'Form reimburs',
+              disabled: true,
+              href: '/reimburs/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'edit/:id',
+        name: 'reimburs.edit',
+        component: () => import('@/views/apps/beranda/Tools/reimburs/EditView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Edit Pengajuan Reimburs',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'reimburs',
+              disabled: true,
+              href: '/reimburs',
+            },
+            {
+              text: 'Form reimburs',
+              disabled: true,
+              href: '/reimburs/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'reimburs-laporan',
+        name: 'reimburs.laporan',
+        component: () => import('@/views/apps/beranda/Tools/reimburs/ReportView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Laporan reimburs',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'reimburs',
+              disabled: true,
+              href: '/reimburs',
+            },
+            {
+              text: 'Laporan reimburs',
+              disabled: true,
+              href: '/reimburs/laporan',
             },
           ]
         }
@@ -524,6 +854,90 @@ const routes = [
     ]
   },
   {
+    path: '/jadwal-kerja',
+    component: () => import('@/views/apps/beranda/jadwal/kerja/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Kerja',
+    },
+    children: [
+      {
+        path: '',
+        name: 'jadwal-kerja.data',
+        component: () => import('@/views/apps/beranda/jadwal/kerja/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola List Data Kerja',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Kerja',
+              disabled: true,
+              href: '/kerja',
+            },
+          ]
+        }
+      },
+      {
+        path: 'form-kerja',
+        name: 'jadwal-kerja.add',
+        component: () => import('@/views/apps/beranda/jadwal/kerja/FormView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Form Kerja',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Kerja',
+              disabled: true,
+              href: '/kerja',
+            },
+            {
+              text: 'Form Kerja',
+              disabled: true,
+              href: '/kerja/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'time-config',
+        name: 'jadwal-kerja.timeconfig',
+        component: () => import('@/views/apps/beranda/jadwal/kerja/TimeView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Pengaturan Jam Kerja',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Piket',
+              disabled: true,
+              href: '/kerja',
+            },
+            {
+              text: 'Pengaturan Jam Piket',
+              disabled: true,
+              href: '/kerja/time-config',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
     path: '/masterdata-piket',
     name: 'masterdata-piket',
     component: () => import('@/views/apps/beranda/jadwal/piket/MasterData.vue'),
@@ -573,9 +987,51 @@ const routes = [
               href: '/',
             },
             {
-              text: 'Gji',
+              text: 'Gaji',
               disabled: true,
               href: '/gaji',
+            },
+          ]
+        }
+      },
+      {
+        path: 'edit/:id',
+        name: 'summary-gaji.edit',
+        component: () => import('@/views/apps/keuangan/Gaji/EditView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Edit List Data Gaji',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Gaji',
+              disabled: true,
+              href: '/gaji',
+            },
+          ]
+        }
+      },
+      {
+        path: 'generate-gaji',
+        name: 'summary-gaji.generate',
+        component: () => import('@/views/apps/keuangan/Gaji/GenerateView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Generate Data Gaji',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Generate Gaji',
+              disabled: true,
+              href: '/generate-gaji',
             },
           ]
         }
@@ -661,6 +1117,90 @@ const routes = [
     ]
   },
   {
+    path: '/resign',
+    component: () => import('@/views/apps/Resign/IndexView.vue'),
+    meta: {
+      layout: 'content',
+      requiresAuth: true,
+      title: 'Master Data Resign',
+    },
+    children: [
+      {
+        path: '',
+        name: 'resign.data',
+        component: () => import('@/views/apps/Resign/DataView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Kelola List Data Resign',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Resign',
+              disabled: true,
+              href: '/resign',
+            },
+          ]
+        }
+      },
+      {
+        path: 'form-resign',
+        name: 'resign.form',
+        component: () => import('@/views/apps/Resign/FormView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Form Resign',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Resign',
+              disabled: true,
+              href: '/resign',
+            },
+            {
+              text: 'Form Piket',
+              disabled: true,
+              href: '/resign/form',
+            },
+          ]
+        }
+      },
+      {
+        path: 'edit/:id',
+        name: 'resign.edit',
+        component: () => import('@/views/apps/Resign/FormEditView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Form Resign',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Resign',
+              disabled: true,
+              href: '/resign',
+            },
+            {
+              text: 'Form Piket',
+              disabled: true,
+              href: '/resign/form',
+            },
+          ]
+        }
+      },
+    ]
+  },
+  {
     path: '/summary-kasbon',
     component: () => import('@/views/apps/keuangan/Kasbon/IndexView.vue'),
     meta: {
@@ -676,6 +1216,48 @@ const routes = [
         meta: {
           requiresAuth: true,
           title: 'Kelola List Data Kasbon',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Kasbon',
+              disabled: true,
+              href: '/kasbon',
+            },
+          ]
+        }
+      },
+      {
+        path: 'form',
+        name: 'summary-kasbon.form',
+        component: () => import('@/views/apps/keuangan/Kasbon/FormView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Form Kasbon',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Kasbon',
+              disabled: true,
+              href: '/kasbon',
+            },
+          ]
+        }
+      },
+      {
+        path: 'report',
+        name: 'summary-kasbon.report',
+        component: () => import('@/views/apps/keuangan/Kasbon/ReportView.vue'),
+        meta: {
+          requiresAuth: true,
+          title: 'Laporan Kasbon',
           breadscrum: [
             {
               text: 'Beranda',
@@ -770,6 +1352,32 @@ const routes = [
               text: 'Lihat Data Pengguna',
               disabled: true,
               href: '/master-data-pengguna/show/:id',
+            },
+          ]
+        }
+      },
+      {
+        path: 'group',
+        name: 'master-data-pengguna.group',
+        component: () => import('@/views/apps/Masterdata/pengguna/GroupView.vue'),
+        meta: { 
+          requiresAuth: true,
+          title: 'Group Pengguna',
+          breadscrum: [
+            {
+              text: 'Beranda',
+              disabled: false,
+              href: '/',
+            },
+            {
+              text: 'Master Data Pengguna',
+              disabled: true,
+              href: '/master-data-pengguna',
+            },
+            {
+              text: 'Lihat Data Pengguna',
+              disabled: true,
+              href: '/master-data-pengguna/group',
             },
           ]
         }

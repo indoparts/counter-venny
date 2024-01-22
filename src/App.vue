@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import LayoutBlank from '@/layouts/LayoutsBlank.vue'
 import LayoutContent from '@/layouts/LayoutsContents.vue'
 export default {
@@ -17,10 +17,6 @@ export default {
   },
   computed: {
     ...mapGetters(['isAuth']),
-    ...mapState('auth', {
-      authenticated: state => state.authenticated,
-      permissions: state => state.permissions,
-    }),
   },
   watch: {
     isAuth(nv) {

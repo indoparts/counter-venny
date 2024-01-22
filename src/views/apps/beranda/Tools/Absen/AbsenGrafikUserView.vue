@@ -105,11 +105,7 @@ export default {
                     }
                 ],
                 tooltip: {
-                    shared: false,
-                    intersect: true,
-                    x: {
-                        show: false
-                    }
+                    theme: (this.$vuetify.theme.dark) ? 'dark' : 'light'
                 },
                 legend: {
                     horizontalAlign: "left",

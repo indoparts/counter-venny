@@ -41,7 +41,7 @@ export default new Vuetify({
                 primary: '#7f2549',
                 secondary: '#F1F7B5',
                 accent: '#A8D1D1',
-                error: '#FD8A8A',
+                error: '#F44336',
             },
             dark: {
                 card: '#00303C',
@@ -53,7 +53,7 @@ export default new Vuetify({
                 primary: '#00DC82',
                 secondary: '#255461',
                 accent: '#BEF264',
-                error: '#E879F9',
+                error: '#E91E63',
             },
         },
     },

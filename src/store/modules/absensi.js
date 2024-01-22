@@ -89,7 +89,7 @@ const actions = {
             formData.append('waktu_telat_masuk', form.waktu_telat_masuk)
             formData.append('foto_selfi', form.foto_selfi)
             const headers = { 'Content-Type': 'multipart/form-data' };
-            $axios.post('absensi', formData, { headers })
+            $axios.post('api/absensi', formData, { headers })
                 .then(response => {
                     commit('CLEAR_FORM')
                     resolve(response.data)

@@ -95,6 +95,9 @@ export default {
                     ['Absensi Kehadiran', 'mdi-fingerprint', '/users-absen'],
                     ['Pengajuan Cuti', 'mdi-plane-car', '/cuti'],
                     ['Pengajuan Izin', 'mdi-frequently-asked-questions', '/izin'],
+                    ['Pengajuan Lembur', 'mdi-debug-step-over', '/lembur'],
+                    ['Perjalanan Dinas', 'mdi-car-side', '/perdin'],
+                    ['Pengajuan Reimburs', 'mdi-hand-coin', '/reimburs'],
                 ],
                 link: '/'
             },
@@ -106,6 +109,7 @@ export default {
                 itemchild: [
                     ['Jadwal-istirahat', 'mdi-coffee', '/jadwal-istirahat'],
                     ['Jadwal piket', 'mdi-broom', '/jadwal-piket'],
+                    ['Jadwal Kerja', 'mdi-store-clock', '/jadwal-kerja'],
                 ],
                 link: '/'
             },
@@ -126,7 +130,7 @@ export default {
                 icon: 'mdi-exit-run',
                 child: false,
                 itemchild: [],
-                link: '/'
+                link: '/resign'
             },
         ],
         menus_masterdata:[

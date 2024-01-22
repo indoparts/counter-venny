@@ -124,7 +124,7 @@ const actions = {
                 })
         })
     },
-    submitIzin({ state, commit }) {
+    submitIzin({ state }) {
         return new Promise(resolve => {
             const { form } = state
             const formData = new FormData()
@@ -141,9 +141,6 @@ const actions = {
             const headers = { 'Content-Type': 'multipart/form-data' };
             $axios.post('api/form-izin', formData, { headers })
                 .then(response => {
-                    if (response.data.status === true) {
-                        commit('CLEAR_FORM')
-                    }
                     resolve(response.data)
                 })
                 .catch(error => {

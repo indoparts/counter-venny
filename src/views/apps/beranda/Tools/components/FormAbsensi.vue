@@ -49,9 +49,6 @@ export default {
         lng: function (v) {
             this.form.longitude = v
         },
-        status: function (v) {
-            this.form.status = v
-        }
     },
     data: () => ({
         valid: false,
@@ -72,6 +69,9 @@ export default {
         ...mapActions('absensi', ['submitAbsen']),
         submit() {
             this.loading = true
+            if (this.form.keterangan_absen === 'pulang') {
+                this.form.status = 'tidak telat'
+            }
             this.submitAbsen().then((e) => {
                 this.loading = false
                 var a = (function () {
