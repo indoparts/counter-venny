@@ -20,7 +20,7 @@ Vue.use(VueGoogleMaps, {
         libraries: "places"
     }
 });
-const url = `http://${process.env.BASE_URL_API}`
+const url = `https://${process.env.BASE_URL_API}`
 const SocketInstance = socketio.connect(url)
 Vue.use(new VueSocketIO({
     debug: true,
