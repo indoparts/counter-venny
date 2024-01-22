@@ -129,8 +129,10 @@ export default {
         ...mapActions('pengajuan_izin', ['approval_izin']),
         check() {
             this.getNotifInfo().then(res => {
-                this.count = res.data.count
-                this.items = res.data.data
+                if (res.data.status) {
+                    this.count = res.data.count
+                    this.items = res.data.data
+                }
             })
         },
         parseDate(e) {

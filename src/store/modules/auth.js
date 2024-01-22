@@ -79,7 +79,7 @@ const actions = {
                         commit('SET_TOKEN', response.data.data.token, { root: true })
                         commit('SET_TOKEN_EXPIRED', response.data.data.expires_at, { root: true })
                     }
-                    resolve(response.data)
+                    resolve(response)
                 })
                 .catch(error => {
                     resolve(error.response)
@@ -157,7 +157,7 @@ const actions = {
         return new Promise(resolve => {
             $axios.get('fetch-notification/piket-istirahat')
                 .then(response => {
-                    resolve(response.data)
+                    resolve(response)
                 })
                 .catch(error => {
                     resolve(error.response)
@@ -168,7 +168,7 @@ const actions = {
         return new Promise(resolve => {
             $axios.get('fetch-notification/info')
                 .then(response => {
-                    resolve(response.data)
+                    resolve(response)
                 })
                 .catch(error => {
                     resolve(error.response)

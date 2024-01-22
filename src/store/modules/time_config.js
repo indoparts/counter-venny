@@ -74,7 +74,7 @@ const actions = {
         return new Promise(resolve => {
             $axios.get(`api/time-config-jadwal-user`)
                 .then(response => {
-                    resolve(response.data)
+                    resolve(response)
                 })
                 .catch(error => {
                     resolve(error.response)

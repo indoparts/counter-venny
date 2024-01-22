@@ -48,21 +48,23 @@ export default {
         get() {
             this.getJadwaUser().then((res) => {
                 const events = []
-                res.data.forEach(el => {
-                    // console.log(el);
-                    const allDay = this.rnd(0, 3) === 0
-                    const firstTimestamp = this.rnd(new Date(el.date).getTime(), new Date(el.date).getTime())
-                    const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-                    const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-                    const second = new Date(first.getTime() + secondTimestamp)
-                    events.push({
-                        name: el.time_config.type,
-                        start: first,
-                        end: second,
-                        color: this.colors[this.rnd(0, this.colors.length - 1)],
-                        timed: !allDay,
-                    })
-                });
+                if (res.status === 200) {
+                    res.data.data.forEach(el => {
+                        // console.log(el);
+                        const allDay = this.rnd(0, 3) === 0
+                        const firstTimestamp = this.rnd(new Date(el.date).getTime(), new Date(el.date).getTime())
+                        const first = new Date(firstTimestamp - (firstTimestamp % 900000))
+                        const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
+                        const second = new Date(first.getTime() + secondTimestamp)
+                        events.push({
+                            name: el.time_config.type,
+                            start: first,
+                            end: second,
+                            color: this.colors[this.rnd(0, this.colors.length - 1)],
+                            timed: !allDay,
+                        })
+                    });
+                }
                 this.events = events
             })
         },
