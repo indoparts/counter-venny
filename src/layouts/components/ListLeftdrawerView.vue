@@ -141,7 +141,7 @@ export default {
                 child: false,
                 itemchild: [],
                 link: '/master-data-pengguna',
-                permission: 'read-user'
+                permission: 'user-viewList'
             },
             {
                 no:7,
@@ -150,7 +150,7 @@ export default {
                 child: false,
                 itemchild: [],
                 link: '/master-data-dept',
-                permission: 'read-dept'
+                permission: 'dept-viewList'
             },
             {
                 no:8,
@@ -159,7 +159,7 @@ export default {
                 child: false,
                 itemchild: [],
                 link: '/master-data-role',
-                permission: 'read-role'
+                permission: 'role-viewList'
             },
             {
                 no:9,
@@ -168,7 +168,7 @@ export default {
                 child: false,
                 itemchild: [],
                 link: '/master-data-akses',
-                permission: 'read-permission'
+                permission: 'permission-viewList'
             },
             {
                 no:10,
@@ -177,7 +177,7 @@ export default {
                 child: false,
                 itemchild: [],
                 link: '/master-data-toko',
-                permission: 'read-mastertoko'
+                permission: 'mastertoko-viewList'
             },
             {
                 no:11,
@@ -186,7 +186,7 @@ export default {
                 child: false,
                 itemchild: [],
                 link: '/master-data-office',
-                permission: 'read-masteroffice'
+                permission: 'masteroffice-viewList'
             },
             {
                 no:12,
@@ -195,7 +195,7 @@ export default {
                 child: false,
                 itemchild: [],
                 link: '/master-data-gudang',
-                permission: 'read-mastergudang'
+                permission: 'mastergudang-viewList'
             },
             {
                 no:13,
@@ -204,7 +204,7 @@ export default {
                 child: false,
                 itemchild: [],
                 link: '/master-data-pelanggan',
-                permission: 'read-masterpelanggan'
+                permission: 'masterpelanggan-viewList'
             },
         ]
     }),

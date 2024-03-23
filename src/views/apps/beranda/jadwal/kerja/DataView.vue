@@ -8,7 +8,7 @@
                     {{ parseDate(item.date) }}
                 </template>
                 <template v-slot:[`item.act`]="{ item }">
-                    <v-icon small @click="deleteItem(item.id)" v-if="$can('delete-jadwalgroup')">
+                    <v-icon small @click="deleteItem(item.id)" v-if="$can('jadwalgroup-delete')">
                         mdi-delete
                     </v-icon>
                 </template>

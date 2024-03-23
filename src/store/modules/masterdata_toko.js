@@ -11,8 +11,8 @@ const state = () => ({
         radius_forabsen: '',
     },
     rightMenuDrawer: [
-        ['List Data', 'mdi-view-list', 'master-data-toko.data', 'read-mastertoko'],
-        ['Buat Data Baru', 'mdi-plus-box', 'master-data-toko.add', 'create-mastertoko'],
+        ['List Data', 'mdi-view-list', 'master-data-toko.data', 'mastertoko-viewList'],
+        ['Buat Data Baru', 'mdi-plus-box', 'master-data-toko.add', 'mastertoko-create'],
         // ['Grafik', 'mdi-chart-bar', 'grafik-data-users-user'],
     ]
 })

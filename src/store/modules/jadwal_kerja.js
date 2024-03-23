@@ -7,9 +7,9 @@ const state = () => ({
         date: [],
     },
     rightMenuDrawer: [
-        ['Form Pengaturan Kerja', 'mdi-form-select', 'jadwal-kerja.add', 'create-jadwalgroup'],
-        ['List Data', 'mdi-view-list', 'jadwal-kerja.data', 'read-jadwalgroup'],
-        ['Pengaturan Waktu Kerja', 'mdi-wrench-clock', 'jadwal-kerja.timeconfig', 'create-jadwalgroup'],
+        ['Form Pengaturan Kerja', 'mdi-form-select', 'jadwal-kerja.add', 'jadwalgroup-create'],
+        ['List Data', 'mdi-view-list', 'jadwal-kerja.data', 'jadwalgroup-viewList'],
+        ['Pengaturan Waktu Kerja', 'mdi-wrench-clock', 'jadwal-kerja.timeconfig', 'jadwalgroup-create'],
     ]
 })
 

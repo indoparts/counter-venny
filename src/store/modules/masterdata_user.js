@@ -23,9 +23,9 @@ const state = () => ({
         total_gaji_perbulan: '',
     },
     rightMenuDrawer: [
-        ['List Data', 'mdi-view-list', 'master-data-pengguna.data', 'read-user'],
-        ['Buat Data Baru', 'mdi-plus-box', 'master-data-pengguna.add', 'create-user'],
-        ['User Group', 'mdi-group', 'master-data-pengguna.group', 'create-user'],
+        ['List Data', 'mdi-view-list', 'master-data-pengguna.data', 'user-viewList'],
+        ['Buat Data Baru', 'mdi-plus-box', 'master-data-pengguna.add', 'user-create'],
+        ['User Group', 'mdi-group', 'master-data-pengguna.group', 'user-create'],
     ]
 })
 
@@ -83,7 +83,7 @@ const actions = {
                 })
         })
     },
-    store({ state, commit }) {
+    store({ state }) {
         return new Promise(resolve => {
             const { form } = state
             const formData = new FormData()
@@ -107,7 +107,7 @@ const actions = {
             const headers = { 'Content-Type': 'multipart/form-data' };
             $axios.post('api/users', formData, { headers })
                 .then(response => {
-                    commit('CLEAR_FORM')
+                    // commit('CLEAR_FORM')
                     resolve(response.data)
                 })
                 .catch(error => {

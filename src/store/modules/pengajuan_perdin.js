@@ -11,9 +11,9 @@ const state = () => ({
         status_approval: 'n',
     },
     rightMenuDrawer: [
-        ['Form Pengajuan PERDIN', 'mdi-form-select', 'perdin.add', 'create-perdin'],
-        ['List Data', 'mdi-view-list', 'perdin.data', 'read-perdin'],
-        ['Laporan PERDIN', 'mdi-chart-scatter-plot-hexbin', 'perdin.laporan', 'report-perdin'],
+        ['Form Pengajuan PERDIN', 'mdi-form-select', 'perdin.add', 'perdin-create'],
+        ['List Data', 'mdi-view-list', 'perdin.data', 'perdin-viewList'],
+        ['Laporan PERDIN', 'mdi-chart-scatter-plot-hexbin', 'perdin.laporan', 'perdin-viewList'],
     ]
 })
 

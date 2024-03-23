@@ -142,19 +142,11 @@ export default {
             this.loading = true
             this.store().then((e) => {
                 this.loading = false
-                var a = (function () {
-                    if (e.msg === 'error' && typeof e.data !== 'undefined') {
-                        return e.data.errors
-                    } else if (e.msg === 'error' && typeof e.data === 'undefined') {
-                        return [{ field: '', rule: '', message: 'Terjadi duplikat, anda sudah membuat data ini sebelumnya !!' }]
-                    } else {
-                        return [{ field: '', rule: '', message: 'Berhasil' }]
-                    }
-                })();
+                console.log(e);
                 this.alert = {
-                    type: e.msg,
-                    title: e.msg,
-                    msg: a
+                    type: e.status === 200 ? 'success' : 'error',
+                    title: e.data.msg,
+                    msg: e.data.msg
                 }
             })
         },

@@ -10,9 +10,9 @@ const state = () => ({
         file_receipt:[]
     },
     rightMenuDrawer: [
-        ['Form Pengajuan Reimburs', 'mdi-form-select', 'reimburs.add', 'create-reimburs'],
-        ['List Data', 'mdi-view-list', 'reimburs.data', 'read-reimburs'],
-        ['Laporan Reimburs', 'mdi-chart-scatter-plot-hexbin', 'reimburs.laporan', 'report-reimburs'],
+        ['Form Pengajuan Reimburs', 'mdi-form-select', 'reimburs.add', 'reimburs-create'],
+        ['List Data', 'mdi-view-list', 'reimburs.data', 'reimburs-viewList'],
+        ['Laporan Reimburs', 'mdi-chart-scatter-plot-hexbin', 'reimburs.laporan', 'reimburs-viewList'],
     ]
 })
 

@@ -3,8 +3,8 @@ import $axios from '../api'
 
 const state = () => ({
     rightMenuDrawer: [
-        ['Form Resign', 'mdi-plus-box', 'resign.form', 'create-resign'],
-        ['List Data', 'mdi-view-list', 'resign.data', 'read-resign'],
+        ['Form Resign', 'mdi-plus-box', 'resign.form', 'resign-create'],
+        ['List Data', 'mdi-view-list', 'resign.data', 'resign-viewList'],
     ]
 })
 

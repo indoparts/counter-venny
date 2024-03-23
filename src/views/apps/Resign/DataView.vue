@@ -21,10 +21,10 @@
                     </v-chip>
                 </template>
                 <template v-slot:[`item.act`]="{ item }">
-                    <v-icon small class="mr-2" @click="editItem(item.id)" v-if="$can('update-resign')">
+                    <v-icon small class="mr-2" @click="editItem(item.id)" v-if="$can('resign-update')">
                         mdi-pencil
                     </v-icon>
-                    <v-icon small @click="deleteItem(item.id)" v-if="$can('delete-resign')">
+                    <v-icon small @click="deleteItem(item.id)" v-if="$can('resign-delete')">
                         mdi-delete
                     </v-icon>
                 </template>

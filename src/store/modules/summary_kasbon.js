@@ -11,9 +11,9 @@ const state = () => ({
         status_approval: 'w',
     },
     rightMenuDrawer: [
-        ['Form Kasbon', 'mdi-form-select', 'summary-kasbon.form', 'create-jadwalpiket'],
-        ['List Data', 'mdi-view-list', 'summary-kasbon.data', 'read-jadwalpiket'],
-        ['Laporan Kasbon', 'mdi-chart-scatter-plot-hexbin', 'summary-kasbon.report', 'report-jadwalpiket'],
+        ['Form Kasbon', 'mdi-form-select', 'summary-kasbon.form', 'jadwalpiket-create'],
+        ['List Data', 'mdi-view-list', 'summary-kasbon.data', 'jadwalpiket-viewList'],
+        ['Laporan Kasbon', 'mdi-chart-scatter-plot-hexbin', 'summary-kasbon.report', 'jadwalpiket-viewList'],
     ]
 })
 

@@ -11,11 +11,11 @@ const state = () => ({
         status: 'n',
     },
     rightMenuDrawer: [
-        ['Setup Formula Gaji', 'mdi-form-select', 'summary-gaji.formula', 'create-jadwalpiket'],
-        ['Generate Gaji', 'mdi-cash-sync', 'summary-gaji.generate', 'read-jadwalpiket'],
-        ['List Data', 'mdi-view-list', 'summary-gaji.data', 'read-jadwalpiket'],
-        ['Laporan Gaji', 'mdi-chart-scatter-plot-hexbin', 'summary-gaji.laporan', 'report-jadwalpiket'],
-        ['Selip Gaji', 'mdi-smart-card', 'summary-gaji.selip', 'report-jadwalpiket'],
+        ['Setup Formula Gaji', 'mdi-form-select', 'summary-gaji.formula', 'jadwalpiket-create'],
+        ['Generate Gaji', 'mdi-cash-sync', 'summary-gaji.generate', 'jadwalpiket-viewList'],
+        ['List Data', 'mdi-view-list', 'summary-gaji.data', 'jadwalpiket-viewList'],
+        ['Laporan Gaji', 'mdi-chart-scatter-plot-hexbin', 'summary-gaji.laporan', 'jadwalpiket-viewList'],
+        ['Selip Gaji', 'mdi-smart-card', 'summary-gaji.selip', 'jadwalpiket-viewList'],
     ]
 })
 

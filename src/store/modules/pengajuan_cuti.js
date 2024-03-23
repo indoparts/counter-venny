@@ -15,9 +15,9 @@ const state = () => ({
         status_approval: 'n',
     },
     rightMenuDrawer: [
-        ['Form Pengajuan Cuti', 'mdi-form-select', 'cuti.add', 'create-cuti'],
-        ['List Data', 'mdi-view-list', 'cuti.data', 'read-cuti'],
-        ['Laporan Cuti', 'mdi-chart-scatter-plot-hexbin', 'cuti.laporan', 'report-cuti'],
+        ['Form Pengajuan Cuti', 'mdi-form-select', 'cuti.add', 'cuti-create'],
+        ['List Data', 'mdi-view-list', 'cuti.data', 'cuti-viewList'],
+        ['Laporan Cuti', 'mdi-chart-scatter-plot-hexbin', 'cuti.laporan', 'cuti-viewList'],
     ]
 })
 

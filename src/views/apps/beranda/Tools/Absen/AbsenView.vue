@@ -17,6 +17,9 @@
                     <v-icon>mdi-reload</v-icon>
                 </v-btn>
             </v-toolbar>
+            <v-card-text>
+                <div>Jarak anda dengan lokasi kerja sekarang adalah <strong>{{ calculateDistance }} m</strong>, anda hanya bisa absen jika jarak anda dengan kantor kurang dari <strong>{{ lokasiAbsen.radius_forabsen }}</strong> m.</div>
+            </v-card-text>
             <v-card-actions class="d-flex justify-center">
                 <form-absensi :lat="marker.position.lat" :lng="marker.position.lng" :enable="enableAbsen"></form-absensi>
             </v-card-actions>
@@ -79,12 +82,14 @@ export default {
                 disableDefaultUI: true,
             },
             lokasiAbsen: {},
-            enableAbsen: false
+            enableAbsen: false,
+            calculateDistance:0
         };
     },
     mounted() {
         this.getUserLogin().then((res) => {
             const v = res.data.data.user
+            console.log(v.jadwal);
             let currentTime = new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
             const calculate = parseInt(this.diffTime(currentTime, v.jadwal.jam_mulai))
             if (calculate <= -60) {
@@ -135,8 +140,8 @@ export default {
                     latitude: parseFloat(lt),
                     longitude: parseFloat(lg),
                 })
+                this.calculateDistance = this.$roundToDecimal(calculate, 2)
                 const x = calculate >= parseFloat(this.lokasiAbsen.radius_forabsen) ? true : false
-                console.log(Math.round(calculate));
                 this.enableAbsen = x
             });
         },

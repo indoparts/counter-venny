@@ -108,7 +108,7 @@ export default {
         DatePicker
     },
     data: () => ({
-        baseUrl: `http://${process.env.BASE_URL_API}/api/images/avatar-users/`,
+        baseUrl: `${process.env.BASE_URL_API}/api/images/avatar-users/`,
         avatar: '',
         role: [],
         dept: [],

@@ -7,8 +7,8 @@ const state = () => ({
         permission: []
     },
     rightMenuDrawer: [
-        ['List Data', 'mdi-view-list', 'master-data-akses.data', 'read-permission'],
-        ['Buat Data Baru', 'mdi-plus-box', 'master-data-akses.add', 'create-permission'],
+        ['List Data', 'mdi-view-list', 'master-data-akses.data', 'permission-viewList'],
+        ['Buat Data Baru', 'mdi-plus-box', 'master-data-akses.add', 'permission-create'],
         // ['Grafik', 'mdi-chart-bar', 'grafik-data-users-user'],
     ]
 })

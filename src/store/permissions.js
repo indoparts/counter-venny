@@ -6,5 +6,9 @@ export default {
                 return Permission.indexOf(permissionName) !== -1
             }
         },
+        $roundToDecimal(number, decimalPlaces) {
+            const factor = 10 ** decimalPlaces;
+            return Math.round(number * factor) / factor;
+        }
     },
 }

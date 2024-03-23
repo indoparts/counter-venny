@@ -11,9 +11,9 @@ const state = () => ({
         status_approval: 'n',
     },
     rightMenuDrawer: [
-        ['Form Pengajuan Lembur', 'mdi-form-select', 'lembur.add', 'create-lembur'],
-        ['List Data', 'mdi-view-list', 'lembur.data', 'read-lembur'],
-        ['Laporan Lembur', 'mdi-chart-scatter-plot-hexbin', 'lembur.laporan', 'report-lembur'],
+        ['Form Pengajuan Lembur', 'mdi-form-select', 'lembur.add', 'lembur-create'],
+        ['List Data', 'mdi-view-list', 'lembur.data', 'lembur-viewList'],
+        ['Laporan Lembur', 'mdi-chart-scatter-plot-hexbin', 'lembur.laporan', 'lembur-viewList'],
     ]
 })
 

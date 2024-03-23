@@ -6,8 +6,8 @@ const state = () => ({
         deptname: '',
     },
     rightMenuDrawer: [
-        ['List Data', 'mdi-view-list', 'master-data-dept.data', 'read-dept'],
-        ['Buat Data Baru', 'mdi-plus-box', 'master-data-dept.add', 'create-dept'],
+        ['List Data', 'mdi-view-list', 'master-data-dept.data', 'dept-viewList'],
+        ['Buat Data Baru', 'mdi-plus-box', 'master-data-dept.add', 'dept-create'],
         // ['Grafik', 'mdi-chart-bar', 'grafik-data-users-user'],
     ]
 })

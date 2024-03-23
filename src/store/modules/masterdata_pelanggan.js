@@ -9,8 +9,8 @@ const state = () => ({
         alamat: '',
     },
     rightMenuDrawer: [
-        ['List Data', 'mdi-view-list', 'master-data-pelanggan.data', 'read-masterpelanggan'],
-        ['Buat Data Baru', 'mdi-plus-box', 'master-data-pelanggan.add', 'create-masterpelanggan'],
+        ['List Data', 'mdi-view-list', 'master-data-pelanggan.data', 'masterpelanggan-viewList'],
+        ['Buat Data Baru', 'mdi-plus-box', 'master-data-pelanggan.add', 'masterpelanggan-create'],
         // ['Grafik', 'mdi-chart-bar', 'grafik-data-users-user'],
     ]
 })

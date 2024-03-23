@@ -11,10 +11,10 @@ const state = () => ({
         foto_selfi: [],
     },
     rightMenuDrawer: [
-        ['Absensi', 'mdi-fingerprint', 'users-absen', 'create-absensi'],
-        ['List Data', 'mdi-view-list', 'list-data-absensi-user', 'read-absensi'],
-        ['Grafik', 'mdi-chart-bar', 'grafik-data-absensi-user', 'read-absensi'],
-        ['Laporan Absensi', 'mdi-chart-scatter-plot-hexbin', 'laporan-data-absensi', 'report-absensi'],
+        ['Absensi', 'mdi-fingerprint', 'users-absen', 'absensi-create'],
+        ['List Data', 'mdi-view-list', 'list-data-absensi-user', 'absensi-viewList'],
+        ['Grafik', 'mdi-chart-bar', 'grafik-data-absensi-user', 'absensi-viewList'],
+        ['Laporan Absensi', 'mdi-chart-scatter-plot-hexbin', 'laporan-data-absensi', 'absensi-viewList'],
     ]
 })
 

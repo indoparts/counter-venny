@@ -14,9 +14,9 @@ const state = () => ({
         file: [],
     },
     rightMenuDrawer: [
-        ['Form Pengajuan Izin', 'mdi-form-select', 'izin.add', 'create-izin'],
-        ['List Data', 'mdi-view-list', 'izin.data', 'read-izin'],
-        ['Laporan Izin', 'mdi-chart-scatter-plot-hexbin', 'izin.laporan', 'report-izin'],
+        ['Form Pengajuan Izin', 'mdi-form-select', 'izin.add', 'izin-create'],
+        ['List Data', 'mdi-view-list', 'izin.data', 'izin-viewList'],
+        ['Laporan Izin', 'mdi-chart-scatter-plot-hexbin', 'izin.laporan', 'izin-viewList'],
     ]
 })
 

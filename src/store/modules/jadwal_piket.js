@@ -11,10 +11,10 @@ const state = () => ({
         status: 'n',
     },
     rightMenuDrawer: [
-        ['Form Pengaturan Piket', 'mdi-form-select', 'jadwal-piket.add', 'create-jadwalpiket'],
-        ['List Data', 'mdi-view-list', 'jadwal-piket.data', 'read-jadwalpiket'],
-        ['Laporan Piket', 'mdi-chart-scatter-plot-hexbin', 'jadwal-piket.laporan', 'report-jadwalpiket'],
-        ['Master Data Piket', 'mdi-database', 'masterdata-piket', 'report-jadwalpiket'],
+        ['Form Pengaturan Piket', 'mdi-form-select', 'jadwal-piket.add', 'jadwalpiket-create'],
+        ['List Data', 'mdi-view-list', 'jadwal-piket.data', 'jadwalpiket-viewList'],
+        ['Laporan Piket', 'mdi-chart-scatter-plot-hexbin', 'jadwal-piket.laporan', 'jadwalpiket-viewList'],
+        ['Master Data Piket', 'mdi-database', 'masterdata-piket', 'jadwalpiket-viewList'],
     ]
 })
 

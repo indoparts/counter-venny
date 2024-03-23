@@ -4,8 +4,8 @@
             <v-container>
                 <v-row>
                     <v-select dense outlined v-model="form.bulan" label="Pilih Bulan" required
-                        :rules="[v => !!v || 'Item is required']" :items="bln" item-text="name"
-                        item-value="value" disabled></v-select>
+                        :rules="[v => !!v || 'Item is required']" :items="bln" item-text="name" item-value="value"
+                        disabled></v-select>
                     <v-select dense outlined v-model="form.tahun" label="Pilih Tahun" required
                         :rules="[v => !!v || 'Item is required']" :items="thn" disabled></v-select>
                     <v-btn depressed color="primary" @click="generateSubmit" tile height="40" :loading="loading"
@@ -19,23 +19,23 @@
             <v-card-title>Data Generator</v-card-title>
             <v-card-text>
                 <v-row no-gutters v-for="i in formLoop" :key="i.id">
-                    <v-col cols="12" md="1">
+                    <v-col cols="12" md="2">
                         <v-text-field dense outlined label="NIK" required v-model="i.nik"
                             :rules="[v => !!v || 'Item is required']" class="mb-input" disabled />
                     </v-col>
-                    <v-col cols="12" md="1">
+                    <v-col cols="12" md="2">
                         <v-text-field dense outlined label="NAMA" required v-model="i.name"
                             :rules="[v => !!v || 'Item is required']" class="mb-input" disabled />
                     </v-col>
-                    <v-col cols="12" md="1">
+                    <v-col cols="12" md="2">
                         <v-text-field dense outlined label="PERIODE" required v-model="i.periode"
                             :rules="[v => !!v || 'Item is required']" class="mb-input" disabled />
                     </v-col>
-                    <v-col cols="12" md="1">
+                    <v-col cols="12" md="2">
                         <v-text-field dense outlined label="TOTAL ABSEN" required v-model="i.total_absen"
                             :rules="[v => !!v || 'Item is required']" class="mb-input" disabled />
                     </v-col>
-                    <v-col cols="12" md="1">
+                    <v-col cols="12" md="2">
                         <v-text-field dense outlined label="ABSEN TERLAMBAT" required v-model="i.total_terlambat"
                             :rules="[v => !!v || 'Item is required']" class="mb-input" disabled />
                     </v-col>
@@ -43,20 +43,27 @@
                         <v-text-field dense outlined label="GAJI" required v-model="i.gaji_perbulan"
                             :rules="[v => !!v || 'Item is required']" class="mb-input" disabled />
                     </v-col>
-                    <v-col cols="12" md="1">
+                    <v-col cols="12" md="3">
                         <v-text-field dense outlined label="HARI KERJA" required v-model="i.total_workday"
                             :rules="[v => !!v || 'Item is required']" class="mb-input" disabled />
                     </v-col>
-                    <v-col cols="12" md="2">
+                    <v-col cols="12" md="3">
                         <v-text-field dense outlined label="GAJI PERHARI" required v-model="i.gaji_perhari"
                             :rules="[v => !!v || 'Item is required']" class="mb-input" disabled />
                     </v-col>
-                    <v-col cols="12" md="2">
+                    <v-col cols="12" md="3">
+                        <v-text-field dense outlined label="KASBON" required v-model="i.kasbon"
+                            :rules="[v => !!v || 'Item is required']" class="mb-input" disabled />
+                    </v-col>
+                    <v-col cols="12" md="3">
                         <v-text-field dense outlined label="GAJI TOTAL" required v-model="i.gaji_thp"
                             :rules="[v => !!v || 'Item is required']" class="mb-input" />
                     </v-col>
                 </v-row>
             </v-card-text>
+            <v-alert border="top" color="red lighten-2" dark>
+                (Total gaji : jumlah hari kerja (jadwal) x total absen) - kasbon(pinjaman) = gaji THP
+            </v-alert>
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="primary" text @click="save">
@@ -111,9 +118,10 @@ export default {
                         total_absen: el.total_absen,
                         total_terlambat: el.total_absen_telat,
                         total_workday: this.hitunghari(el.periode_gaji),
-                        gaji_perbulan: el.total_gaji_perbulan,
-                        gaji_perhari: el.total_gaji_perbulan / this.hitunghari(el.periode_gaji) - 4,
-                        gaji_thp: (el.total_gaji_perbulan / this.hitunghari(el.periode_gaji) - 4) * el.total_absen,
+                        gaji_perbulan: el.total_gaji_perbulan.toFixed(2),
+                        gaji_perhari: (el.total_gaji_perbulan / this.hitunghari(el.periode_gaji) - 4).toFixed(2),
+                        kasbon: el.total_kasbon.toFixed(2),
+                        gaji_thp: (((el.total_gaji_perbulan / this.hitunghari(el.periode_gaji) - 4) * el.total_absen) - el.total_kasbon).toFixed(2),
                     })
                 });
                 this.loading = false
@@ -130,7 +138,6 @@ export default {
                     res.status === true ? 'Data berhasil ditambahkan' : 'Data gagal ditambahkan',
                     res.msg
                 )
-                this.$router.push({ name: 'summary-gaji.data' })
             })
         },
         blnName(e) {

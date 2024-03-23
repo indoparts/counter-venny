@@ -13,10 +13,10 @@
                     {{ parseDate(item) }}
                 </template>
                 <template v-slot:[`item.act`]="{ item }">
-                    <v-icon small class="mr-2" @click="editItem(item.id)" v-if="$can('update-dept')">
+                    <v-icon small class="mr-2" @click="editItem(item.id)" v-if="$can('dept-update')">
                         mdi-pencil
                     </v-icon>
-                    <v-icon small @click="deleteItem(item.id)" v-if="$can('delete-dept')">
+                    <v-icon small @click="deleteItem(item.id)" v-if="$can('dept-delete')">
                         mdi-delete
                     </v-icon>
                 </template>

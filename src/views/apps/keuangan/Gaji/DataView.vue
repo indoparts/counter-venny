@@ -77,10 +77,10 @@
                     {{ formatRupiah(item.gaji_thp) }}
                 </template>
                 <template v-slot:[`item.act`]="{ item }">
-                    <v-icon small class="mr-2" @click="editItem(item.id)" v-if="$can('update-dept')">
+                    <v-icon small class="mr-2" @click="editItem(item.id)" v-if="$can('gaji-update')">
                         mdi-pencil
                     </v-icon>
-                    <v-icon small @click="deleteItem(item.id)" v-if="$can('delete-dept')">
+                    <v-icon small @click="deleteItem(item.id)" v-if="$can('gaji-delete')">
                         mdi-delete
                     </v-icon>
                 </template>

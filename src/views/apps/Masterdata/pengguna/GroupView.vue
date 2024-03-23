@@ -1,6 +1,6 @@
 <template>
     <v-data-table dense flat :headers="headers" :items="desserts" :options.sync="options"
-        :server-items-length="totalDesserts" :loading="loading">
+        :server-items-length="totalDesserts" :loading="loading" show-expand item-key="id" :expanded.sync="expanded">
         <template v-slot:top>
             <v-toolbar flat color="card">
                 <v-toolbar-title>Group Pengguna</v-toolbar-title>
@@ -65,6 +65,30 @@
                 </v-dialog>
             </v-toolbar>
         </template>
+        <template v-slot:expanded-item="{ headers, item }">
+            <th :colspan="headers.length">
+                <v-simple-table dense>
+                    <template v-slot:default>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>NIK</th>
+                                <th>Email</th>
+                                <th>HP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="i in item.membersTeams" :key="i.user.id">
+                                <td>{{ i.user.name }}</td>
+                                <td>{{ i.user.nik }}</td>
+                                <td>{{ i.user.email }}</td>
+                                <td>{{ i.user.hp }}</td>
+                            </tr>
+                        </tbody>
+                    </template>
+                </v-simple-table>
+            </th>
+        </template>
     </v-data-table>
 </template>
 <script>
@@ -76,12 +100,14 @@ export default {
         editedIndex: -1,
         baseUrl: `http://${process.env.BASE_URL_API}/api/images/avatar-users/`,
         totalDesserts: 0,
+        expanded: [],
         desserts: [],
         loading: true,
         options: {},
         headers: [
-            { text: 'GROUP', value: 'master_group.nama' },
-            { text: 'MEMBER', value: 'user.name' },
+            { text: 'GROUP', value: 'nama' },
+            { text: 'CREATED AT', value: 'created_at' },
+            { text: 'UPDATED AT', value: 'updated_at' },
         ],
         usersAllItems: [],
         groupAllItems: [],

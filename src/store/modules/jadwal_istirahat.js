@@ -9,9 +9,9 @@ const state = () => ({
         date: null,
     },
     rightMenuDrawer: [
-        ['Form Pengaturan Jam Istirahat', 'mdi-form-select', 'jadwal-istirahat.add', 'create-jadwalistirahat'],
-        ['List Data', 'mdi-view-list', 'jadwal-istirahat.data', 'read-jadwalistirahat'],
-        ['Laporan Jam Istirahat', 'mdi-chart-scatter-plot-hexbin', 'jadwal-istirahat.laporan', 'report-jadwalistirahat'],
+        ['Form Pengaturan Jam Istirahat', 'mdi-form-select', 'jadwal-istirahat.add', 'jadwalistirahat-viewList'],
+        ['List Data', 'mdi-view-list', 'jadwal-istirahat.data', 'jadwalistirahat-viewList'],
+        ['Laporan Jam Istirahat', 'mdi-chart-scatter-plot-hexbin', 'jadwal-istirahat.laporan', 'jadwalistirahat-viewList'],
     ]
 })
 

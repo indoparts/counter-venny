@@ -14,10 +14,10 @@
                 :server-items-length="totalDesserts" :loading="loading" :single-expand="singleExpand" item-key="id"
                 :expanded.sync="expanded">
                 <template v-slot:[`item.act`]="{ item }">
-                    <v-icon small class="mr-2" @click="editItem(item.id)" v-if="$can('update-user')">
+                    <v-icon small class="mr-2" @click="editItem(item.id)" v-if="$can('user-update')">
                         mdi-pencil
                     </v-icon>
-                    <v-icon small @click="deleteItem(item.id)" v-if="$can('delete-user')">
+                    <v-icon small @click="deleteItem(item.id)" v-if="$can('user-delete')">
                         mdi-delete
                     </v-icon>
                 </template>

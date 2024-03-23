@@ -1,6 +1,6 @@
 <template>
-    <v-card color="card">
-        <v-card-text>
+    <v-card color="card" id="print">
+        <v-card-title>
             <v-simple-table dense>
                 <template v-slot:default>
                     <tr>
@@ -11,9 +11,9 @@
                     </tr>
                 </template>
             </v-simple-table>
-        </v-card-text>
+        </v-card-title>
         <v-divider></v-divider>
-        <v-card-actions class="d-flex justify-space-between" v-for="i in dataSlip.data" :key="i.id">
+        <v-card-text class="d-flex justify-space-between" v-for="i in dataSlip.data" :key="i.id">
             <v-simple-table dense>
                 <template v-slot:default>
                     <tr>
@@ -42,7 +42,7 @@
                     </tr>
                 </template>
             </v-simple-table>
-        </v-card-actions>
+        </v-card-text>
         <v-divider></v-divider>
         <v-card-text>
             <v-simple-table dense>
@@ -78,6 +78,12 @@
                 </template>
             </v-simple-table>
         </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+            <v-btn depressed color="primary" block @click="printpdf">
+                Print
+            </v-btn>
+        </v-card-actions>
     </v-card>
 </template>
 <script>
@@ -87,12 +93,12 @@ export default {
     data: () => ({
         loading: false,
         dataSlip: {
-            data:[],
-            office:{
-                id:'',
-                nama:'',
-                alamat:'',
-                telepon:''
+            data: [],
+            office: {
+                id: '',
+                nama: '',
+                alamat: '',
+                telepon: ''
             }
         }
     }),
@@ -105,6 +111,11 @@ export default {
         authenticated(v) {
             if (v.id !== undefined)
                 this.getVariable(v.id)
+        }
+    },
+    mounted() {
+        if (this.authenticated.id) {
+            this.getVariable(this.authenticated.id)
         }
     },
     methods: {
@@ -122,6 +133,29 @@ export default {
         },
         parseDate(e) {
             return moment(e).format('yyyy-MM-DD');
+        },
+        printpdf() {
+            const prtHtml = document.getElementById('print').innerHTML;
+            let stylesHtml = '';
+            for (const node of [...document.querySelectorAll('link[rel="stylesheet"], style')]) {
+                stylesHtml += node.outerHTML;
+            }
+            const WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+
+            WinPrint.document.write(`<!DOCTYPE html>
+            <html>
+            <head>
+                ${stylesHtml}
+            </head>
+            <body>
+                ${prtHtml}
+            </body>
+            </html>`);
+
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
         }
     }
 }
