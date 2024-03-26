@@ -22,8 +22,6 @@
 
               <v-card-actions class="text--secondary">
                 <v-checkbox color="primary" label="Ingat Saya" v-model="form.remember_me"></v-checkbox>
-                <v-spacer></v-spacer>
-                Tidak punya akun? <a href="#" class="pl-2" color="primary">Daftar Akun</a>
               </v-card-actions>
               <v-btn class="rounded-0" color="primary"
                 :disabled="form.email === '' && form.password === '' ? true : false" :loading="loading" x-large block dark

@@ -18,10 +18,13 @@
                 </v-btn>
             </v-toolbar>
             <v-card-text>
-                <div>Jarak anda dengan lokasi kerja sekarang adalah <strong>{{ calculateDistance }} m</strong>, anda hanya bisa absen jika jarak anda dengan kantor kurang dari <strong>{{ lokasiAbsen.radius_forabsen }}</strong> m.</div>
+                <div>Jarak anda dengan lokasi kerja sekarang adalah <strong>{{ calculateDistance }} m</strong>, anda
+                    hanya bisa absen jika jarak anda dengan kantor kurang dari <strong>{{ lokasiAbsen.radius_forabsen
+                        }}</strong> m.</div>
             </v-card-text>
             <v-card-actions class="d-flex justify-center">
-                <form-absensi :lat="marker.position.lat" :lng="marker.position.lng" :enable="enableAbsen"></form-absensi>
+                <form-absensi :lat="marker.position.lat" :lng="marker.position.lng"
+                    :enable="enableAbsen"></form-absensi>
             </v-card-actions>
             <v-card-actions>
                 <v-container>
@@ -64,7 +67,7 @@
         </v-card>
     </v-container>
 </template>
- 
+
 <script>
 import { mapActions } from "vuex";
 import FormAbsensi from '../components/FormAbsensi.vue'
@@ -83,39 +86,50 @@ export default {
             },
             lokasiAbsen: {},
             enableAbsen: false,
-            calculateDistance:0
+            calculateDistance: 0
         };
     },
     mounted() {
         this.getUserLogin().then((res) => {
             const v = res.data.data.user
-            console.log(v.jadwal);
-            let currentTime = new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
-            const calculate = parseInt(this.diffTime(currentTime, v.jadwal.jam_mulai))
-            if (calculate <= -60) {
+            if (v.jadwal == null) {
                 this.$swal({
-                    title: 'Anda sudah terlambat melebihi 1 jam!',
+                    title: 'Terjadi kesalahan saat mendeteksi jam kerja/jadwal kerja anda!',
                     icon: 'error',
-                    text: 'Untuk dapat tetap melakukan absen silahkan anda membuat form izin terlambat, dan meminta administrator untuk membuatkan absensi secara manual, dan tolong untuk tidak mengulanginya demi kenyamanan anda!',
+                    text: 'Periksa data jadwal kerja anda pada sistem karena kami tidak dapat menemukan data jadwal kerja anda, silakan hubungi administrator/pemilik otoritas untuk mengurus hal ini.',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        this.$router.push({ name: 'izin.add' })
+                        this.$router.push({ name: 'dashboard' })
                     }
                 })
-            }else{
-                if (v.work_location_detail === undefined) {
+            } else {
+                let currentTime = new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
+                const calculate = parseInt(this.diffTime(currentTime, v.jadwal.jam_mulai))
+                if (calculate <= -60) {
                     this.$swal({
-                        title: 'Terjadi kesalahan saat mendeteksi kantor anda!',
+                        title: 'Anda sudah terlambat melebihi 1 jam!',
                         icon: 'error',
-                        text: 'Periksa data lokasi kantor anda pada sistem karena kami tidak dapat menemukan data lokasi kantor anda, silakan hubungi administrator.',
+                        text: 'Untuk dapat tetap melakukan absen silahkan anda membuat form izin terlambat, dan meminta administrator/pemilik otoritas untuk membuatkan absensi secara manual, dan tolong untuk tidak mengulanginya demi kenyamanan anda!',
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            this.$router.push({ name: 'dashboard' })
+                            this.$router.push({ name: 'izin.add' })
                         }
                     })
                 } else {
-                    this.lokasiAbsen = v.work_location_detail
-                    this.geolocate(v.work_location_detail.latitude, v.work_location_detail.longitude);
+                    if (v.work_location_detail === undefined) {
+                        this.$swal({
+                            title: 'Terjadi kesalahan saat mendeteksi kantor anda!',
+                            icon: 'error',
+                            text: 'Periksa data lokasi kantor anda pada sistem karena kami tidak dapat menemukan data lokasi kantor anda, silakan hubungi administrator/pemilik otoritas untuk mengurus hal ini.',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                this.$router.push({ name: 'dashboard' })
+                            }
+                        })
+                    } else {
+                        this.lokasiAbsen = v.work_location_detail
+                        this.geolocate(v.work_location_detail.latitude, v.work_location_detail.longitude);
+                    }
                 }
             }
         })

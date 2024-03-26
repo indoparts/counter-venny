@@ -107,9 +107,9 @@ export default {
                 icon: 'mdi-clipboard-text-clock',
                 child: true,
                 itemchild: [
+                    ['Jadwal Kerja', 'mdi-store-clock', '/jadwal-kerja'],
                     ['Jadwal-istirahat', 'mdi-coffee', '/jadwal-istirahat'],
                     ['Jadwal piket', 'mdi-broom', '/jadwal-piket'],
-                    ['Jadwal Kerja', 'mdi-store-clock', '/jadwal-kerja'],
                 ],
                 link: '/'
             },
