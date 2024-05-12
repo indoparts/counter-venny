@@ -13,7 +13,7 @@
             <v-divider></v-divider>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn v-if="$can('update-dept')" text color="primary" @click="submit">
+                <v-btn v-if="$can('dept-update')" text color="primary" @click="submit">
                     Submit
                 </v-btn>
             </v-card-actions>
