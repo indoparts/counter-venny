@@ -75,11 +75,12 @@
                             class="mb-input" :error-messages="$formErr(error, 'status')"></v-select>
                     </v-col>
                     <v-col cols="12" md="3">
-                        <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="form.tgl_join"
-                            transition="scale-transition" offset-y min-width="auto">
+                        <v-menu ref="menu" v-model="menu" :close-on-content-click="false"
+                            :return-value.sync="form.tgl_join" transition="scale-transition" offset-y min-width="auto">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-text-field v-model="form.tgl_join" label="Tanggal Join" dense outlined
-                                    prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on" :error-messages="$formErr(error, 'tgl_join')"></v-text-field>
+                                    prepend-inner-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"
+                                    :error-messages="$formErr(error, 'tgl_join')"></v-text-field>
                             </template>
                             <v-date-picker v-model="form.tgl_join" no-title scrollable>
                                 <v-spacer></v-spacer>
@@ -106,7 +107,8 @@
                             class="mb-input" accept="image/*" label="avatar"
                             :error-messages="$formErr(error, 'avatar')"></v-file-input>
                     </v-col>
-                    <v-img :src="baseUrl + avatar" lazy-src="https://picsum.photos/id/11/100/60" max-width="100"></v-img>
+                    <v-img :src="baseUrl + avatar" lazy-src="https://picsum.photos/id/11/100/60"
+                        max-width="100"></v-img>
                 </v-row>
             </v-card-text>
             <v-card-actions>
@@ -134,7 +136,7 @@ export default {
         valid: false,
         loading: false,
         menu: false,
-        error:[]
+        error: []
     }),
     computed: {
         ...mapState('masterdata_user', {
@@ -157,23 +159,19 @@ export default {
         ...mapActions('masterdata_user', ['attr_form_user', 'edit', 'update']),
         submit() {
             this.loading = true
-            this.update(this.$route.params.id).then((e) => {
-                this.loading = false
-                var a = (function () {
-                    if (e.msg === 'error' && typeof e.data !== 'undefined') {
-                        return e.data.errors
-                    } else if (e.msg === 'error' && typeof e.data === 'undefined') {
-                        return [{ field: '', rule: '', message: 'Terjadi duplikat, anda sudah membuat data ini sebelumnya !!' }]
-                    } else {
-                        return [{ field: '', rule: '', message: 'Berhasil' }]
+            this.update(this.$route.params.id)
+                .then((e) => {
+                    if (e.status != 200) {
+                        if (e.data.data.messages)
+                            this.error = e.data.data.messages.errors
                     }
-                })();
-                this.alert = {
-                    type: e.msg,
-                    title: e.msg,
-                    msg: a
-                }
-            })
+                    this.loading = false
+                    this.$swal({
+                        title: e.status < 201 ? 'Berhasil tersimpan.' : 'Gagal tersimpan.',
+                        icon: e.status < 201 ? 'success' : 'error',
+                        text: e.status < 201 ? 'Berhasil tersimpan.' : e.data.msg,
+                    });
+                })
         },
     }
 }
