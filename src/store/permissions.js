@@ -9,6 +9,12 @@ export default {
         $roundToDecimal(number, decimalPlaces) {
             const factor = 10 ** decimalPlaces;
             return Math.round(number * factor) / factor;
-        }
+        },
+        $formErr(data, field) {
+            if (data.length > 0) {
+                const t = data.filter(item => item.field === field)
+                return t[0] && t[0].message ? t[0].message : ''
+            }
+        },
     },
 }

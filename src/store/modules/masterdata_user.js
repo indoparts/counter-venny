@@ -1,6 +1,5 @@
 /* eslint-disable no-empty-pattern */
 import $axios from '../api'
-import moment from 'moment'
 
 const state = () => ({
     form: {
@@ -87,28 +86,14 @@ const actions = {
         return new Promise(resolve => {
             const { form } = state
             const formData = new FormData()
-            formData.append('role_id', form.role_id)
-            formData.append('dept_id', form.dept_id)
-            formData.append('name', form.name)
-            formData.append('email', form.email)
-            formData.append('nik', form.nik)
-            formData.append('password', form.password)
-            formData.append('password_confirmation', form.password_confirmation)
-            formData.append('activation', form.activation)
-            formData.append('avatar', form.avatar)
-            formData.append('work_location', form.work_location)
-            formData.append('work_location_master', form.work_location_master)
-            formData.append('saldo_cuti', form.saldo_cuti)
-            formData.append('hp', form.hp)
-            formData.append('status', form.status)
-            formData.append('tgl_join', form.tgl_join)
-            formData.append('limit_kasbon', form.limit_kasbon)
-            formData.append('total_gaji_perbulan', form.total_gaji_perbulan)
+            Object.keys(form).forEach(key => {
+                formData.append(key, form[key]);
+            });
             const headers = { 'Content-Type': 'multipart/form-data' };
             $axios.post('api/users', formData, { headers })
-                .then(response => {
+                .then(res => {
                     // commit('CLEAR_FORM')
-                    resolve(response.data)
+                    resolve(res)
                 })
                 .catch(error => {
                     resolve(error.response)
@@ -120,7 +105,7 @@ const actions = {
             $axios.get(`api/users/${payload}`)
                 .then(response => {
                     const x = response.data.data
-                    console.log(x[0].dept_id);
+                    console.log(x[0].tgl_join);
                     state.form = {
                         role_id: x[0].role_id,
                         dept_id: x[0].dept_id,
@@ -138,6 +123,7 @@ const actions = {
                         status: x[0].status,
                         tgl_join: x[0].tgl_join,
                         limit_kasbon: x[0].limit_kasbon,
+                        total_gaji_perbulan: x[0].total_gaji_perbulan,
                     }
                     resolve(response.data)
                 })
@@ -150,23 +136,9 @@ const actions = {
         return new Promise(resolve => {
             const { form } = state
             const formData = new FormData()
-            formData.append('role_id', form.role_id)
-            formData.append('dept_id', form.dept_id)
-            formData.append('name', form.name)
-            formData.append('email', form.email)
-            formData.append('nik', form.nik)
-            formData.append('password', form.password)
-            formData.append('password_confirmation', form.password_confirmation)
-            formData.append('activation', form.activation)
-            formData.append('avatar', form.avatar)
-            formData.append('work_location', form.work_location)
-            formData.append('work_location_master', form.work_location_master)
-            formData.append('saldo_cuti', form.saldo_cuti)
-            formData.append('hp', form.hp)
-            formData.append('status', form.status)
-            formData.append('tgl_join', moment(form.tgl_join).format("YYYY-MM-DD"))
-            formData.append('limit_kasbon', form.limit_kasbon)
-            formData.append('total_gaji_perbulan', form.total_gaji_perbulan)
+            Object.keys(form).forEach(key => {
+                formData.append(key, form[key]);
+            });
             const headers = { 'Content-Type': 'multipart/form-data' };
             $axios.put(`api/users/${payload}`, formData, { headers })
                 .then(response => {
