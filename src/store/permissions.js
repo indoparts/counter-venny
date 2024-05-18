@@ -1,3 +1,4 @@
+import moment from "moment";
 export default {
     methods: {
         $can(permissionName) {
@@ -15,6 +16,9 @@ export default {
                 const t = data.filter(item => item.field === field)
                 return t[0] && t[0].message ? t[0].message : ''
             }
+        },
+        $parseDate(e) {
+            return moment(e).format('yyyy-MM-DD, h:mm:ss');
         },
     },
 }

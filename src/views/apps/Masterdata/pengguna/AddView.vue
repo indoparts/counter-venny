@@ -106,6 +106,18 @@
                             class="mb-input" accept="image/*" label="avatar"
                             :error-messages="$formErr(error, 'avatar')"></v-file-input>
                     </v-col>
+                    <v-col cols="12" md="4">
+                        <v-select dense outlined v-model="form.app_line" :items="items_user"
+                            label="pilih approval start" :rules="[v => !!v || 'Item is required']" class="mb-input"
+                            item-text="name" item-value="id"
+                            :error-messages="$formErr(error, 'app_line')"></v-select>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                        <v-select dense outlined v-model="form.app_mngr" :items="items_user"
+                            label="pilih approval final" :rules="[v => !!v || 'Item is required']" class="mb-input"
+                            item-text="name" item-value="id"
+                            :error-messages="$formErr(error, 'app_mngr')"></v-select>
+                    </v-col>
                 </v-row>
             </v-card-text>
             <v-card-actions>
@@ -127,6 +139,7 @@ export default {
         items_toko: [],
         items_gudang: [],
         items_office: [],
+        items_user: [],
         lokasi_kerja: ['office', 'gudang', 'toko'],
         status: ['tetap', 'training', 'kontrak', 'magang'],
         activation: [true, false],
@@ -146,6 +159,7 @@ export default {
             this.items_toko = res.data.toko
             this.items_gudang = res.data.gudang
             this.items_office = res.data.office
+            this.items_user = res.data.user
         })
     },
     methods: {

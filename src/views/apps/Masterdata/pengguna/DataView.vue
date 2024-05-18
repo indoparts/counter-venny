@@ -2,7 +2,6 @@
     <v-card flat color="card">
         <v-card-title>Master Data Pengguna</v-card-title>
         <v-card-text>
-            <alert-components :type="alert.type" :title="alert.title" :msg="alert.msg"></alert-components>
             <v-text-field
                 label="Cari data..."
                 prepend-inner-icon="mdi-text-search"
@@ -52,7 +51,7 @@
                         </tr>
                         <tr>
                             <th class="text-left">Tgl. Join</th>
-                            <td> : {{ parseDate(item.tgl_join) }}</td>
+                            <td> : {{ $parseDate(item.tgl_join) }}</td>
                         </tr>
                         <tr>
                             <th class="text-left">Limit Kasbon</th>
@@ -70,29 +69,14 @@
                 </template>
             </v-data-table>
         </v-card-text>
-        <DialogAlert :show="dialogAlert" :width="350" :title="`Apakah anda ingin menghapus data ini?`" :text="`Data yang sudah dihapus bersifat permanent dan tidak akan bisa dikembalikan kembali.`" @callback="response" />
     </v-card>
 </template>
 <script>
-import DialogAlert from '@/components/DialogAlert.vue';
-import AlertComponents from '@/components/AlertComponents.vue'
-import moment from 'moment'
 import { mapActions } from "vuex";
 export default {
-    components:{
-        DialogAlert,
-        AlertComponents
-    },
     data() {
         return {
             search:'',
-            dialogAlert:false,
-            deleteId:0,
-            alert: {
-                type: '',
-                title: '',
-                msg: []
-            },
             baseUrl: `http://${process.env.BASE_URL_API}/api/images/avatar-users/`,
             expanded: [],
             singleExpand: false,
@@ -130,40 +114,39 @@ export default {
         filter() {
             this.getDataFromApi()
         },
-        parseDate(e) {
-            return moment(e).format('yyyy-MM-DD, h:mm:ss');
-        },
         editItem(id) {
             this.$router.push({ name: 'master-data-pengguna.show', params: { id: id } })
         },
         deleteItem(id) {
-            this.deleteId = id
-            this.dialogAlert = true
+            this.$swal({
+                title: 'Apakah anda yakin akanmenghapus data ini?',
+                text: 'Data yang sudah terhapus tidak dapat dikembalikan lagi!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.delete(id).then((e) => {
+                        var a = (function () {
+                            if (e.msg === 'error') {
+                                return 'Terjadi kesalahan saat menghapus data!'
+                            } else {
+                                return 'Berhasil menghapus data!'
+                            }
+                        })();
+                        this.$swal({
+                            title: e.msg,
+                            icon: e.msg,
+                            text: a,
+                        });
+                        this.getDataFromApi()
+                        this.deleteId = 0
+                    })
+                }
+            });
         },
-        response(res){
-            if (res.event === 'yes' && this.deleteId !== 0) {
-                this.delete(this.deleteId).then((e)=>{
-                    var a = (function () {
-                        if (e.msg === 'error' && typeof e.data !== 'undefined') {
-                            return e.data.errors
-                        } else if (e.msg === 'error' && typeof e.data === 'undefined') {
-                            return [{ field: '', rule: '', message: 'Terjadi kesalahan hubungi tim developer !!' }]
-                        } else {
-                            return [{ field: '', rule: '', message: 'Berhasil Terhapus' }]
-                        }
-                    })();
-                    this.alert = {
-                        type: e.msg,
-                        title: e.msg,
-                        msg: a
-                    }
-                    this.getDataFromApi()
-                })
-            } else {
-                this.deleteId = 0
-            }
-            this.dialogAlert = res.dialog
-        }
     },
 }
 </script>

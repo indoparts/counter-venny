@@ -20,6 +20,8 @@ const state = () => ({
         tgl_join: '',
         limit_kasbon: '',
         total_gaji_perbulan: '',
+        app_line: '',
+        app_mngr: '',
     },
     rightMenuDrawer: [
         ['List Data', 'mdi-view-list', 'master-data-pengguna.data', 'user-viewList'],
@@ -48,6 +50,8 @@ const mutations = {
             tgl_join: '',
             limit_kasbon: '',
             total_gaji_perbulan: '',
+            app_line: '',
+            app_mngr: '',
         }
     },
 }
@@ -124,6 +128,8 @@ const actions = {
                         tgl_join: x[0].tgl_join,
                         limit_kasbon: x[0].limit_kasbon,
                         total_gaji_perbulan: x[0].total_gaji_perbulan,
+                        app_line: x[0].app_line,
+                        app_mngr: x[0].app_mngr,
                     }
                     resolve(response.data)
                 })
@@ -141,8 +147,8 @@ const actions = {
             });
             const headers = { 'Content-Type': 'multipart/form-data' };
             $axios.put(`api/users/${payload}`, formData, { headers })
-                .then(response => {
-                    resolve(response.data)
+                .then(res => {
+                    resolve(res)
                 })
                 .catch(error => {
                     resolve(error.response)
